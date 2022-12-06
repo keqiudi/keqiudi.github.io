@@ -30,9 +30,9 @@
     
     
     <entry>
-      <title>C</title>
-      <link href="/2022/12/02/C/"/>
-      <url>/2022/12/02/C/</url>
+      <title>C++</title>
+      <link href="/2022/12/02/C++/"/>
+      <url>/2022/12/02/C++/</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -43,9 +43,9 @@
     
     
     <entry>
-      <title>C++</title>
-      <link href="/2022/12/02/C++/"/>
-      <url>/2022/12/02/C++/</url>
+      <title>C</title>
+      <link href="/2022/12/02/C/"/>
+      <url>/2022/12/02/C/</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -72,9 +72,53 @@
     
     
     <entry>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>movies</title>
+      <link href="/movies/index.html"/>
+      <url>/movies/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>about</title>
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/categories/%E7%BC%96%E7%A8%8B.html"/>
+      <url>/categories/%E7%BC%96%E7%A8%8B.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>music</title>
+      <link href="/music/index.html"/>
+      <url>/music/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -94,31 +138,9 @@
     
     
     <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/js/light.js"/>
-      <url>/js/light.js</url>
-      
-        <content type="html"><![CDATA[// 霓虹灯效果// 颜色数组var arr = ["#39c5bb", "#f14747", "#f1a247", "#f1ee47", "#b347f1", "#1edbff", "#ed709b", "#5636ed"];// 颜色索引var idx = 0;// 切换颜色function changeColor() {    // 仅夜间模式才启用    if (document.getElementsByTagName('html')[0].getAttribute('data-theme') == 'dark') {        if (document.getElementById("site-name"))            document.getElementById("site-name").style.textShadow = arr[idx] + " 0 0 15px";        if (document.getElementById("site-title"))            document.getElementById("site-title").style.textShadow = arr[idx] + " 0 0 15px";        if (document.getElementById("site-subtitle"))            document.getElementById("site-subtitle").style.textShadow = arr[idx] + " 0 0 10px";        if (document.getElementById("post-info"))            document.getElementById("post-info").style.textShadow = arr[idx] + " 0 0 5px";        try {            document.getElementsByClassName("author-info__name")[0].style.textShadow = arr[idx] + " 0 0 12px";            document.getElementsByClassName("author-info__description")[0].style.textShadow = arr[idx] + " 0 0 12px";        } catch {                    }        idx++;        if (idx == 8) {            idx = 0;        }    } else {        // 白天模式恢复默认        if (document.getElementById("site-name"))            document.getElementById("site-name").style.textShadow = "#1e1e1ee0 1px 1px 1px";        if (document.getElementById("site-title"))            document.getElementById("site-title").style.textShadow = "#1e1e1ee0 1px 1px 1px";        if (document.getElementById("site-subtitle"))            document.getElementById("site-subtitle").style.textShadow = "#1e1e1ee0 1px 1px 1px";        if (document.getElementById("post-info"))            document.getElementById("post-info").style.textShadow = "#1e1e1ee0 1px 1px 1px";        try {            document.getElementsByClassName("author-info__name")[0].style.textShadow = "";            document.getElementsByClassName("author-info__description")[0].style.textShadow = "";        } catch {                    }    }}// 开启计时器window.onload = setInterval(changeColor, 1200);]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/categories/%E7%BC%96%E7%A8%8B.html"/>
-      <url>/categories/%E7%BC%96%E7%A8%8B.html</url>
+      <title>link</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -149,44 +171,22 @@
     
     
     <entry>
-      <title>music</title>
-      <link href="/music/index.html"/>
-      <url>/music/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>movies</title>
-      <link href="/movies/index.html"/>
-      <url>/movies/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>link</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>tags</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/js/light.js"/>
+      <url>/js/light.js</url>
+      
+        <content type="html"><![CDATA[// 霓虹灯效果// 颜色数组var arr = ["#39c5bb", "#f14747", "#f1a247", "#f1ee47", "#b347f1", "#1edbff", "#ed709b", "#5636ed"];// 颜色索引var idx = 0;// 切换颜色function changeColor() {    // 仅夜间模式才启用    if (document.getElementsByTagName('html')[0].getAttribute('data-theme') == 'dark') {        if (document.getElementById("site-name"))            document.getElementById("site-name").style.textShadow = arr[idx] + " 0 0 15px";        if (document.getElementById("site-title"))            document.getElementById("site-title").style.textShadow = arr[idx] + " 0 0 15px";        if (document.getElementById("site-subtitle"))            document.getElementById("site-subtitle").style.textShadow = arr[idx] + " 0 0 10px";        if (document.getElementById("post-info"))            document.getElementById("post-info").style.textShadow = arr[idx] + " 0 0 5px";        try {            document.getElementsByClassName("author-info__name")[0].style.textShadow = arr[idx] + " 0 0 12px";            document.getElementsByClassName("author-info__description")[0].style.textShadow = arr[idx] + " 0 0 12px";        } catch {                    }        idx++;        if (idx == 8) {            idx = 0;        }    } else {        // 白天模式恢复默认        if (document.getElementById("site-name"))            document.getElementById("site-name").style.textShadow = "#1e1e1ee0 1px 1px 1px";        if (document.getElementById("site-title"))            document.getElementById("site-title").style.textShadow = "#1e1e1ee0 1px 1px 1px";        if (document.getElementById("site-subtitle"))            document.getElementById("site-subtitle").style.textShadow = "#1e1e1ee0 1px 1px 1px";        if (document.getElementById("post-info"))            document.getElementById("post-info").style.textShadow = "#1e1e1ee0 1px 1px 1px";        try {            document.getElementsByClassName("author-info__name")[0].style.textShadow = "";            document.getElementsByClassName("author-info__description")[0].style.textShadow = "";        } catch {                    }    }}// 开启计时器window.onload = setInterval(changeColor, 1200);]]></content>
       
     </entry>
     
