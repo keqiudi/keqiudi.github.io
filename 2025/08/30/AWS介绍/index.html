@@ -1,0 +1,934 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>AWS介绍 | THEDI的仓库</title><meta name="keywords" content="AWS,云服务"><meta name="author" content="THEDI"><meta name="copyright" content="THEDI"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="AWS介绍"><meta name="application-name" content="AWS介绍"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="AWS介绍"><meta property="og:url" content="https://www.thekqd.top/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/index.html"><meta property="og:site_name" content="THEDI的仓库"><meta property="og:description" content="AWS介绍"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://www.thekqd.top/assets/28.webp"><meta property="article:author" content="THEDI"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://www.thekqd.top/assets/28.webp"><meta name="description" content="AWS介绍"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://www.thekqd.top/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--anzhiyu-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@1.0.17/lib/assets/font-awesome-animation.min.css#fontawesome_animation 如果有就会加载，示例值：https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@1.0.17/lib/assets/font-awesome-animation.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"与大家一起进步","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"该回来学习啦！","backTitle":"w(ﾟДﾟ)w快认真学习！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🏠 智能家居小能手"]},
+  algolia: {"appId":"PW49GHYJ6T","apiKey":"42b04be58e36cfebeb6ac1989c6e8009","indexName":"hexo","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    simplehomepage: false,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: THEDI","link":"链接: ","source":"来源: THEDI的仓库","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'THEDI的仓库',
+  title: 'AWS介绍',
+  postAI: '',
+  pageFillDescription: '什么是 AWS？, IAM, IAM 作用, IAM主要概念, AWS IoT, AWS IoT Core, 核心功能, 典型应用场景, AWS IoT Core 客户端身份验证, AWS IoT Core使用, 物品(Thing), 物品(Thing)介绍, 物品的主要作用, 单个设备连接 AWS IoT 的基本流程, 策略, 设备影子, 什么是设备影子, 为什么需要设备影子, 设备影子结构, 设备影子的操作和流程, 设备影子的常用 MQTT 主题(Topic), 典型场景, 代码amp消息示例, Amazon Cognito, 核心功能, 用户池和身份池概念, 用户池（User Pool）, Token, 身份池（Identity Pool）, 临时凭证, 用户池和身份池区别, IAM 与 Cognito区别, 场景示例, 创建用户池和身份池, 创建用户池, 创建身份池, 身份池用户访问权限, 创建自定义策略以下所有内容在文档中均有描述建议观看文档学习能做什么什么是是亚马逊提供的全球领先的云计算平台涵盖了计算存储数据库网络安全等众多云服务帮助开发者构建和部署高效的云端解决方案提供了强大的服务生态支持从设备连接到数据分析的全流程开发通过学习和动手实践你可以快速掌握这些工具并构建实际物联网项目作用是亚马逊云中的身份与访问管理服务它是安全体系的核心组件之一主要目的就是让你可以安全地控制谁可以访问你的资源以及可以访问什么资源能做哪些操作身份管理为人用户系统服务应用等分配身份每个身份可以有唯一的认证信息如用户名密码访问密钥等权限控制通过权限策略精细控制每个身份可以访问哪些服务和资源以及能做什么操作如读写删除等主要概念用户组用户的集合方便批量分配权限权限分配给组组内成员继承这些权限用户属于账号下的云账户是平台原生的身份通常代表公司员工长期自动化脚本等有自己的用户名密码访问密钥可以直接登录控制台或使用权限直接或通过组分配角色一种资源的临时身份不属于某个具体用户没有用户名和密码不能直接登录需要通过扮演切换角色获得临时凭证适合临时赋予权限给服务第三方服务外部用户等身份池分配的已认证用户角色和访客用户角色就是角色的实际应用策略用文档描述的权限规则指定允许拒绝哪些操作哪些资源在什么条件下生效提供了一系列物联网相关服务旨在帮助开发者连接管理和分析设备看文档学习设置账户官方文档如何运作核心功能是的托管物联网平台用于安全连接和管理海量设备处理设备与云端的双向通信主要功能包括设备连接与管理支持等协议实现设备与云端的高效通信设备影子存储设备的当前状态格式即使设备离线应用仍可读取或更新影子状态规则引擎实时处理设备数据通过语法将数据路由到服务如安全机制证书认证设备身份策略控制设备权限支持加密传输典型应用场景远程监控与控制如智能家居设备状态同步预测性维护通过传感器数据分析设备健康状态数据集成将设备数据转发到服务如实时分析关键组件注册表记录设备元数据如序列号位置消息代理处理设备与云端间的消息传递任务批量向设备推送固件更新或配置变更客户端身份验证客户端身份验证支持三种类型的身份主体进行设备或客户端身份验证客户端证书用户组和角色身份这些身份可与设备移动或桌面应用程序结合使用用户甚至可以键入命令行界面命令来使用它们通常情况下设备使用证书验证移动应用程序使用身份验证应用程序和桌面应用程序使用或联合身份验证命令使用使用物品物品介绍物品是中对每一个物理设备的数字化建模每个物品代表你在现实世界中的一个具体设备如传感器网关家电等通过物品你可以对单个设备进行身份标识配置管理权限控制远程监控和自动化运维物品的主要作用唯一标识设备每个物品有唯一名称便于管理和追踪安全认证为物品分配证书和密钥实现设备级别安全认证权限管理通过策略对物品绑定的证书分配权限如连接发布订阅等设备影子每个物品都可以有一个设备影子云端虚拟状态副本便于状态同步和离线控制分组与分类物品可以分组便于批量管理和分类操作监控与日志通过物品可以监控单台或多台设备的连接消息告警等单个设备连接的基本流程创建物品在管理里的物品下创建一个新物品为你的物理设备分配一个唯一名称创建并下载证书和私钥为物品生成新的证书和私钥首次创建时下载后续丢失只能新建用于设备端安全连接下载根证书下载并保存这是服务器端认证用的绑定策略给物品的证书附加一个或多个策略策略规定了此设备可以在上执行哪些操作如连接发布订阅等设备端配置把下载的设备证书私钥根证书填入或客户端代码配置服务器地址即的端口一般为并使用正确的证书和私钥进行连接连接测试可用控制台的测试客户端功能测试设备与云端通信是否正常具体流程见笔记常见连接流程的连接至部分策略在中可以看到我们创建的对应的策略每个策略中也可以看到该策略附加到了什么类型上证书身份不同类型的身份认证方式对应的策略附加类型也不同三种身份认证方式证书对应的是证书认证身份对应的是身份验证方式设备影子文档在设备中使用影子什么是设备影子设备影子是提供的一项云端服务核心作用是为每个物理设备在云端保存一个状态副本文档让云端应用和设备本身都可以随时读写这个副本实现设备状态的同步和管理可以使用该影子通过或获取和设置设备的状态无论该设备是否连接到每台设备的影子都由相应事物的名称唯一标识关键点每个设备都有自己的影子影子存储在云端即使设备离线也能访问设备和应用都可以通过影子读写设备状态为什么需要设备影子设备可能经常离线比如断网掉电休眠等云端和设备解耦云端应用可以直接与影子交互不必直接连设备状态同步云端可以设定目标状态设备上线后自动获取并更新自己持久性状态保存在云端不怕设备重启丢失设备影子结构设备影子的本质是一个文档主要有三部分事物的预期状态应用程序可以向本文档部分写入数据来更新事物的状态且无需直接连接到该事物事物的报告状态事物可以向本文档部分写入数据以报告其新状态应用程序可以读取本文档部分以确定事物的状态差异和的不同指明传输消息的时间通过在消息中使用时间戳并对或部分中的不同属性使用时间戳事物可以确定已更新项目的存在时间即使它不具有内部时钟特性云端设定的目标状态如灯要开温度调到度设备自己上报的实际状态如灯现在开着温度度目标和实际的差异如果有设备可以据此调整设备影子的操作和流程云端操作云端应用可以直接写影子的部分设定希望设备达到的目标云端应用可以读影子的部分获知设备当前的实际状态设备操作设备上线后主动读影子的或部分获取云端最新目标设备调整自身状态后写影子的部分上报自己的实际状态状态同步流程示意云端设置例如希望开灯设备上线后获取到发现云端期望开灯于是开灯设备开灯后上报已开灯云端看到和一致消失状态同步完成设备影子的常用主题主题用途发布影子状态更新或获取影子文档影子更新成功的反馈影子更新失败的反馈获取影子成功的反馈获取影子失败的反馈删除影子文档典型场景远程控制云端设定设备感知并调整自身状态然后上报状态上报设备定时事件驱动发布云端可以查询设备当前状态离线同步设备断网期间云端依旧可修改设备重新上线时会收到自动同步代码消息示例云端设置目标状态发布到设备上报实际状态发布到设备收到云端下发的什么是核心功能是面向应用的用户身份管理服务提供用户注册登录访问控制等功能支持移动端和应用用户池和身份池概念用户池作用用户池用于用户身份认证即你是谁功能提供注册登录找回密码多因子认证等用户管理功能可以存储用户的用户名邮箱手机号密码等信息支持社交登录如和企业身份提供商应用场景适合需要自有用户账号体系的应用比如网站等用法示例你可以用用户池来让用户注册账号登录重置密码等用户池会保存用户信息并生成一个应用通过识别和管理用户会话用户池什么是令牌是认证系统生成的字符串用来代表用户的登录状态和身份信息在用户池中这个实际上是格式的登录成功后用户池会返回三种名称主要作用描述用户身份信息如用户名邮箱等授权用户访问受保护的资源用于刷新获取新的和内容包含用户的身份信息比如用户名邮箱用户属性等用途你的可以读取里的信息知道用户是谁内容包含用户权限和授权信息用途你的或后端在访问受保护资源比如网关时把附上服务端用它判断你是否有权限访问内容只用于换取新的和用途过期后用户无需重新登录可以用换新通常存储在本地身份池作用身份池用于授权和临时身份凭证管理即你可以访问什么功能允许用户联合身份登录如用用户池社交账号匿名身份等通过身份池应用可以为用户分配资源的临时访问凭证如等权限由身份池的角色策略控制身份池并不管理用户的用户名密码而是根据已认证的身份发放临时权限应用场景适合让用户访问资源如上传文件到与设备通信等用法示例重要用户登录后应用会把用户池获得的传给身份池身份池验证后返回一组有权限的临时凭证应用再用这些凭证去访问服务临时凭证在中临时凭证指的是一组由颁发的有时效限制的安全密钥包括三部分访问密钥访问密钥秘钥会话令牌作用访问云服务拿到临时凭证后或设备可以用它来直接访问的各类云资源与服务如等可以把它理解为给你的一把临时钥匙你能用它做什么能访问哪些资源取决于分配给你的权限策略权限可控且更安全临时凭证由身份池根据你的身份比如你用换的动态分配权限范围和有效期都可控有效期一般为小时即使凭证泄漏风险也有限过期自动失效且权限受限不需要在里硬编码长期的密钥安全性更高支持多种身份源统一授权不管你用邮箱微信匿名企业账户登录只要能获得用户池的都能通过身份池换取临时凭证实现统一的云端访问授权用户池和身份池区别用户池管理应用用户的注册登录这些用户不是用户身份池将应用用户通过登录认证的或匿名用户映射为角色获得访问权限已认证用户访客用户都不是用户而是通过角色机制获得临时权限项目用户池身份池主要用途用户身份认证资源授权和临时凭证获取用户管理是保存用户信息否不保存用户信息签发对象临时凭证支持身份自注册社交企业用户池社交匿名等常见应用登录注册会话管理等资源访问通常先用用户池处理登录注册再用身份池换取资源访问权限与区别用户属于账号下的云账户是平台原生的身份通常代表公司员工长期自动化脚本等有自己的用户名密码访问密钥可以直接登录控制台或使用权限直接或通过组分配角色一种临时身份不属于某个具体用户没有用户名和密码不能直接登录需要通过扮演切换角色获得临时凭证适合服务之间外部用户临时授权等场景权限通过策略分配用户存在于用户池中是你应用的终端用户比如手机网站的注册用户负责用户注册登录找回密码多因素认证等只管理应用层的账号不是用户没有账号权限身份存在于身份池中用于将应用用户映射为可访问资源的临时身份身份池会根据用户认证已认证未认证分配不同的角色发放临时凭证可以支持多种身份源用户池社交登录匿名等场景示例用户打开注册登录用登录成功后获取到用换取的临时凭证用临时凭证访问上传照片或与设备通信创建用户池和身份池创建用户池应用程序类型这里我们是移动端所以使用移动应用程序登录标识符选项选择可以使用什么登录图中勾选代表可以使用电子邮箱手机号码用户名任意一种方式登录注册必要属性注册时的必填项图中代表必填邮箱和电话点击创建即可创建后可在用户池中看到对应的用户池进入后可修改名称以及用户管理等操作用户登录和注册相关的设置可以在身份验证模块进行修改比如注册时的验证方式手机还是邮箱等等创建身份池配置身份池信任用户访问权限两种经过身份验证的访问权限允许身份池管理的用户获取临时凭证访客访问权限允许没有登录没有身份认证的用户通过身份池获得颁发的临时凭证从而访问你允许的云端资源经过身份验证的身份来源用户群体通过的用户池进行身份验证注册和登录应用的用户其它可选身份提供方如自定义开发人员身份提供者等这些可以让你支持其它第三方账号登录配置权限可以为我们的经过身份验证的角色和访客角色分配对应的角色获取对应的凭证和权限可以新建角色默认最低初始权限创建完成身份池后可以去控制台自定义角色的策略也可以使用已有角色这里使用新建角色可以看到默认的策略这里图中应该对身份验证和访客进行不同的角色管理权限不同不应该使用相同角色应该新建和两个角色连接身份提供商用户群体用户池这里我们选择之前创建的用户池以及应用程序客户端角色选择经过身份验证的默认角色映射选择不活跃配置身份池属性设置我们的身份池名称不勾选基本身份验证基本身份验证启用后应用可以通过较老的基本身份验证流程来获取身份池的临时凭证基本流程是应用先用身份池的身份和登录令牌直接请求服务分配给该身份的角色权限这种方式兼容老老代码如果你的应用或依赖于经典的调用如需要勾选但这种方式有一定安全风险因为角色选择的逻辑会暴露给客户端可能导致被恶意利用造成不必要的权限暴露不启用的话将不会使用经典流使用增强流增强流会在服务端更安全地完成身份验证和角色分配客户端不直接控制角色选择安全性更高新的默认推荐用增强流适合新应用或强安全需求场景身份池用户访问权限创建身份时如果使用的时新建角色创建完成后应该如图所示活跃状态代表角色创建成功如果是不活跃可以在右边编辑角色重新创建来到我们的控制台找到之前创建身份池时选择的和角色可信实体必须是身份提供者才能作为身份池的角色选择经过身份验证的访问权限角色点击进入角色后可以看到目前只有一种客户托管策略现在我们要为其添加对应策略在右边添加权限中进入附加策略其中包含客户托管我们自己创建的策略托管自带的一些策略我们选择允许所有的服务添加这里的策略是允许所有的服务实际使用是我们应该满足最小权限原则创建自定义策略还需要其他权限的话也可以再添加对应的托管策略或客户托管策略这样就将经过身份验证的角色的服务权限配置完成了访客的权限角色访客没登录我们不给其他权限保持默认即可创建自定义策略客户托管自定义策略进入的策略创建策略选择策略然后勾选需要的权限填写指定的资源区域限制等勾选完成后可以选择查看一下点击下一步然后填写策略名称描述即可最后在附加策略中搜索我们刚刚创建的自定义策略然后将新建的添加即可',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-08-30 00:31:36',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://i.postimg.cc/fbN6bFqP/20220206101541-14a48.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/keqiudi/keqiudi.github.io" title="我的博客仓库"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="我的博客仓库"/><span class="back-menu-item-text">我的博客仓库</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">THEDI的仓库</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AWS/" style="font-size: 1.05rem;">AWS<sup>2</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>2</sup></a><a href="/tags/CLion/" style="font-size: 1.05rem;">CLion<sup>2</sup></a><a href="/tags/CMake/" style="font-size: 1.05rem;">CMake<sup>1</sup></a><a href="/tags/ESP32/" style="font-size: 1.05rem;">ESP32<sup>1</sup></a><a href="/tags/FreeRTOS/" style="font-size: 1.05rem;">FreeRTOS<sup>5</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/LCD/" style="font-size: 1.05rem;">LCD<sup>2</sup></a><a href="/tags/LVGL/" style="font-size: 1.05rem;">LVGL<sup>7</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>8</sup></a><a href="/tags/MySQL/" style="font-size: 1.05rem;">MySQL<sup>2</sup></a><a href="/tags/PCB/" style="font-size: 1.05rem;">PCB<sup>2</sup></a><a href="/tags/QT/" style="font-size: 1.05rem;">QT<sup>1</sup></a><a href="/tags/keil/" style="font-size: 1.05rem;">keil<sup>1</sup></a><a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/" style="font-size: 1.05rem;">云服务<sup>3</sup></a><a href="/tags/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" style="font-size: 1.05rem;">启动流程<sup>2</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.05rem;">嵌入式<sup>2</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">嵌入式安全<sup>3</sup></a><a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 1.05rem;">架构<sup>2</sup></a><a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 1.05rem;">环境配置<sup>4</sup></a><a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 1.05rem;">硬件<sup>5</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">算法<sup>3</sup></a><a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 1.05rem;">调试<sup>5</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">35</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/06/"><span class="card-archive-list-date">六月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/01/"><span class="card-archive-list-date">一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%89%A9%E8%81%94%E7%BD%91/" itemprop="url">物联网</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/AWS/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>AWS</span></a><a class="article-meta__tags" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>云服务</span></a></span></div></div><h1 class="post-title" itemprop="name headline">AWS介绍</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-08-29T16:28:11.000Z" title="发表于 2025-08-30 00:28:11">2025-08-30</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-08-29T16:31:36.290Z" title="更新于 2025-08-30 00:31:36">2025-08-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.9k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="AWS介绍"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为成都"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>成都</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/assets/28.webp"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://www.thekqd.top/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/"><header><a class="post-meta-categories" href="/categories/%E7%89%A9%E8%81%94%E7%BD%91/" itemprop="url">物联网</a><a href="/tags/AWS/" tabindex="-1" itemprop="url">AWS</a><a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/" tabindex="-1" itemprop="url">云服务</a><h1 id="CrawlerTitle" itemprop="name headline">AWS介绍</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">THEDI</span><time itemprop="dateCreated datePublished" datetime="2025-08-29T16:28:11.000Z" title="发表于 2025-08-30 00:28:11">2025-08-30</time><time itemprop="dateCreated datePublished" datetime="2025-08-29T16:31:36.290Z" title="更新于 2025-08-30 00:31:36">2025-08-30</time></header><p><strong>以下所有内容在文档中均有描述，建议观看文档学习</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/aws-iot-solutions.html">AWS IoT 能做什么 - AWS IoT Core</a></p>
+<h1 id="什么是-AWS？"><a href="#什么是-AWS？" class="headerlink" title="什么是 AWS？"></a>什么是 AWS？</h1><p>AWS 是 <strong>Amazon(亚马逊) 提供的全球领先的云计算平台</strong>，涵盖了计算、存储、数据库、网络、安全等众多<strong>云服务</strong>，帮助开发者构建和部署高效的云端解决方案。</p>
+<p>AWS 提供了强大的 IoT 服务生态，支持从设备连接到数据分析的全流程开发。通过学习和动手实践，你可以快速掌握这些工具并构建实际物联网项目。</p>
+<h1 id="IAM"><a href="#IAM" class="headerlink" title="IAM"></a>IAM</h1><h2 id="IAM-作用"><a href="#IAM-作用" class="headerlink" title="IAM 作用"></a>IAM 作用</h2><p>IAM（Identity and Access Management）是 AWS（亚马逊云）中的<code>身份与访问管理</code><strong>服务</strong>。它是 AWS 安全体系的核心组件之一，主要目的就是让你可以安全地控制谁可以访问你的 AWS 资源，以及可以访问什么资源、能做哪些操作。</p>
+<ul>
+<li><strong>身份管理</strong>：为人（用户）、系统（服务）、应用等分配身份（Identity），<code>每个身份</code>可以有唯一的认证信息（如用户名、密码、访问密钥等）。</li>
+<li><strong>权限控制</strong>：通过权限策略（Policy）精细控制每个身份可以访问哪些 AWS 服务和资源，以及能做什么操作（如读、写、删除等）。</li>
+</ul>
+<h2 id="IAM主要概念"><a href="#IAM主要概念" class="headerlink" title="IAM主要概念"></a>IAM主要概念</h2><p><code>用户组（Group）</code></p>
+<ul>
+<li>用户的集合，方便批量分配权限。</li>
+<li>权限分配给组，组内成员继承这些权限。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520110135312.png" alt="image-20250520110135312"></p>
+<p><code>用户（User）</code></p>
+<ul>
+<li><strong>属于 AWS 账号下的“云账户”，是 AWS 平台原生的身份，通常代表公司员工、长期自动化脚本等。</strong></li>
+<li><strong>有自己的用户名、密码、访问密钥，可以直接登录 AWS 控制台或使用 API。</strong></li>
+<li><strong>权限直接或通过组分配（Policy）。</strong></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520110150450.png" alt="image-20250520110150450"></p>
+<p> <code>角色（Role）</code></p>
+<ul>
+<li><strong>一种 AWS 资源的“临时身份”，不属于某个具体用户，没有用户名和密码，不能直接登录 AWS</strong></li>
+<li>需要通过“扮演&#x2F;切换角色（AssumeRole）”获得临时凭证。</li>
+<li>适合临时赋予权限给 AWS 服务、第三方服务、外部用户等。</li>
+<li>Cognito 身份池分配的“已认证用户角色”和“访客用户角色”就是 IAM 角色的实际应用。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520110209711.png" alt="image-20250520110209711"></p>
+<p> <code>策略（Policy）</code></p>
+<ul>
+<li>用 JSON 文档描述的权限规则。</li>
+<li>指定“允许&#x2F;拒绝”哪些操作（Action）、哪些资源（Resource）、在什么条件（Condition）下生效。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520110222793.png" alt="image-20250520110222793"></p>
+<h1 id="AWS-IoT"><a href="#AWS-IoT" class="headerlink" title="AWS IoT"></a>AWS IoT</h1><p>AWS 提供了一系列物联网（IoT）相关服务，旨在帮助开发者连接、管理和分析 IoT 设备。</p>
+<p><code>看文档学习</code>:</p>
+<p><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/setting-up.html">设置 AWS 账户 - AWS IoT Core</a></p>
+<h2 id="AWS-IoT-Core"><a href="#AWS-IoT-Core" class="headerlink" title="AWS IoT Core"></a>AWS IoT Core</h2><p><strong>官方文档</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/aws-iot-how-it-works.html">如何 AWS IoT 运作 - AWS IoT Core</a></p>
+<h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><p><strong>AWS IoT Core 是 AWS 的托管物联网平台，用于安全连接和管理海量设备，处理设备与云端的双向通信</strong>。</p>
+<p>主要功能包括：</p>
+<ul>
+<li><p><strong>设备连接与管理</strong>：支持 MQTT、HTTP、WebSockets 等协议，实现设备与云端的高效通信。</p>
+</li>
+<li><p><strong>设备影子（Device Shadow）</strong>：存储设备的当前状态（JSON 格式），即使设备离线，应用仍可读取或更新影子状态。</p>
+</li>
+<li><p><strong>规则引擎（Rules Engine）</strong>：实时处理设备数据，通过 SQL-like 语法将数据路由到 AWS 服务（如 Lambda、DynamoDB、S3）。</p>
+</li>
+<li><p><strong>安全机制</strong>：</p>
+<ul>
+<li>X.509 证书认证设备身份。</li>
+<li>IAM 策略控制设备权限。</li>
+<li>支持 TLS 加密传输。</li>
+</ul>
+</li>
+</ul>
+<h3 id="典型应用场景"><a href="#典型应用场景" class="headerlink" title="典型应用场景"></a>典型应用场景</h3><ul>
+<li><strong>远程监控与控制</strong>：如智能家居设备状态同步。</li>
+<li><strong>预测性维护</strong>：通过传感器数据分析设备健康状态。</li>
+<li><strong>数据集成</strong>：将设备数据转发到 AWS 服务（如 Kinesis 实时分析）。</li>
+</ul>
+<p><strong>关键组件</strong>：</p>
+<ul>
+<li><strong>注册表（Registry）</strong>：记录设备元数据（如序列号、位置）。</li>
+<li><strong>消息代理（Message Broker）</strong>：处理设备与云端间的消息传递。</li>
+<li><strong>任务（Jobs）</strong>：批量向设备推送固件更新或配置变更。</li>
+</ul>
+<h2 id="AWS-IoT-Core-客户端身份验证"><a href="#AWS-IoT-Core-客户端身份验证" class="headerlink" title="AWS IoT Core 客户端身份验证"></a>AWS IoT Core 客户端身份验证</h2><p><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/client-authentication.html">客户端身份验证 - AWS IoT Core</a></p>
+<p>AWS IoT 支持三种类型的身份主体进行设备或客户端身份验证：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/x509-client-certs.html">X.509 客户端证书</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/iam-users-groups-roles.html">IAM 用户、组和角色</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/cognito-identities.html">Amazon Cognito 身份</a></li>
+</ul>
+<p>这些身份可与设备、移动、Web 或桌面应用程序结合使用。用户甚至可以键入 AWS IoT 命令行界面 (CLI) 命令来使用它们。通常情况下：</p>
+<p><code> AWS IoT 设备</code>：使用 X.509 证书验证</p>
+<p><code>移动应用程序</code>：使用 Amazon Cognito 身份验证</p>
+<p><code>Web 应用程序和桌面应用程序</code>：使用 IAM 或联合身份验证</p>
+<p><code>AWS CLI 命令</code>：使用 IAM。</p>
+<h2 id="AWS-IoT-Core使用"><a href="#AWS-IoT-Core使用" class="headerlink" title="AWS IoT Core使用"></a>AWS IoT Core使用</h2><h3 id="物品-Thing"><a href="#物品-Thing" class="headerlink" title="物品(Thing)"></a>物品(Thing)</h3><h4 id="物品-Thing-介绍"><a href="#物品-Thing-介绍" class="headerlink" title="物品(Thing)介绍"></a>物品(Thing)介绍</h4><ul>
+<li><p>**物品（Thing）**是 AWS IoT Core 中对每一个物理设备的数字化建模。每个物品代表你在现实世界中的一个<code>具体设备</code>（如传感器、网关、家电等）。</p>
+</li>
+<li><p>通过物品，你可以对单个设备进行身份标识、配置管理、权限控制、远程监控和自动化运维。</p>
+</li>
+</ul>
+<h4 id="物品的主要作用"><a href="#物品的主要作用" class="headerlink" title="物品的主要作用"></a>物品的主要作用</h4><ol>
+<li><strong>唯一标识设备</strong>：每个物品有唯一名称，便于管理和追踪。</li>
+<li><strong>安全认证</strong>：为物品分配证书和密钥，实现设备级别安全认证。</li>
+<li><strong>权限管理</strong>：通过策略（Policy）对物品绑定的证书分配权限（如连接、发布、订阅等）。</li>
+<li><strong>设备影子（Device Shadow）</strong>：每个物品都可以有一个设备影子，云端虚拟状态副本，便于状态同步和离线控制。</li>
+<li><strong>分组与分类</strong>：物品可以分组，便于批量管理和分类操作。</li>
+<li><strong>监控与日志</strong>：通过物品可以监控单台或多台设备的连接、消息、告警等。</li>
+</ol>
+<h4 id="单个设备连接-AWS-IoT-的基本流程"><a href="#单个设备连接-AWS-IoT-的基本流程" class="headerlink" title="单个设备连接 AWS IoT 的基本流程"></a>单个设备连接 AWS IoT 的基本流程</h4><ol>
+<li><strong>创建物品（Thing）</strong><ul>
+<li>在“管理”里的“物品”下创建一个新物品，为你的物理设备分配一个唯一名称。</li>
+</ul>
+</li>
+<li><strong>创建并下载证书和私钥</strong><ul>
+<li>为物品生成新的证书和私钥（首次创建时下载，后续丢失只能新建），用于设备端 TLS&#x2F;SSL 安全连接。</li>
+</ul>
+</li>
+<li><strong>下载 CA 根证书</strong><ul>
+<li>下载并保存 Amazon Root CA 1，这是服务器端认证用的。</li>
+</ul>
+</li>
+<li><strong>绑定策略（Policy）</strong><ul>
+<li>给物品的证书附加一个或多个策略，策略规定了此设备可以在 AWS IoT Core 上执行哪些操作（如连接、发布、订阅等）。</li>
+</ul>
+</li>
+<li><strong>设备端配置</strong><ul>
+<li>把下载的设备证书、私钥、CA 根证书填入 MCU 或客户端代码。</li>
+<li>配置 MQTT 服务器地址（即 AWS IoT Core 的 endpoint）、端口（一般为8883），并使用正确的证书和私钥进行 SSL&#x2F;TLS 连接。</li>
+</ul>
+</li>
+<li><strong>连接测试</strong><ul>
+<li>可用控制台的“MQTT 测试客户端”功能测试设备与云端通信是否正常。</li>
+</ul>
+</li>
+</ol>
+<p><code>具体流程:见笔记MQTT常见连接流程的MCU连接至AWS部分！</code></p>
+<h3 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h3><p>在AWS IoT中可以看到我们创建的对应的策略。每个策略中也可以看到该策略附加到了什么类型上：AWS IoT证书、Cognito身份</p>
+<p>不同类型的身份认证方式，对应的策略附加类型也不同</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250519174612900.png" alt="image-20250519174612900"></p>
+<p><strong>三种身份认证方式</strong>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250519174729945.png" alt="image-20250519174729945"></p>
+<blockquote>
+<p><strong><code>AWS IoT证书</code>对应的是X.509证书认证</strong></p>
+<p><strong><code>Cognito身份</code>对应的是Amazon Cognito身份验证方式</strong></p>
+</blockquote>
+<h3 id="设备影子"><a href="#设备影子" class="headerlink" title="设备影子"></a>设备影子</h3><p><code>AWS文档</code>：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/device-shadow-comms-device.html">在设备中使用影子 - AWS IoT Core</a></p>
+<h4 id="什么是设备影子"><a href="#什么是设备影子" class="headerlink" title="什么是设备影子"></a>什么是设备影子</h4><p><strong>设备影子</strong>是 AWS IoT Core 提供的一项云端服务，核心作用是：</p>
+<blockquote>
+<p><strong>为每个物理设备在云端保存一个“状态副本”</strong>（JSON 文档），让云端应用和设备本身都可以随时读写这个副本，实现设备状态的同步和管理。</p>
+<p>可以使用该影子通过 MQTT 或 HTTP 获取和设置设备的状态，无论该设备是否连接到 Internet。每台设备的影子都由相应事物的名称唯一标识。</p>
+</blockquote>
+<p><strong>关键点</strong>：</p>
+<ul>
+<li>每个设备（Thing）都有自己的影子（Shadow）。</li>
+<li>影子存储在 AWS 云端，即使设备离线也能访问。</li>
+<li>设备和应用都可以通过影子读写设备状态。</li>
+</ul>
+<h4 id="为什么需要设备影子"><a href="#为什么需要设备影子" class="headerlink" title="为什么需要设备影子"></a>为什么需要设备影子</h4><ul>
+<li><strong>设备可能经常离线</strong>：比如断网、掉电、休眠等。</li>
+<li><strong>云端和设备解耦</strong>：云端应用可以直接与影子交互，不必直接连设备。</li>
+<li><strong>状态同步</strong>：云端可以“设定目标状态”，设备上线后自动获取并更新自己。</li>
+<li><strong>持久性</strong>：状态保存在云端，不怕设备重启丢失</li>
+</ul>
+<h4 id="设备影子结构"><a href="#设备影子结构" class="headerlink" title="设备影子结构"></a>设备影子结构</h4><p>设备影子的本质是一个<code>JSON文档</code>，主要有三部分：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;state&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;desired&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span><span class="punctuation">,</span>  <span class="comment">//事物的预期状态。应用程序可以向本文档部分写入数据来更新事物的状态，且无需直接连接到该事物。</span></span><br><span class="line">    <span class="attr">&quot;reported&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span><span class="punctuation">,</span>  <span class="comment">// 事物的报告状态。事物可以向本文档部分写入数据，以报告其新状态。应用程序可以读取本文档部分，以确定事物的状态</span></span><br><span class="line">    <span class="attr">&quot;delta&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span>      <span class="comment">// 差异（desired 和 reported 的不同）</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;metadata&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="number">12</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="number">1716260000</span>  <span class="comment">//指明 AWS IoT 传输消息的时间。通过在消息中使用时间戳并对 desired 或 reported 部分中的不同属性使用时间戳，事物可以确定已更新项目的存在时间，即使它不具有内部时钟特性。</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>desired</strong>：云端设定的目标状态（如灯要开、温度调到25度）。</li>
+<li><strong>reported</strong>：设备自己上报的实际状态（如灯现在开着，温度23度）。</li>
+<li><strong>delta</strong>：目标和实际的差异（如果有），设备可以据此调整。</li>
+</ul>
+<h4 id="设备影子的操作和流程"><a href="#设备影子的操作和流程" class="headerlink" title="设备影子的操作和流程"></a>设备影子的操作和流程</h4><p><strong>云端操作</strong>：</p>
+<ul>
+<li>云端应用可以直接“写”影子的desired部分，设定希望设备达到的目标。</li>
+<li>云端应用可以“读”影子的reported部分，获知设备当前的实际状态。</li>
+</ul>
+<p><strong>设备操作</strong>：</p>
+<ul>
+<li>设备上线后，主动“读”影子的delta或desired部分，获取云端最新目标。</li>
+<li>设备调整自身状态后，“写”影子的reported部分，上报自己的实际状态。</li>
+</ul>
+<p><strong>状态同步流程示意</strong>：</p>
+<ol>
+<li>云端设置desired（例如希望开灯）；</li>
+<li>设备上线后获取到delta（发现云端期望开灯），于是开灯；</li>
+<li>设备开灯后，上报reported（已开灯）；</li>
+<li>云端看到reported和desired一致，delta消失，状态同步完成。</li>
+</ol>
+<h4 id="设备影子的常用-MQTT-主题-Topic"><a href="#设备影子的常用-MQTT-主题-Topic" class="headerlink" title="设备影子的常用 MQTT 主题(Topic)"></a>设备影子的常用 MQTT 主题(Topic)</h4><table>
+<thead>
+<tr>
+<th>主题</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$aws/things/&#123;thingName&#125;/shadow/update</code></td>
+<td><strong>发布影子状态更新（desired或reported）</strong></td>
+</tr>
+<tr>
+<td><code>$aws/things/&#123;thingName&#125;/shadow/get</code></td>
+<td><strong>获取影子文档</strong></td>
+</tr>
+<tr>
+<td><code>$aws/things/&#123;thingName&#125;/shadow/update/accepted</code></td>
+<td><strong>影子更新成功的反馈</strong></td>
+</tr>
+<tr>
+<td><code>$aws/things/&#123;thingName&#125;/shadow/update/rejected</code></td>
+<td><strong>影子更新失败的反馈</strong></td>
+</tr>
+<tr>
+<td><code>$aws/things/&#123;thingName&#125;/shadow/get/accepted</code></td>
+<td><strong>获取影子成功的反馈</strong></td>
+</tr>
+<tr>
+<td><code>$aws/things/&#123;thingName&#125;/shadow/get/rejected</code></td>
+<td><strong>获取影子失败的反馈</strong></td>
+</tr>
+<tr>
+<td><code>$aws/things/&#123;thingName&#125;/shadow/delete</code></td>
+<td><strong>删除影子文档</strong></td>
+</tr>
+</tbody></table>
+<h4 id="典型场景"><a href="#典型场景" class="headerlink" title="典型场景"></a>典型场景</h4><p><strong>1. 远程控制</strong></p>
+<p>云端App设定<code>desired</code>，设备感知并调整自身状态，然后上报<code>reported</code>。</p>
+<p><strong>2. 状态上报</strong></p>
+<p>设备定时&#x2F;事件驱动发布<code>reported</code>，云端可以查询设备当前状态。</p>
+<p><strong>3. 离线同步</strong></p>
+<p>设备断网期间，云端依旧可修改<code>desired</code>。设备重新上线时，会收到<code>delta</code>，自动同步。</p>
+<h4 id="代码-消息示例"><a href="#代码-消息示例" class="headerlink" title="代码&amp;消息示例"></a>代码&amp;消息示例</h4><ul>
+<li><strong>云端设置目标状态</strong></li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发布到 $aws/things/my_thing/shadow/update</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;state&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;desired&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;led&quot;</span><span class="punctuation">:</span> <span class="string">&quot;on&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>设备上报实际状态</strong></li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发布到 $aws/things/my_thing/shadow/update</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;state&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;reported&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;led&quot;</span><span class="punctuation">:</span> <span class="string">&quot;on&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>设备收到云端下发的delta</strong></li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;state&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;led&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="number">12</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="number">1716260000</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="Amazon-Cognito"><a href="#Amazon-Cognito" class="headerlink" title="Amazon Cognito"></a>Amazon Cognito</h1><p><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/cognito/latest/developerguide/what-is-amazon-cognito.html">什么是 Amazon Cognito？ - Amazon Cognito</a></p>
+<h2 id="核心功能-1"><a href="#核心功能-1" class="headerlink" title="核心功能"></a>核心功能</h2><p>Amazon Cognito 是面向应用的<code>用户身份管理服务</code>，提供用户注册、登录、访问控制等功能，支持移动端(APP)和 Web 应用。</p>
+<h2 id="用户池和身份池概念"><a href="#用户池和身份池概念" class="headerlink" title="用户池和身份池概念"></a>用户池和身份池概念</h2><h3 id="用户池（User-Pool）"><a href="#用户池（User-Pool）" class="headerlink" title="用户池（User Pool）"></a>用户池（User Pool）</h3><p><strong>作用：</strong><br>用户池用于用户身份认证，即“你是谁”。</p>
+<p><strong>功能：</strong></p>
+<ul>
+<li>提供注册、登录、找回密码、多因子认证（MFA）等用户管理功能。</li>
+<li>可以存储用户的用户名、邮箱、手机号、密码等信息。</li>
+<li>支持社交登录（如 Facebook、Google）和企业身份提供商（SAML、OIDC）。</li>
+</ul>
+<p><strong>应用场景：</strong><br>适合需要自有用户账号体系的应用，比如 App、网站等。</p>
+<p><strong>用法示例：</strong><br>你可以用 Cognito 用户池来让用户注册账号、登录、重置密码等。用户池会保存用户信息，并生成一个 <code>JWT Token</code>（ID Token&#x2F;Access Token），应用通过 Token 识别和管理用户会话。</p>
+<p><code>AWS用户池</code>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250519161736438.png" alt="image-20250519161736438"></p>
+<h3 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h3><p><code>什么是 Token？</code></p>
+<p><strong>Token（令牌）是认证系统生成的字符串，用来代表用户的登录状态和身份信息</strong></p>
+<p>在 AWS Cognito 用户池中，这个 Token 实际上是<strong>JWT</strong>（JSON Web Token）格式的。</p>
+<p><strong>登录成功后，Cognito 用户池会返回三种 Token</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>Token 名称</th>
+<th>主要作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ID Token</td>
+<td>描述用户身份信息（如用户名、邮箱等）</td>
+</tr>
+<tr>
+<td>Access Token</td>
+<td>授权用户访问受保护的 API 资源</td>
+</tr>
+<tr>
+<td>Refresh Token</td>
+<td>用于刷新获取新的 ID Token 和 Access Token</td>
+</tr>
+</tbody></table>
+<p><code> ID Token</code>：</p>
+<ul>
+<li>内容：<strong>包含用户的身份信息</strong>（比如用户名、邮箱、用户属性等）。</li>
+<li>用途：你的 App 可以读取 ID Token 里的信息，知道用户是谁。</li>
+</ul>
+<p><code>Access Token</code>：</p>
+<ul>
+<li>内容：<strong>包含用户权限和授权信息。</strong></li>
+<li>用途：你的 App 或后端在访问受保护资源（比如 API 网关）时，把 Access Token 附上，服务端用它判断你是否有权限访问。</li>
+</ul>
+<p><code>Refresh Token</code>：</p>
+<ul>
+<li>内容：<strong>只用于换取新的 ID Token 和 Access Token</strong>。</li>
+<li>用途：Token 过期后，用户无需重新登录，可以用 Refresh Token 换新 Token（通常存储在本地）。</li>
+</ul>
+<h3 id="身份池（Identity-Pool）"><a href="#身份池（Identity-Pool）" class="headerlink" title="身份池（Identity Pool）"></a>身份池（Identity Pool）</h3><p><strong>作用：</strong><br>身份池用于<code>授权</code>和<code>临时身份凭证</code>管理，即“你可以访问什么”。</p>
+<p><strong>功能：</strong></p>
+<ul>
+<li>允许用户“联合身份”登录（如用 Cognito 用户池、社交账号、SAML、匿名身份等）。</li>
+<li>通过身份池，应用可以为用户分配 AWS 资源的临时访问凭证（如 S3、DynamoDB、IoT 等），<code>权限由身份池的角色策略控制</code></li>
+<li><strong>身份池并不管理用户的用户名&#x2F;密码，而是根据已认证的身份，发放临时 AWS 权限。</strong></li>
+</ul>
+<p><strong>应用场景：</strong><br>适合让用户访问 AWS 资源（如上传文件到 S3、与 IoT 设备通信等）。</p>
+<p><code>用法示例(重要)</code>：</p>
+<p>用户登录后，应用会把<strong>用户池</strong>获得的 Token 传给<strong>身份池</strong>，身份池验证后，返回一组有权限的 AWS 临时凭证（AK&#x2F;SK&#x2F;SessionToken），<strong>应用再用这些凭证去访问 AWS 服务</strong>。</p>
+<h3 id="临时凭证"><a href="#临时凭证" class="headerlink" title="临时凭证"></a>临时凭证</h3><p>在 AWS 中，<strong>临时凭证</strong>（Temporary Credentials）指的是一组由 AWS 颁发的、有时效限制的安全密钥，包括三部分：</p>
+<ul>
+<li><strong>Access Key ID</strong>（访问密钥ID）</li>
+<li><strong>Secret Access Key</strong>（访问密钥秘钥）</li>
+<li><strong>Session Token</strong>（会话令牌）</li>
+</ul>
+<p><code>作用</code>：</p>
+<p><strong>1.访问 AWS 云服务</strong></p>
+<ul>
+<li>拿到临时凭证后，App（或设备）可以用它来<strong>直接访问 AWS 的各类云资源与服务</strong>，如 S3、DynamoDB、IoT、Lambda、API Gateway等。</li>
+<li>可以把它理解为 AWS 给你的 App 一把临时钥匙，你能用它做什么、能访问哪些资源，取决于分配给你的权限策略（Policy）。</li>
+</ul>
+<p><strong>2.权限可控且更安全</strong></p>
+<ul>
+<li>临时凭证由 Cognito 身份池根据你的身份（比如你用 JWT Token 换的）动态分配，<strong>权限范围和有效期都可控</strong>，有效期一般为<code>1小时</code>。</li>
+<li>即使凭证泄漏，风险也有限（过期自动失效，且权限受限）。</li>
+<li>不需要在 App 里硬编码长期的 AWS 密钥，安全性更高。</li>
+</ul>
+<p><strong>3.支持多种身份源统一授权</strong></p>
+<ul>
+<li>不管你用邮箱&#x2F;微信&#x2F;QQ&#x2F;匿名&#x2F;企业账户登录，只要能获得 Cognito 用户池的 Token，都能通过身份池换取 AWS 临时凭证，实现统一的云端访问授权。</li>
+</ul>
+<h3 id="用户池和身份池区别"><a href="#用户池和身份池区别" class="headerlink" title="用户池和身份池区别"></a>用户池和身份池区别</h3><ul>
+<li><strong>Cognito 用户池</strong>：管理应用用户的注册、登录——这些用户不是 IAM 用户。</li>
+<li><strong>Cognito 身份池</strong>：将应用用户（通过登录认证的或匿名用户）映射为 IAM 角色，获得 AWS 访问权限。<ul>
+<li>已认证用户&#x2F;访客用户都不是 IAM 用户，而是通过“角色”机制获得临时 AWS 权限。</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>用户池（User Pool）</th>
+<th>身份池（Identity Pool）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主要用途</td>
+<td>用户身份认证</td>
+<td>AWS 资源授权和临时凭证获取</td>
+</tr>
+<tr>
+<td>用户管理</td>
+<td>是（保存用户信息）</td>
+<td>否（不保存用户信息）</td>
+</tr>
+<tr>
+<td>签发对象</td>
+<td>JWT Token（ID&#x2F;Access&#x2F;Refresh）</td>
+<td>AWS 临时凭证（AK&#x2F;SK&#x2F;Session）</td>
+</tr>
+<tr>
+<td>支持身份</td>
+<td>自注册、社交、企业</td>
+<td>用户池、社交、SAML、匿名等</td>
+</tr>
+<tr>
+<td>常见应用</td>
+<td>登录注册、会话管理</td>
+<td>S3&#x2F;IoT 等 AWS 资源访问</td>
+</tr>
+</tbody></table>
+<p>通常<strong>先用用户池处理登录注册，再用身份池换取 AWS 资源访问权限</strong>。</p>
+<h3 id="IAM-与-Cognito区别"><a href="#IAM-与-Cognito区别" class="headerlink" title="IAM 与 Cognito区别"></a>IAM 与 Cognito区别</h3><p><strong>IAM 用户（User）</strong></p>
+<ul>
+<li>属于 AWS 账号下的“云账户”，是 AWS 平台原生的身份，通常代表公司员工、长期自动化脚本等。</li>
+<li>有自己的用户名、密码、访问密钥，可以直接登录 AWS 控制台或使用 API。</li>
+<li>权限直接或通过组分配（Policy）。</li>
+</ul>
+<p><strong>IAM 角色（Role）</strong></p>
+<ul>
+<li>一种“临时身份”，不属于某个具体用户，没有用户名和密码，不能直接登录 AWS。</li>
+<li>需要通过“扮演&#x2F;切换角色（AssumeRole）”获得临时凭证。</li>
+<li>适合 AWS 服务之间、外部用户、临时授权等场景。</li>
+<li>权限通过策略分配。</li>
+</ul>
+<p><strong>Cognito 用户（User Pool User）</strong></p>
+<ul>
+<li>存在于 Cognito 用户池（User Pool）中，是你应用的终端用户（比如手机APP、网站的注册用户）。</li>
+<li>负责用户注册、登录、找回密码、多因素认证等。</li>
+<li>只管理“应用层”的账号，<strong>不是 IAM 用户</strong>，没有 AWS 账号权限。</li>
+</ul>
+<p><strong>Cognito 身份（Identity Pool Identity）</strong></p>
+<ul>
+<li><strong>存在于 Cognito 身份池（Identity Pool）中，用于将“应用用户”映射为可访问 AWS 资源的临时身份</strong>。</li>
+<li><strong>Cognito 身份池会根据用户认证（已认证&#x2F;未认证）分配不同的 IAM 角色，发放 AWS 临时凭证</strong>。</li>
+<li>可以支持多种身份源（Cognito 用户池、社交登录、匿名、SAML 等）。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520113206763.png" alt="image-20250520113206763"></p>
+<h3 id="场景示例"><a href="#场景示例" class="headerlink" title="场景示例"></a>场景示例</h3><ol>
+<li>用户打开 App 注册&#x2F;登录（用 User Pool）。</li>
+<li>登录成功后，获取到 Token。</li>
+<li>用 Token 换取 Identity Pool 的 AWS 临时凭证。</li>
+<li>App 用临时凭证访问 S3 上传照片，或与 IoT 设备通信。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250519171050852.png" alt="image-20250519171050852"></p>
+<h2 id="创建用户池和身份池"><a href="#创建用户池和身份池" class="headerlink" title="创建用户池和身份池"></a>创建用户池和身份池</h2><h3 id="创建用户池"><a href="#创建用户池" class="headerlink" title="创建用户池"></a>创建用户池</h3><p><strong>应用程序类型</strong>：这里我们是移动端APP，所以使用移动应用程序</p>
+<p><strong>登录标识符选项</strong>：选择可以使用什么登录，图中勾选代表：可以使用电子邮箱、手机号码、用户名任意一种方式登录</p>
+<p><strong>注册必要属性</strong>：注册时的必填项，图中代表必填邮箱和电话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520100649118.png" alt="image-20250520100649118"></p>
+<p>点击创建即可，创建后可在用户池中看到对应的用户池，进入后可修改名称，以及用户管理等操作</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520101740978.png" alt="image-20250520101740978"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520101757768.png" alt="image-20250520101757768"></p>
+<p><strong>用户登录和注册相关的设置可以在身份验证模块进行修改：</strong></p>
+<p>比如注册时的验证方式：手机还是邮箱等等</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520164158065.png" alt="image-20250520164158065"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520164120825.png" alt="image-20250520164120825"></p>
+<h3 id="创建身份池"><a href="#创建身份池" class="headerlink" title="创建身份池"></a>创建身份池</h3><p><strong>1.配置身份池信任</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520102105060.png" alt="image-20250520102105060"></p>
+<ul>
+<li><code>用户访问权限:两种</code></li>
+</ul>
+<p><strong>经过身份验证的访问权限</strong>：允许身份池管理的用户获取临时AWS凭证</p>
+<p><strong>访客访问权限</strong>：允许“没有登录、没有身份认证”的用户，通过身份池获得 AWS 颁发的临时凭证，从而访问你允许的云端资源</p>
+<ul>
+<li><code>经过身份验证的身份来源</code></li>
+</ul>
+<p><strong>Amazon Cognito 用户群体</strong>：通过Cognito的用户池进行身份验证(注册和登录应用的用户)</p>
+<p>其它可选身份提供方：如 Apple、Facebook、Google、Amazon、Twitter、OpenID Connect (OIDC)、SAML、自定义开发人员身份提供者等。这些可以让你支持其它第三方账号登录。</p>
+<hr>
+<p><strong>2.配置权限</strong></p>
+<p><strong>可以为我们的经过身份验证的角色和访客角色，分配对应的IAM角色，获取对应的凭证和权限</strong></p>
+<p>可以新建IAM角色，默认最低初始权限，创建完成身份池后，可以去IAM控制台，自定义IAM角色的策略。也可以使用已有IAM角色</p>
+<p><strong>这里使用新建IAM角色，可以看到默认的策略。这里图中应该对身份验证和访客进行不同的IAM角色管理(权限不同)，不应该使用相同角色。</strong></p>
+<p><strong>应该新建 auth_test 和 unauth_test 两个角色</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520113851990.png" alt="image-20250520113851990"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520113919269.png" alt="image-20250520113919269"></p>
+<hr>
+<p><strong>3.连接身份提供商(Amazon Cognito 用户群体 [用户池])</strong></p>
+<p><strong>这里我们选择之前创建的用户池ID、以及应用程序客户端ID</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520114127400.png" alt="image-20250520114127400"></p>
+<p><strong>角色选择经过身份验证的默认角色、映射选择不活跃</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520114219696.png" alt="image-20250520114219696"></p>
+<hr>
+<p><strong>4.配置身份池属性</strong></p>
+<p>设置我们的身份池名称</p>
+<p>不勾选 基本身份验证</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520135317365.png" alt="image-20250520135317365"></p>
+<blockquote>
+<p><strong>基本身份验证</strong>:</p>
+<ul>
+<li>启用后，应用可以通过较老的“基本身份验证”流程（Legacy&#x2F;Classic Flow）来获取身份池的临时凭证。</li>
+<li>基本流程是：应用先用身份池的身份ID（IdentityId）和登录令牌，直接请求AWS服务分配给该身份的IAM角色权限。</li>
+<li>这种方式<strong>兼容老SDK&#x2F;老代码</strong>，如果你的应用或SDK依赖于经典的 Cognito API 调用（如 GetCredentialsForIdentity），需要勾选。</li>
+<li>但这种方式有一定安全风险：因为IAM角色选择的逻辑会暴露给客户端，可能导致被恶意利用，造成不必要的权限暴露。</li>
+</ul>
+<p><strong>不启用的话，将不会使用经典流，使用增强流</strong></p>
+<ul>
+<li>增强流会在服务端更安全地完成身份验证和角色分配，客户端不直接控制角色选择，安全性更高。</li>
+<li>新的 AWS SDK 默认推荐用增强流，适合新应用或强安全需求场景。</li>
+</ul>
+</blockquote>
+<h2 id="身份池用户访问权限"><a href="#身份池用户访问权限" class="headerlink" title="身份池用户访问权限"></a>身份池用户访问权限</h2><p>创建身份时如果使用的时新建IAM角色，创建完成后应该如图所示，活跃状态代表IAM角色创建成功(如果是不活跃，可以在右边编辑角色重新创建)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520153559641.png" alt="image-20250520153559641"></p>
+<p>来到我们的IAM控制台找到之前创建身份池时选择的<code>auth_test</code>和<code>unauth_test</code>角色： <strong>可信实体必须是身份提供者: cognito-identity.amazor才能作为身份池的IAM角色选择</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520154559654.png" alt="image-20250520154559654"></p>
+<p><strong>经过身份验证的访问权限：角色 auth_test</strong></p>
+<p>点击进入auth_test角色后可以看到，目前只有一种客户托管策略。现在我们要为其添加对应IoT策略</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520155059286.png" alt="image-20250520155059286"></p>
+<p><strong>在右边添加权限中，进入附加策略，其中包含</strong>：</p>
+<p><strong>客户托管</strong>：我们自己创建的策略</p>
+<p><strong>AWS托管</strong>：AWS自带的一些策略</p>
+<p>我们选择AWSIoTFullAccess允许所有的IoT服务添加</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520155402375.png" alt="image-20250520155402375"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520155508921.png" alt="image-20250520155508921"></p>
+<p><strong>这里的AWSIoTFullAccess策略是允许所有的iot服务，实际使用是我们应该满足最小权限原则，<code>创建自定义策略</code></strong></p>
+<p>还需要其他权限的话，也可以再添加对应的AWS托管策略或客户托管策略</p>
+<p><strong>这样就将经过身份验证的角色的IoT服务权限配置完成了 !!!</strong> </p>
+<hr>
+<p><strong>访客的权限</strong>：角色 unauth_test，访客没登录，我们不给其他权限保持默认即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520155922787.png" alt="image-20250520155922787"></p>
+<hr>
+<h2 id="创建自定义策略"><a href="#创建自定义策略" class="headerlink" title="创建自定义策略"></a>创建自定义策略</h2><p><code>客户托管</code>：自定义策略</p>
+<p>进入IAM的策略，创建策略</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520151040192.png" alt="image-20250520151040192"></p>
+<p>选择IoT策略，然后勾选需要的权限，填写指定的资源区域、Topic限制等。勾选完成后可以选择json查看一下。点击下一步，然后填写策略名称、描述即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520151149144.png" alt="image-20250520151149144"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520151339307.png" alt="image-20250520151339307"></p>
+<p>最后在附加策略中搜索我们刚刚创建的自定义策略，然后将新建的auth_test添加即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250520151631676.png" alt="image-20250520151631676"></p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://i.postimg.cc/fbN6bFqP/20220206101541-14a48.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://i.postimg.cc/fbN6bFqP/20220206101541-14a48.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">THEDI</div><div class="post-copyright__author_desc">我想睡到12点!</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://www.thekqd.top/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://www.thekqd.top/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/')">AWS介绍</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://www.thekqd.top/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=AWS介绍&amp;url=https://www.thekqd.top/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/&amp;pic=/assets/28.webp" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.thekqd.top" target="_blank">THEDI的仓库</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/AWS/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>AWS<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>云服务<span class="tagsPageCount">3</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/assets/213.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/08/30/PCB%E8%AE%BE%E8%AE%A1-%E5%9F%BA%E4%BA%8E%E7%AB%8B%E5%88%9BEDA/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/26.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PCB设计(基于立创EDA)</div></div></a></div><div class="next-post pull-right"><a href="/2025/08/30/TLS%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/33.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">TLS传输层安全协议</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/08/30/MQTT%E8%BF%9E%E6%8E%A5AWS-IoT/" title="MQTT连接AWS IoT"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/213.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-08-30</div><div class="title">MQTT连接AWS IoT</div></div></a></div><div><a href="/2025/08/30/TLS%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/" title="TLS传输层安全协议"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/33.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-08-30</div><div class="title">TLS传输层安全协议</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://i.postimg.cc/fbN6bFqP/20220206101541-14a48.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">THEDI</h1><div class="author-info__desc">我想睡到12点!</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="/assets/QRCode.jpg" target="_blank" title="微信"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-weixin"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/" target="_blank" title="B站"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a><a class="social-icon faa-parent animated-hover" href="mailto:1244381125@qq.com" target="_blank" title="QQ邮箱"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youxiang"></use></svg></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">不要偷看我的博客!</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(null) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-AWS%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是 AWS？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IAM"><span class="toc-number">2.</span> <span class="toc-text">IAM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IAM-%E4%BD%9C%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">IAM 作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IAM%E4%B8%BB%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="toc-number">2.2.</span> <span class="toc-text">IAM主要概念</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AWS-IoT"><span class="toc-number">3.</span> <span class="toc-text">AWS IoT</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AWS-IoT-Core"><span class="toc-number">3.1.</span> <span class="toc-text">AWS IoT Core</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="toc-number">3.1.1.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.1.2.</span> <span class="toc-text">典型应用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AWS-IoT-Core-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81"><span class="toc-number">3.2.</span> <span class="toc-text">AWS IoT Core 客户端身份验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AWS-IoT-Core%E4%BD%BF%E7%94%A8"><span class="toc-number">3.3.</span> <span class="toc-text">AWS IoT Core使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E5%93%81-Thing"><span class="toc-number">3.3.1.</span> <span class="toc-text">物品(Thing)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E5%93%81-Thing-%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">物品(Thing)介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E5%93%81%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BD%9C%E7%94%A8"><span class="toc-number">3.3.1.2.</span> <span class="toc-text">物品的主要作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA%E8%AE%BE%E5%A4%87%E8%BF%9E%E6%8E%A5-AWS-IoT-%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-number">3.3.1.3.</span> <span class="toc-text">单个设备连接 AWS IoT 的基本流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5"><span class="toc-number">3.3.2.</span> <span class="toc-text">策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%BD%B1%E5%AD%90"><span class="toc-number">3.3.3.</span> <span class="toc-text">设备影子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%AE%BE%E5%A4%87%E5%BD%B1%E5%AD%90"><span class="toc-number">3.3.3.1.</span> <span class="toc-text">什么是设备影子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E8%AE%BE%E5%A4%87%E5%BD%B1%E5%AD%90"><span class="toc-number">3.3.3.2.</span> <span class="toc-text">为什么需要设备影子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%BD%B1%E5%AD%90%E7%BB%93%E6%9E%84"><span class="toc-number">3.3.3.3.</span> <span class="toc-text">设备影子结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%BD%B1%E5%AD%90%E7%9A%84%E6%93%8D%E4%BD%9C%E5%92%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">3.3.3.4.</span> <span class="toc-text">设备影子的操作和流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%BD%B1%E5%AD%90%E7%9A%84%E5%B8%B8%E7%94%A8-MQTT-%E4%B8%BB%E9%A2%98-Topic"><span class="toc-number">3.3.3.5.</span> <span class="toc-text">设备影子的常用 MQTT 主题(Topic)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E5%9C%BA%E6%99%AF"><span class="toc-number">3.3.3.6.</span> <span class="toc-text">典型场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-%E6%B6%88%E6%81%AF%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.3.3.7.</span> <span class="toc-text">代码&amp;消息示例</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Amazon-Cognito"><span class="toc-number">4.</span> <span class="toc-text">Amazon Cognito</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD-1"><span class="toc-number">4.1.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%B1%A0%E5%92%8C%E8%BA%AB%E4%BB%BD%E6%B1%A0%E6%A6%82%E5%BF%B5"><span class="toc-number">4.2.</span> <span class="toc-text">用户池和身份池概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%B1%A0%EF%BC%88User-Pool%EF%BC%89"><span class="toc-number">4.2.1.</span> <span class="toc-text">用户池（User Pool）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Token"><span class="toc-number">4.2.2.</span> <span class="toc-text">Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E6%B1%A0%EF%BC%88Identity-Pool%EF%BC%89"><span class="toc-number">4.2.3.</span> <span class="toc-text">身份池（Identity Pool）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B4%E6%97%B6%E5%87%AD%E8%AF%81"><span class="toc-number">4.2.4.</span> <span class="toc-text">临时凭证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%B1%A0%E5%92%8C%E8%BA%AB%E4%BB%BD%E6%B1%A0%E5%8C%BA%E5%88%AB"><span class="toc-number">4.2.5.</span> <span class="toc-text">用户池和身份池区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IAM-%E4%B8%8E-Cognito%E5%8C%BA%E5%88%AB"><span class="toc-number">4.2.6.</span> <span class="toc-text">IAM 与 Cognito区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.2.7.</span> <span class="toc-text">场景示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E6%B1%A0%E5%92%8C%E8%BA%AB%E4%BB%BD%E6%B1%A0"><span class="toc-number">4.3.</span> <span class="toc-text">创建用户池和身份池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E6%B1%A0"><span class="toc-number">4.3.1.</span> <span class="toc-text">创建用户池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%BA%AB%E4%BB%BD%E6%B1%A0"><span class="toc-number">4.3.2.</span> <span class="toc-text">创建身份池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E6%B1%A0%E7%94%A8%E6%88%B7%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="toc-number">4.4.</span> <span class="toc-text">身份池用户访问权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AD%96%E7%95%A5"><span class="toc-number">4.5.</span> <span class="toc-text">创建自定义策略</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/MQTT%E8%BF%9E%E6%8E%A5AWS-IoT/" title="MQTT连接AWS IoT"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/213.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MQTT连接AWS IoT"/></a><div class="content"><a class="title" href="/2025/08/30/MQTT%E8%BF%9E%E6%8E%A5AWS-IoT/" title="MQTT连接AWS IoT">MQTT连接AWS IoT</a><time datetime="2025-08-29T16:33:21.000Z" title="发表于 2025-08-30 00:33:21">2025-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/TLS%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/" title="TLS传输层安全协议"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/33.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="TLS传输层安全协议"/></a><div class="content"><a class="title" href="/2025/08/30/TLS%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/" title="TLS传输层安全协议">TLS传输层安全协议</a><time datetime="2025-08-29T16:31:07.000Z" title="发表于 2025-08-30 00:31:07">2025-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/" title="AWS介绍"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/28.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AWS介绍"/></a><div class="content"><a class="title" href="/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/" title="AWS介绍">AWS介绍</a><time datetime="2025-08-29T16:28:11.000Z" title="发表于 2025-08-30 00:28:11">2025-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/PCB%E8%AE%BE%E8%AE%A1-%E5%9F%BA%E4%BA%8E%E7%AB%8B%E5%88%9BEDA/" title="PCB设计(基于立创EDA)"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/26.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PCB设计(基于立创EDA)"/></a><div class="content"><a class="title" href="/2025/08/30/PCB%E8%AE%BE%E8%AE%A1-%E5%9F%BA%E4%BA%8E%E7%AB%8B%E5%88%9BEDA/" title="PCB设计(基于立创EDA)">PCB设计(基于立创EDA)</a><time datetime="2025-08-29T16:20:05.000Z" title="发表于 2025-08-30 00:20:05">2025-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="加密算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/5.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="加密算法"/></a><div class="content"><a class="title" href="/2025/08/30/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="加密算法">加密算法</a><time datetime="2025-08-29T16:12:06.000Z" title="发表于 2025-08-30 00:12:06">2025-08-30</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://www.dogecloud.com/" style="margin-inline:5px" data-title="本站使用多吉云为静态资源提供CDN加速" title="本站使用多吉云为静态资源提供CDN加速"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg" alt="本站使用多吉云为静态资源提供CDN加速"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="/" title="THEDI" target="_blank">THEDI</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">8</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/keqiudi/keqiudi.github.io" title="我的博客仓库"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="我的博客仓库"/><span class="back-menu-item-text">我的博客仓库</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AWS/" style="font-size: 0.88rem;">AWS<sup>2</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>2</sup></a><a href="/tags/CLion/" style="font-size: 0.88rem;">CLion<sup>2</sup></a><a href="/tags/CMake/" style="font-size: 0.88rem;">CMake<sup>1</sup></a><a href="/tags/ESP32/" style="font-size: 0.88rem;">ESP32<sup>1</sup></a><a href="/tags/FreeRTOS/" style="font-size: 0.88rem;">FreeRTOS<sup>5</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/LCD/" style="font-size: 0.88rem;">LCD<sup>2</sup></a><a href="/tags/LVGL/" style="font-size: 0.88rem;">LVGL<sup>7</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>8</sup></a><a href="/tags/MySQL/" style="font-size: 0.88rem;">MySQL<sup>2</sup></a><a href="/tags/PCB/" style="font-size: 0.88rem;">PCB<sup>2</sup></a><a href="/tags/QT/" style="font-size: 0.88rem;">QT<sup>1</sup></a><a href="/tags/keil/" style="font-size: 0.88rem;">keil<sup>1</sup></a><a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/" style="font-size: 0.88rem;">云服务<sup>3</sup></a><a href="/tags/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" style="font-size: 0.88rem;">启动流程<sup>2</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 0.88rem;">嵌入式<sup>2</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">嵌入式安全<sup>3</sup></a><a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 0.88rem;">架构<sup>2</sup></a><a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 0.88rem;">环境配置<sup>4</sup></a><a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 0.88rem;">硬件<sup>5</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 0.88rem;">算法<sup>3</sup></a><a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 0.88rem;">调试<sup>5</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 THEDI 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/01/2022 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.60.0/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script async src="//at.alicdn.com/t/c/font_4169545_k8d3mxnig4s.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

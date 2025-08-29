@@ -1,0 +1,1753 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>LVGL移植到STM32 | THEDI的仓库</title><meta name="keywords" content="LVGL"><meta name="author" content="THEDI"><meta name="copyright" content="THEDI"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="LVGL移植到STM32"><meta name="application-name" content="LVGL移植到STM32"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="LVGL移植到STM32"><meta property="og:url" content="https://www.thekqd.top/2025/08/29/LVGL%E7%A7%BB%E6%A4%8D%E5%88%B0STM32/index.html"><meta property="og:site_name" content="THEDI的仓库"><meta property="og:description" content="LVGL移植到STM32"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://www.thekqd.top/assets/14.webp"><meta property="article:author" content="THEDI"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://www.thekqd.top/assets/14.webp"><meta name="description" content="LVGL移植到STM32"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://www.thekqd.top/2025/08/29/LVGL%E7%A7%BB%E6%A4%8D%E5%88%B0STM32/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--anzhiyu-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@1.0.17/lib/assets/font-awesome-animation.min.css#fontawesome_animation 如果有就会加载，示例值：https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@1.0.17/lib/assets/font-awesome-animation.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"与大家一起进步","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"该回来学习啦！","backTitle":"w(ﾟДﾟ)w快认真学习！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🏠 智能家居小能手"]},
+  algolia: {"appId":"PW49GHYJ6T","apiKey":"42b04be58e36cfebeb6ac1989c6e8009","indexName":"hexo","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    simplehomepage: false,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: THEDI","link":"链接: ","source":"来源: THEDI的仓库","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'THEDI的仓库',
+  title: 'LVGL移植到STM32',
+  postAI: '',
+  pageFillDescription: '移植LVGL到STM32, 源码获取, 移植, src源码, 移植文件, 配置文件, 工程管理, 源文件添加, conf组, port组, src组, 移植总览表格, draw, layout, libs, misc, osal, stdlib, themes, widgets, driver, other, 头文件添加, 启用lv_conf.h, 编译报错, 找不到头文件, 关于移植的一些问题, 修改LVGL配置文件, 显示屏, 颜色深度, 字节序, 内存管理, 内存池介绍, 分配内存池大小, 显示刷新与输入设备, 刷新周期, 读取周期, 操作系统, 字体, 控件启用(widget), 默认内容开启, 控件使能, 主题, 布局, 其他, 编译报错, 修改LVGL移植层, 移植层文件启用, 移植显示驱动, 设置分辨率, lv_port_disp_init, 初始化显示屏, 创建显示对象并设置刷新回调, 显示缓冲区, 显示缓冲区介绍, LVGL显示工作原理, 单缓冲区(部分缓冲), 双缓冲区（部分缓冲）, 全屏双缓冲(全屏缓冲), API, disp_flush, 示例程序, 判断是否允许刷新, 像素刷新逻辑, 刷新完成通知, 常用做法, DMA批量传输, 移植触摸驱动, lv_port_indev_init, touchpad_init, touchpad_read, touchpad_is_pressed, touchpad_get_xy, 配置和启动LVGL, 配置时基, FreeRTOS, 使用FreeRTOS的钩子函数, 单任务控制, 裸机, 使用SysTick中断, 定时器, 周期性调用lvgl任务处理, 移植成功与否测试, 显示驱动测试, 触摸驱动测试, 移植遇到的问题, LVGL触摸回调函数不触发移植到官方英文移植教程获取文档韦东山中文移植教程移植文档源码获取然后从上下载源码官方移植方法这是版本移植该笔记基于往上的如果使用版本较低就可能与本笔记中的内容不同我们的只需要关注源码中需要移植的部分以工程为例我们找到项目根目录下没有就创建一个然后再其中创建一个文件夹用于存放我们移植相关的内容然后在该目录下新建和文件夹文件夹源码文件夹存放我们自己的移植代码比如显示驱动移植输入设备触摸按键接口移植等等源码将下载下来的库的源码文件夹替换刚刚创建的文件夹移植文件再将下的文件复制到到我们的项目的中去并进行一个规范命名的操作相关文件介绍显示驱动移植模板通用文件系统接口移植模板输入设备触摸按键驱动移植模板专用显示驱动移植模板这个和差不多只不过是专用的二选一即可我们这里只有显示驱动和触摸驱动所有只需要保留这两个到我们项目的中然后去掉后缀规范命名配置文件主要就是库中的这三个文件需要移植的配置头文件模板里面包含了各种宏定义比如颜色深度是否开启某个控件功能内存大小等版本信息头文件对源码目录下所有头文件的包含后续只需要包含整个文件就能使用全部将这三个文件复制到目录下然后将配置文件更名为工程管理源文件添加在工程中新建这三个组然后分别添加对应的文件到项目组把这三个放到组中组将需要移植文件夹中的的文件和文件添加到组组第一种可以将需要添加的所有文件都添加到组中第二种按照文件夹目录结构将中的各个模块单独创建组添加这样比较好找文件然后按照下方给的移植总览表格将对应模块所需要的文件添加到对应组中即可移植总览表格全部移植就是该文件夹下的所有文件包括子文件夹一个一个都要手动添加到组中必须全部添加否则编译会报错只有和两个文件夹可以完全不用移植如果使用到了再添加进去名称作用描述必要性核心对象管理事件基础框架全部移植显示相关管理显示设备适配全部移植字体管理和渲染全部移植输入设备触摸按键等抽象和管理全部移植控件布局系统如全部移植杂项工具和通用功能如内存链表等全部移植定时任务调度与管理全部移植绘图引擎图形渲染全部移植操作系统抽象适配如接口全部移植主题系统控件风格美化全部移植所有具体控件实现如按钮滑块列表等全部移植标准库适配为兼容不同库平台全部移植第三方库支持如等全部移植官方外设驱动如各种屏触摸等按需移植不用可以不移植其它杂项实验性不常用功能按需移植不用可以不移植下面是一些含有子目录的文件夹内容介绍名称作用必要性硬件绘图加速支持按需移植仅带且需加速时系列芯片的硬件绘图加速接口按需移植仅等芯片使用时图形加速接口按需移植仅带芯片用恩智浦芯片硬件绘图加速按需移植芯片带加速功能时图形库加速接口按需移植高端嵌入式平台用瑞萨芯片专用绘图加速按需移植瑞萨特定芯片用仿真绘图后端适合开发测试和演示按需移植仿真时可用纯软件绘图默认后端所有平台可用建议移植几乎所有平台都可用也可和硬件加速共存加速接口按需移植如等带芯片名称作用必要性布局引擎类似于网页的布局控件自适应排列建议移植用到布局或相关控件时必须布局引擎类似于网页的布局控件网格排列建议移植用到布局或相关控件时必须布局系统主入口和调度代码必须移植布局系统主头文件必须移植布局系统私有头文件必须移植名称作用描述必要性条形码生成解析支持按需移植如需条形码功能时才用二进制图片格式解码按需移植如需支持二进制图片时才用图片格式解码按需移植如需图片支持时才用解析库按需移植如需用到相关功能时才用视频音频解码库适配按需移植如需视频音频播放时才用矢量字体引擎按需移植如需矢量字体高级字体支持时文件系统驱动接口按需移植如需卡盘文件系统支持时图片格式解码按需移植如需动画支持时才用图片格式解码按需移植如需图片支持时才用图片格式解码按需移植如需图片支持时才用纯实现解码按需移植如需且不用时可选压缩算法支持按需移植如需压缩资源时才用二维码生成按需移植如需二维码生成功能时才用压缩支持按需移植如需图片资源支持时才用动画支持按需移植如需矢量动画时才用矢量图形格式支持按需移植如需图片动画时才用矢量图形库支持按需移植如需高级矢量渲染时才用轻量级字体支持按需移植如需使用字体时才用解码库轻量级解码按需移植如需支持且资源有限时用名称作用必要性必须移植建议移植按需移植缓存相关功能提升性能按需移植需要缓存机制时才用默认可不加名称作用描述必要性内置标准库实现如内存字符串等建议移植大多数平台通用默认推荐标准库适配层如等按需移植需适配特殊库时才用适配相关按需移植做绑定时用系统下标准库适配按需移植系统用固件环境下标准库适配按需移植做固件开发才用名称作用描述必要性默认主题配色控件样式等建议移植默认主题常用建议加单色主题灰度黑白配色按需移植如需单色风格时用简化主题简洁外观较少样式按需移植如需极简界面时用主题系统主实现文件建议移植使用主题功能时必须主题系统主头文件建议移植使用主题功能时必须主题系统私有头文件建议移植名称作用描述必要性按钮控件建议移植常用控件图片控件建议移植常用控件文字标签控件建议移植常用控件进度条控件按需移植常用建议加圆弧控件按需移植沿圆弧排布的文字控件按需移植按钮矩阵控件如键盘九宫格按需移植日历控件按需移植画布控件可自绘像素按需移植图表控件折线柱状饼图按需移植复选框控件按需移植下拉框控件按需移植图片按钮控件按需移植屏幕软键盘控件按需移植指示灯控件按需移植线段控件按需移植列表控件按需移植动画控件按需移植需矢量动画时才用菜单控件按需移植消息框控件按需移植对象扩展模板自定义开发用按需移植开发自定义控件时用属性面板控件按需移植转轮选择控件如日期时间选择器按需移植刻度尺标尺控件按需移植滑块控件用于调节音量亮度等数值按需移植富文本多样式文本片段控件按需移植数字步进框控件带加减按钮的数字输入按需移植加载等待动画控件按需移植开关控件类似手机设置中的开关按需移植表格控件按需移植标签页控件多页面切换按需移植多行文本输入框控件按需移植平铺视图控件多页面自由滑动切换按需移植窗口控件带标题栏和关闭按钮的窗口仿桌面风格按需移植三维纹理控件罕用按需移植需纹理时才用动图控件如序列按需移植需显示动图时才用这里面的驱动不使用的话直接都不移植即可名称作用必要性各种显示屏驱动适配示例仿真开发板用较多按需移植移植通常不用可参考下输入设备驱动适配按需移植仿真环境用库适配端窗口输入显示键鼠按需移植端仿真用下输入库适配按需移植桌面或嵌入式开发用平台驱动适配按需移植用才用操作系统下驱动适配按需移植用才用库适配端仿真窗口输入输出等按需移植仿真演示用固件环境下驱动适配按需移植做固件开发才用窗口系统驱动适配按需移植桌面环境才用平台下输入显示驱动适配按需移植仿真开发才用窗口系统驱动适配按需移植桌面环境才用不用就都不移植名称作用描述必要性必须移植建议移植按需移植文件浏览器相关功能示例按需移植需文件管理功能时才用字体管理扩展按需移植需高级字体管理时才用界面分片功能类似按需移植需动态界面切换时才用网格导航控件按需移植需网格导航时才用输入法扩展按需移植需自定义输入法时才用图片字体支持按需移植需图片字体时才用自动化测试工具按需移植需自动测试时才用观察者模式实现按需移植需事件订阅发布时才用屏幕控件快照功能按需移植需截图快照时才用系统监控如内存帧率等按需移植需性能监控时才用自带的测试代码按需移植开发调试或自测时才用国际化多语言支持按需移植需多语言界面时才用格式矢量图形支持按需移植需矢量图时才用相关功能解析按需移植需数据支持时才用头文件添加最后添加库所有的头文件搜索路径即可四个都要添加不能缺少否则可能会出现找不到头文件错误启用我们在配置文件将此处的修改为启用该配置文件关于是的配置文件主要用于配置库要不要编译哪些功能用多大内存支不支持某些控件主题库底层适配方式等这个文件就是在裁剪库的功能和适配你的硬件需求这里启用后就能进行编译了如果编译报错可以看是否是下面的问题编译报错找不到头文件然后进行编译操作可以发现有很多这些都是由于找不到造成的我们可以看到由于没有宏定义包含的路径的方法是第三种然而我们的的实际路径是所以找不到解决方法在预处理器添加宏定义让包含头文件方式修改为自动查找头文件搜索路径关于移植的一些问题移植的时候尽量全部移植没事不要去裁剪因为裁剪过后如果进行了函数调用找不到文件会报链接错误我的疑问如果全部移植编译时间那么久不会导致最终的固件体积增大吗不会因为添加到工程的所有文件在编译阶段时都会被单独编译成目标文件以供后续链接使用这就是为什么编译时间久的原因然而最终只有使用到的代码才会被链接最终算入到固件体积中固件体积并不会因为编译时间长而改变修改配置文件是的主配置文件用于打开关闭的各类功能定义分辨率颜色格式内存策略日志等在实际使用时我们必须对其进行配置裁剪我们不需要的功能优化固件大小等下面是一些可能会修改的地方进行一个介绍显示屏颜色深度我们设置的是表示像素的颜色深度所有设置为字节序该配置项作用设置位颜色数据在内存中的高低字节顺序大端小端在之后已经移除了该配置会自动根据你传给的像素缓冲区格式和显示驱动的要求来处理字节顺序内存管理内存池介绍在运行时会不断创建销毁控件比如按钮标签图片等它需要用等函数动态分配内存为了适配嵌入式系统有些没有标准库的或者用外部自带一套内存管理机制你可以把一块内存固定分配给全部动态分配都在这块里面进行互不干扰主程序其他部分分配内存池大小文件中这里可以看到这里可以设置供使用的内存大小这个大小根据页面复杂程度和控件多少进行分配使用时根据使用内存大小自行修改即可这里分配的是所有控件动画图片缓冲内部结构体等动态分配的内存都只能用这用完就失败控件创建会报错假设使用的是他的是如果我们分配给那么剩下的就是给主程序栈全局变量等的空间相当于把的划分一部分专门给分配内存请注意分配给的内存不要浪费如果剩下的空间较少的话就会导致其他程序分配空间不够运行失败显示刷新与输入设备刷新周期该参数表示界面刷新的默认频率单位数值越小刷新越快这里表示每刷新一次理论上帧率就是我们想要的话就设置左右即可我们开发的时候需要兼顾刷新率和功耗等所以应该实际测试并做调整刷新越快动画更流畅但是负担大功耗大刷新越慢动画卡顿界面响应不及时体验不好但是更省资源功耗更低读取周期用于设置输入设备如触摸屏按键读取的默认周期单位是在之后删除了该配置项输入设备读取周期请在注册驱动时用成员单独设置操作系统这是及以后新加的配置项用于指定你用的操作系统类型比如裸机等的多任务保护互斥锁延时等底层机制会根据这个选项自动适配对应的这样才能正确地实现多线程安全和操作系统相关功能比如保护资源防止多线程同时操作界面导致崩溃我这里使用的的操作系统所以修改为两种选择区别直接调用的原生如等通过适配层访问操作系统功能如任务信号量等调用的是的标准如字体这里是对启用的字体大小做配置这里表示只启用了号的字体我们使用时将对应需要的字体大小的宏设置为即可该字体就会被编译进固件注意只启用需要的字号可以节省空间不要都开因为启用的字体都会被编译进固件中占用固件体积控件启用这里主要是对中各种控件功能模块的开关和细节选项进行配置以下是配置的作用裁剪代码体积只打开你项目实际需要使用的控件未用的全部关闭可以让固件更小占用更少性能更高定制控件行为可以让某些控件有自带默认内容比如按钮标签下拉框等也可以自定义某些细节如日历的星期名月份名密码明文显示时长等依赖关系某些控件依赖于其它控件比如滑块依赖进度条下拉框依赖标签关闭时要注意依赖默认内容开启该选项可是否让控件自动带有默认内容比如按钮带默认标签下拉框带默认选项等设置为比如新建按钮矩阵会自带这些默认项方便测试和快速开发设置为所有控件默认内容为空需要你手动设置内容更加干净控件使能这些都是控制是否编译进该控件类型支持的宏如果不用某个控件建议关掉设为可以减少固件体积和内存消耗下面是所有的配置项根据需求开关即可配置项作用说明控件创建时自动带有默认内容如按钮有默认标签日历有默认选项等启用动画图片控件可播放帧动画图片启用弧形控件用于仪表盘等圆弧显示启用弧形文字控件文字沿圆弧排列显示启用条形进度条控件启用普通按钮控件启用按钮矩阵控件如数字键盘启用日历控件显示日期支持周起始日月份名等设置启用画布控件可自定义绘图启用图表控件显示折线柱状等数据图启用复选框控件启用下拉框控件依赖启用图片控件依赖启用图片按钮控件启用虚拟键盘控件启用标签文本控件启用指示灯控件启用线段控件启用列表控件启用动画控件动画矢量图依赖和库启用菜单控件启用消息框控件启用滚轮选择器控件依赖启用刻度尺控件启用滑块控件依赖启用富文本控件支持一行多样式文本启用数字微调控件启用加载等待动画控件启用开关控件类似手机设置中的滑动开关启用表格控件启用分页栏控件多标签切换如微信顶部栏目启用多行文本输入框依赖可用于输入密码框等启用多页面平铺控件可滑动切换页面启用窗口控件带标题栏按钮的窗口启用纹理控件一般很少用默认关闭主题主题相关的选项用于设置界面整体风格色彩动效等配置项作用说明启用默认主题一个功能完整效果美观的主题配合默认主题为浅色模式为深色模式按钮等控件按下时是否放大动效有动态放大无主题内控件切换动画的默认时长单位毫秒启用简单主题样式很简洁适合自定义二次开发启用单色主题为黑白单色屏显示设计使用彩屏时应设置为布局布局系统的配置项决定你的界面控件能否使用更高级的自动布局方式不使用都设置为即可配置项作用说明启用布局类似的支持弹性排列自动换行对齐等适合动态响应式界面启用布局类似的支持复杂的网格行列布局适合表单面板等场景其他还有一些其他的配置使用的时候再看即可启用性能监控器以查看和帧率编译报错如果发现关闭某些控件后出现编译报错的现象很大概率是因为部分控件之间有相互依赖关系必须同时开启或关闭如果一个开启一个关闭就可能会导致编译失败比如必须一起开这样就会导致中用到相关时就会报错修改移植层移植层文件启用编译通过修改配置文件过后就该开始适配对应的显示驱动触摸驱动文件系统等我们移植过来时的移植层文件中由于规范了命名去掉了后缀所以还需要对对应的和文件进行修改和启用这里我的项目中只使用了显示驱动适配输入设备适配移植层中所有我们需要使用的所有文件中和对应的文件都要启用和修改具体每个文件修改位置如下移植显示驱动在文件中主要注意的就只有和以下对这两个分别进行介绍设置分辨率在中由这几个宏定义我们需要修改为自己的大小之后才有更低版本没有需要自己定义我使用的是的屏幕水平分辨率我设置为垂直分辨率我设置为每个像素所占字节数我们设置的是所以代表字节版本往上流程具有一定的修改和老版本使用的方式不同这个函数主要是三部分组成初始化显示屏创建显示对象并设置刷新回调显示缓冲区和缓冲配置示例初始化显示屏这里主要是我们完成底层硬件显示屏的初始化初始化控制器设置背光等但是这里我们一般不使用因为在我们的项目中会有集中初始化的地方创建显示对象并设置刷新回调这里是在内部创建一个显示对象并告诉如何把渲染好的像素数据刷新到屏幕上创建一个显示驱动实例传参就是我们设置的分辨率的宏定义设置刷新回调函数每次有画面要显示时会调用你写的函数把一个区域的数据通过等方式传给屏幕显示缓冲区显示缓冲区介绍显示缓冲区使用的是空间把要渲染的图形的像素内容先放到这个缓冲区然后我们在回调中把这块内容传给实际的屏幕为什么要用缓冲区解耦渲染和传输的图形引擎在内存中先完成绘制不直接操作屏幕这样可以用复杂算法动画混合等技术提升效率你可以用等高效机制将缓冲区内容一次性传输到而不是逐像素刷屏节约资源缓冲区可以只分配部分区域比如行不用整个屏幕都占适合资源受限的支持双缓冲全屏刷新可实现并行渲染和刷屏无撕裂动画在为我们提供了三种显示缓冲的方式单缓冲区双缓冲区全屏双缓冲使用时在注释掉另外两种的代码或使用条件编译控制使用的方法即可下面将介绍工作原理与各方式的优劣显示工作原理渲染阶段首先在内存中的显示缓冲区里渲染出一块区域的像素数据比如行将所有控件图片文字等按照你的界面需求画在缓冲区里刷新阶段完成这一块的渲染后调用你的回调把刚刚渲染好的像素数据交给你数据传输你在里使用或把这块缓冲区的像素数据刷新到屏幕的对应位置让实际屏幕内容发生变化通知完成当数据传输刷新完成后你通知通常调用告知上一块区域刷屏已结束循环过程继续在缓冲区渲染下一块区域然后重复上述渲染刷新过程直到整帧内容全部显示到屏幕上单缓冲区部分缓冲分配的缓冲区一般至少分配屏幕的行像素数据优点占用内存最少适合小缺点刷屏期间必须等传输完才能画下一块渲染和刷屏不能并行效率略低单缓冲区适合内存极度紧张的界面简单刷新要求不高双缓冲区部分缓冲分配两块同样大小的缓冲区在一块缓冲区渲染的同时用把另一块缓冲区的数据刷新到渲染和刷屏可以并行效率高适合使用传输的情况我们通常就是使用这种方式配合进行传输在使用时可以根据的大小适当提高缓冲区的大小但是最好设置为一次刷新行优点效率高动画流畅推荐场景使用缺点比单缓冲多占用一份缓冲区内存但一般都能承受双缓冲区适合有的中等界面需要流畅滚动动画等全屏双缓冲全屏缓冲分配两块全屏大小的缓冲区每次都将整屏内容渲染到缓冲区然后一次性刷到适合直接切换帧缓地址的显示器如外接显存或高级优点画面最流畅无撕裂无闪烁支持复杂动画缺点占用内存极大如一块普通很难承受全屏双缓冲适合高端带外部智能屏等动画复杂全屏刷新需求高缓冲区设置相关函数显示对象第一块缓冲区指针第二块缓冲区指针可为第一块缓冲区的字节数渲染模式由创建的显示对象指针第一块缓冲区地址如宽高字节像素第二块缓冲区地址如需双缓冲否则可传缓冲区的实际字节数不是像素数部分渲染如只分配行缓冲区适合小全屏双缓冲适合充足支持无闪烁动画在初始化的过程中我们使用函数设置了刷新回调函数现在就该对我们的刷新回调函数进行一个实现了函数原型的显示驱动结构体里面有各种屏幕配置参数一般用不到定义了需要刷新的屏幕矩形区域起始坐标结束坐标指向这块区域的像素数据格式取决于我们配置的色深如字节像素示例程序我们移植过来的时候给出的示例回调函数如下使用的是最简单也是最耗时的方式逐个将所有像素显示到屏幕上我们将对其流程进行一个拆解判断是否允许刷新新增内容这个变量定义在上方比如某些时刻禁止刷屏时可以使用像素刷新逻辑工作原理遍历定义的区域把里的每个像素输送到对应的屏幕坐标这里的是示例实际应替换成我们的底层驱动的写像素的接口是指向下一像素如果则每次应加字节刷新完成通知要求我们务必在数据送完屏幕后调用它告诉图形库我们准备好下次刷新了否则界面不会继续渲染后续内容这个函数非常重要如果我们使用异步传输应该在完成中断里调用而不是在这里立即调用常用做法上面的示例是最简单但最耗时的做法我们实际开发过程中并不会这么做以下就介绍一下实际开发过程中的做法批量传输我们可以使用的方式直接将所有的像素数据批量传输给然后在传输完成后的传输完成的中断回调函数中执行刷新完成通知不再逐点的去写这样就可以由很快的速度了具体可以看逻辑开发的使用驱动显示屏笔记移植触摸驱动在文件中有多种触摸的方式触摸屏鼠标键盘编码器按钮我们通常只会选择一种进行移植以下介绍移植触摸屏相关的内容版本往上流程具有一定的修改和老版本使用的方式不同这个函数主要是三部分组成初始化输入设备创建输入对象设置刷新回调函数将所有的输入设备初始化都放进去了我们只需要保留我们需要输入设备即可这里我们只需要触摸屏所以仅保留触摸屏的初始化最终效果如下还有就是前面的函数声明和变量定义也仅保留需要的输入设备我这里只剩下了触摸屏的触摸屏的初始化函数可以在这里放触摸的初始化函数也可以自己安排初始化保证在初始化前该函数就是我们之前注册的回调函数由调用读取触摸屏输入这里主要会使用先判断触摸是被是否按下确认按下后在调用获取触摸点的坐标我们需要移植的也就是这两个函数该函数用于判断触摸是否被按下初始是这样的我们移植的话只需要调用触摸驱动对应的获取按下的手指个数进行判断是否被按下个数就按下了然后返回即可该函数用于触摸按下后获取按下位置的坐标和我们需要做的就是将触摸获取到的坐标赋值给供使用初始是这样的我们调用触摸芯片获取触摸点坐标的函数该函数会将坐标存储在该类型的结构体中然后我们将坐标赋值给变量即可配置和启动以上移植完成后我们还需要配置的时基同时周期性调用的任务处理函数使运行起来配置时基时基作为的核心时间管理机制用于驱动动画任务输入处理等功能详细介绍见调度笔记使用的钩子函数的钩子函数会在每次系统时钟节拍中断时被调用通常是中断详细介绍见笔记或官方文档下面我们来介绍如何进行配置在中配置为启用钩子函数运行周期由决定一般设置为也就是自己实现里面调用告诉已经过去了告诉已经过去了毫秒注意从内执行因此必须非常短且不能被阻塞单任务控制单独创建一个任务每过就调用一次时间源裸机使用中断确保库使用作为时基在中调用即可定时器自己配置一个中断的定时器在内部调用即可周期性调用任务处理我们必须在循环中间隔持续调用来处理的所有任务否则所有刷新动画事件分发等任务操作都不会执行也就不会更新在使用时通常伴随的使用所以我们都是将任务处理单独由一个任务执行保证周期性的被调用处理所有的事件刷新输入检测等驱动运行调用的事务处理或者在主循环中调用也可以调用的事务处理移植成功与否测试显示驱动测试随便在一个任务或者函数中进行初始化初始化画一个按钮启动的任务处理然后下载到中看看是否显示正常触摸正常触摸驱动测试触摸必须保证配置了时基否则不会生效和显示测试一样随便在一个任务或者函数中进行初始化初始化画一个按钮启动的任务处理点击按钮按钮启用即证明触摸移植成功移植遇到的问题触摸回调函数不触发首先检查没有的时候触摸驱动是否正常如果正常多半是配置的时基出了问题检查是否调用没有调用没有通知时间流逝即使调用了也不会执行所有的任务处理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-08-29 23:59:21',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://i.postimg.cc/fbN6bFqP/20220206101541-14a48.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/keqiudi/keqiudi.github.io" title="我的博客仓库"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="我的博客仓库"/><span class="back-menu-item-text">我的博客仓库</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">THEDI的仓库</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AWS/" style="font-size: 1.05rem;">AWS<sup>2</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>2</sup></a><a href="/tags/CLion/" style="font-size: 1.05rem;">CLion<sup>2</sup></a><a href="/tags/CMake/" style="font-size: 1.05rem;">CMake<sup>1</sup></a><a href="/tags/ESP32/" style="font-size: 1.05rem;">ESP32<sup>1</sup></a><a href="/tags/FreeRTOS/" style="font-size: 1.05rem;">FreeRTOS<sup>5</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/LCD/" style="font-size: 1.05rem;">LCD<sup>2</sup></a><a href="/tags/LVGL/" style="font-size: 1.05rem;">LVGL<sup>7</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>8</sup></a><a href="/tags/MySQL/" style="font-size: 1.05rem;">MySQL<sup>2</sup></a><a href="/tags/PCB/" style="font-size: 1.05rem;">PCB<sup>2</sup></a><a href="/tags/QT/" style="font-size: 1.05rem;">QT<sup>1</sup></a><a href="/tags/keil/" style="font-size: 1.05rem;">keil<sup>1</sup></a><a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/" style="font-size: 1.05rem;">云服务<sup>3</sup></a><a href="/tags/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" style="font-size: 1.05rem;">启动流程<sup>2</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.05rem;">嵌入式<sup>2</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">嵌入式安全<sup>3</sup></a><a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 1.05rem;">架构<sup>2</sup></a><a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 1.05rem;">环境配置<sup>4</sup></a><a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 1.05rem;">硬件<sup>5</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">算法<sup>3</sup></a><a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 1.05rem;">调试<sup>5</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">35</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/06/"><span class="card-archive-list-date">六月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/01/"><span class="card-archive-list-date">一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8FUI/" itemprop="url">嵌入式UI</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/LVGL/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>LVGL</span></a></span></div></div><h1 class="post-title" itemprop="name headline">LVGL移植到STM32</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-08-29T15:30:56.000Z" title="发表于 2025-08-29 23:30:56">2025-08-29</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-08-29T15:59:21.123Z" title="更新于 2025-08-29 23:59:21">2025-08-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">9.8k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>31分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="LVGL移植到STM32"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为成都"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>成都</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/assets/14.webp"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://www.thekqd.top/2025/08/29/LVGL%E7%A7%BB%E6%A4%8D%E5%88%B0STM32/"><header><a class="post-meta-categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8FUI/" itemprop="url">嵌入式UI</a><a href="/tags/LVGL/" tabindex="-1" itemprop="url">LVGL</a><h1 id="CrawlerTitle" itemprop="name headline">LVGL移植到STM32</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">THEDI</span><time itemprop="dateCreated datePublished" datetime="2025-08-29T15:30:56.000Z" title="发表于 2025-08-29 23:30:56">2025-08-29</time><time itemprop="dateCreated datePublished" datetime="2025-08-29T15:59:21.123Z" title="更新于 2025-08-29 23:59:21">2025-08-29</time></header><h1 id="移植LVGL到STM32"><a href="#移植LVGL到STM32" class="headerlink" title="移植LVGL到STM32"></a>移植LVGL到STM32</h1><p>官方英文移植教程:</p>
+<p><a target="_blank" rel="noopener" href="https://lvgl.100ask.net/master/intro/add-lvgl-to-your-project/getting_lvgl.html">Getting LVGL（获取 LVGL） — LVGL 文档</a></p>
+<p>韦东山中文移植教程：</p>
+<p><a target="_blank" rel="noopener" href="https://lvgl.100ask.net/9.2/porting/index.html">Porting（移植） — LVGL 文档</a></p>
+<h2 id="源码获取"><a href="#源码获取" class="headerlink" title="源码获取"></a>源码获取</h2><p>然后从github上下载源码：<a target="_blank" rel="noopener" href="https://github.com/lvgl/lvgl">https://github.com/lvgl/lvgl</a></p>
+<p>官方移植方法：<a target="_blank" rel="noopener" href="https://docs.lvgl.io/master/details/integration/adding-lvgl-to-your-project/getting_lvgl.html">https://docs.lvgl.io/master/details/integration/adding-lvgl-to-your-project/getting_lvgl.html</a></p>
+<p>这是LVGL v9.3版本</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250810145619494.png" alt="image-20250810145619494"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250810145425207.png" alt="image-20250810145425207"></p>
+<h2 id="移植"><a href="#移植" class="headerlink" title="移植"></a>移植</h2><p>该笔记基于<code>lvgl v9.x</code>往上的，如果使用版本较低，就可能与本笔记中的内容不同</p>
+<p>我们的只需要关注源码中需要移植的部分：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250729204047343.png" alt="image-20250729204047343"></p>
+<p>以keil工程为例，我们找到项目根目录下<code>Middlewares</code>(没有就创建一个)，然后再其中创建一个lvgl文件夹用于存放我们移植lvgl相关的内容</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250729200924599.png" alt="image-20250729200924599"></p>
+<p>然后在<code>该lvgl目录下</code>新建<code>src</code>和<code>port</code>文件夹</p>
+<blockquote>
+<p><code>src文件夹</code>：lvgl源码</p>
+<p><code>port文件夹</code>：存放我们自己的移植代码，比如显示驱动移植、输入设备（触摸&#x2F;按键）接口移植等等</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730140445796.png" alt="image-20250730140445796"></p>
+<h3 id="src源码"><a href="#src源码" class="headerlink" title="src源码"></a>src源码</h3><p>将下载下来的lvgl库的<code>lvgl/src</code>源码文件夹替换刚刚创建的src文件夹</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730140652464.png" alt="image-20250730140652464"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730140756314.png" alt="image-20250730140756314"></p>
+<h3 id="移植文件"><a href="#移植文件" class="headerlink" title="移植文件"></a>移植文件</h3><p>再将<code>lvgl/examples/porting</code>下的文件复制到到我们的项目的<code>lvgl_port</code>中去，并进行一个规范命名的操作</p>
+<blockquote>
+<p> <strong>相关文件介绍</strong>：</p>
+<p> <code>lv_port_disp_template</code>: LVGL显示驱动移植模板(通用)</p>
+<p> <code>lv_port_fs_template</code> :  LVGL文件系统接口移植模板</p>
+<p> <code>lv_port_indev_template</code>: LVGL输入设备（触摸&#x2F;按键）驱动移植模板</p>
+<p> <code>lv_port_lcd_stm32_template</code>: STM32专用LCD显示驱动移植模板(这个和disp差不多，只不过是stm32专用的二选一即可)</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250729213653574.png" alt="image-20250729213653574"></p>
+<p>我们这里只有<code>显示驱动</code>和<code>触摸驱动</code>所有只需要保留这两个到我们项目的<code>port</code>中，然后去掉template后缀规范命名</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730140948907.png" alt="image-20250730140948907"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730141004954.png" alt="image-20250730141004954"></p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>主要就是lvgl库中的这三个文件需要移植：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250729215427495.png" alt="image-20250729215427495"></p>
+<blockquote>
+<p><code>lv_conf_template.h/lv_cong</code>： LVGL的<strong>配置头文件模板</strong>，里面包含了各种宏定义（比如颜色深度、是否开启某个控件&#x2F;功能、内存大小等）。</p>
+<p><code>lv_version.h</code>: <strong>LVGL版本信息头文件</strong></p>
+<p><code>lvgl.h</code>: 对源码<code>src</code>目录下所有头文件的包含，后续只需要包含整个文件就能使用全部API</p>
+</blockquote>
+<p>将这三个文件复制到<code>Middlewares/lvgl</code>目录下，然后将配置文件更名为<code>lv_conf</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730141141231.png" alt="image-20250730141141231"></p>
+<h2 id="工程管理"><a href="#工程管理" class="headerlink" title="工程管理"></a>工程管理</h2><h3 id="源文件添加"><a href="#源文件添加" class="headerlink" title="源文件添加"></a>源文件添加</h3><p>在keil工程中，新建这三个组<code>src</code>、<code>port</code>、<code>conf</code>，然后分别添加对应的.c文件到项目</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730141309276.png" alt="image-20250730141309276"></p>
+<h4 id="conf组"><a href="#conf组" class="headerlink" title="conf组"></a>conf组</h4><p>把这<code>lv_conf.h</code>、<code>lv_version.h</code>、<code>lvgl.h</code>三个放到conf组中</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730141336603.png" alt="image-20250730141336603"></p>
+<h4 id="port组"><a href="#port组" class="headerlink" title="port组"></a>port组</h4><p>将需要移植port文件夹中的的.c文件和.h文件添加到port组</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731215648421.png" alt="image-20250731215648421"></p>
+<h4 id="src组"><a href="#src组" class="headerlink" title="src组"></a>src组</h4><p><code>第一种</code>：<strong>可以将需要添加的所有.c文件都添加到src组中</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730155209348.png" alt="image-20250730155209348"></p>
+<p><code>第二种</code>：<strong>按照src文件夹目录结构，将src中的各个模块单独创建组添加，这样比较好找文件</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730182427383.png" alt="image-20250730182427383"></p>
+<p><strong>然后按照下方给的<code>移植总览表格</code>将对应模块所需要的.c文件添加到对应组中即可</strong></p>
+<h5 id="移植总览表格"><a href="#移植总览表格" class="headerlink" title="移植总览表格"></a>移植总览表格</h5><p><code>全部移植</code>就是该文件夹下的<code>所有.c文件</code>，包括<code>子文件夹</code>，一个一个都要<code>手动</code>添加到组中，必须全部添加，否则编译会报错</p>
+<p>只有<strong>driver</strong>和<strong>other</strong>两个文件夹可以完全不用移植，如果使用到了再添加进去</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用描述</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>core</code></td>
+<td>LVGL核心对象管理、事件、基础框架</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>display</code></td>
+<td>显示相关管理、显示设备适配</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>font</code></td>
+<td>字体管理和渲染</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>indev</code></td>
+<td>输入设备（触摸、按键等）抽象和管理</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>layouts</code></td>
+<td>控件布局系统（如grid、flex）</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>misc</code></td>
+<td>杂项工具和通用功能（如内存、链表等）</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>tick</code></td>
+<td>LVGL定时任务调度与管理</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>draw</code></td>
+<td>绘图引擎，图形渲染</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>osal</code></td>
+<td>操作系统抽象适配（如RTOS接口）</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>themes</code></td>
+<td>主题系统，控件风格美化</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>widgets</code></td>
+<td>所有具体控件实现（如按钮、滑块、列表等）</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>stdlib</code></td>
+<td>标准库适配（为兼容不同C库&#x2F;平台）</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><code>libs</code></td>
+<td>第三方库支持（如png&#x2F;gif&#x2F;qrcode等）</td>
+<td><code>全部移植</code></td>
+</tr>
+<tr>
+<td><strong>drivers</strong></td>
+<td>官方外设驱动（如各种屏、触摸等）</td>
+<td>按需移植(<strong>不用可以不移植</strong>)</td>
+</tr>
+<tr>
+<td><strong>others</strong></td>
+<td>其它杂项&#x2F;实验性&#x2F;不常用功能</td>
+<td>按需移植(<strong>不用可以不移植</strong>)</td>
+</tr>
+</tbody></table>
+<p><strong>下面是一些含有<code>子目录</code>的文件夹内容介绍</strong></p>
+<h5 id="draw"><a href="#draw" class="headerlink" title="draw"></a>draw</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730143244258.png" alt="image-20250730143244258"></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dma2d</td>
+<td>STM32 DMA2D 硬件绘图加速支持</td>
+<td>按需移植（仅STM32带DMA2D且需加速时）</td>
+</tr>
+<tr>
+<td>espresif</td>
+<td>ESP32&#x2F;ESP系列芯片的硬件绘图加速接口</td>
+<td>按需移植（仅ESP32等芯片使用时）</td>
+</tr>
+<tr>
+<td>nema_gfx</td>
+<td>Think Silicon NEMA GPU 图形加速接口</td>
+<td>按需移植（仅带NEMA GPU芯片用）</td>
+</tr>
+<tr>
+<td>nxp</td>
+<td>恩智浦NXP芯片硬件绘图加速</td>
+<td>按需移植（NXP芯片带加速功能时）</td>
+</tr>
+<tr>
+<td>opengles</td>
+<td>OpenGL ES 图形库加速接口</td>
+<td>按需移植（PC&#x2F;高端嵌入式平台用）</td>
+</tr>
+<tr>
+<td>renesas</td>
+<td>瑞萨Renesas芯片专用绘图加速</td>
+<td>按需移植（瑞萨特定芯片用）</td>
+</tr>
+<tr>
+<td>sdl</td>
+<td>SDL仿真&#x2F;PC绘图后端，适合开发测试和演示</td>
+<td>按需移植（PC仿真时可用）</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>纯软件绘图（LVGL默认后端），所有平台可用</td>
+<td>建议移植（几乎所有平台都可用，也可和硬件加速共存）</td>
+</tr>
+<tr>
+<td>vg_lite</td>
+<td>VeriSilicon VG-Lite GPU 加速接口</td>
+<td>按需移植（如NXP i.MX RT1170等带VG-Lite芯片）</td>
+</tr>
+</tbody></table>
+<h5 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730145427122.png" alt="image-20250730145427122"></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex</td>
+<td>Flex 布局引擎，类似于网页的 flex 布局，控件自适应排列</td>
+<td>建议移植（用到 flex 布局或相关控件时必须）</td>
+</tr>
+<tr>
+<td>grid</td>
+<td>Grid 布局引擎，类似于网页的 grid 布局，控件网格排列</td>
+<td>建议移植（用到 grid 布局或相关控件时必须）</td>
+</tr>
+<tr>
+<td>lv_layout.c</td>
+<td>布局系统主入口和调度代码</td>
+<td>必须移植</td>
+</tr>
+<tr>
+<td>lv_layout.h</td>
+<td>布局系统主头文件</td>
+<td>必须移植</td>
+</tr>
+<tr>
+<td>lv_layout_private.h</td>
+<td>布局系统私有头文件</td>
+<td>必须移植</td>
+</tr>
+</tbody></table>
+<h5 id="libs"><a href="#libs" class="headerlink" title="libs"></a>libs</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730150247181.png" alt="image-20250730150247181"></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用描述</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>barcode</td>
+<td>条形码生成&#x2F;解析支持</td>
+<td>按需移植（如需条形码功能时才用）</td>
+</tr>
+<tr>
+<td>bin_decoder</td>
+<td>二进制图片格式解码</td>
+<td>按需移植（如需支持二进制图片时才用）</td>
+</tr>
+<tr>
+<td>bmp</td>
+<td>BMP图片格式解码</td>
+<td>按需移植（如需BMP图片支持时才用）</td>
+</tr>
+<tr>
+<td>expat</td>
+<td>XML解析库</td>
+<td>按需移植（如需用到XML相关功能时才用）</td>
+</tr>
+<tr>
+<td>ffmpeg</td>
+<td>FFmpeg视频&#x2F;音频解码库适配</td>
+<td>按需移植（如需视频&#x2F;音频播放时才用）</td>
+</tr>
+<tr>
+<td>freetype</td>
+<td>FreeType矢量字体引擎</td>
+<td>按需移植（如需矢量字体&#x2F;高级字体支持时）</td>
+</tr>
+<tr>
+<td>fsdrv</td>
+<td>文件系统驱动接口</td>
+<td>按需移植（如需SD卡&#x2F;U盘&#x2F;文件系统支持时）</td>
+</tr>
+<tr>
+<td>gif</td>
+<td>GIF图片格式解码</td>
+<td>按需移植（如需GIF动画支持时才用）</td>
+</tr>
+<tr>
+<td>libjpeg_turbo</td>
+<td>JPEG图片格式解码</td>
+<td>按需移植（如需JPEG图片支持时才用）</td>
+</tr>
+<tr>
+<td>libpng</td>
+<td>PNG图片格式解码</td>
+<td>按需移植（如需PNG图片支持时才用）</td>
+</tr>
+<tr>
+<td>lodepng</td>
+<td>纯C实现PNG解码</td>
+<td>按需移植（如需PNG且不用libpng时可选）</td>
+</tr>
+<tr>
+<td>lz4</td>
+<td>LZ4压缩算法支持</td>
+<td>按需移植（如需LZ4压缩资源时才用）</td>
+</tr>
+<tr>
+<td>qrcode</td>
+<td>二维码（QR code）生成</td>
+<td>按需移植（如需二维码生成功能时才用）</td>
+</tr>
+<tr>
+<td>rle</td>
+<td>RLE压缩支持</td>
+<td>按需移植（如需RLE图片资源支持时才用）</td>
+</tr>
+<tr>
+<td>rlottie</td>
+<td>Lottie动画支持</td>
+<td>按需移植（如需矢量动画时才用）</td>
+</tr>
+<tr>
+<td>svg</td>
+<td>SVG矢量图形格式支持</td>
+<td>按需移植（如需SVG图片&#x2F;动画时才用）</td>
+</tr>
+<tr>
+<td>thorvg</td>
+<td>ThorVG矢量图形库支持</td>
+<td>按需移植（如需高级矢量渲染时才用）</td>
+</tr>
+<tr>
+<td>tiny_ttf</td>
+<td>轻量级TTF字体支持</td>
+<td>按需移植（如需使用TTF字体时才用）</td>
+</tr>
+<tr>
+<td>tjpgd</td>
+<td>Tiny JPEG解码库（轻量级JPEG解码）</td>
+<td>按需移植（如需JPEG支持且资源有限时用）</td>
+</tr>
+</tbody></table>
+<h5 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730150559802.png" alt="image-20250730150559802"></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+<th>必要性（必须移植、建议移植、按需移植）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cache</td>
+<td>缓存相关功能，提升性能</td>
+<td>按需移植（需要缓存机制时才用，默认可不加）</td>
+</tr>
+</tbody></table>
+<h5 id="osal"><a href="#osal" class="headerlink" title="osal"></a>osal</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730151354894.png" alt="image-20250730151354894"></p>
+<h5 id="stdlib"><a href="#stdlib" class="headerlink" title="stdlib"></a>stdlib</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730151834686.png" alt="image-20250730151834686"></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用描述</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>builtin</td>
+<td>LVGL 内置标准库实现（如内存、字符串等）</td>
+<td>建议移植（大多数平台通用，默认推荐）</td>
+</tr>
+<tr>
+<td>clib</td>
+<td>C 标准库适配层（如 malloc、memcpy 等）</td>
+<td>按需移植（需适配特殊C库时才用）</td>
+</tr>
+<tr>
+<td>micropython</td>
+<td>MicroPython 适配相关</td>
+<td>按需移植（做 MicroPython 绑定时用）</td>
+</tr>
+<tr>
+<td>rtthread</td>
+<td>RT-Thread 系统下标准库适配</td>
+<td>按需移植（RT-Thread 系统用）</td>
+</tr>
+<tr>
+<td>uefi</td>
+<td>UEFI 固件环境下标准库适配</td>
+<td>按需移植（做固件开发才用）</td>
+</tr>
+</tbody></table>
+<h5 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730152030943.png" alt="image-20250730152030943"></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用描述</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>default</td>
+<td>LVGL 默认主题（配色、控件样式等）</td>
+<td>建议移植（默认主题常用，建议加）</td>
+</tr>
+<tr>
+<td>mono</td>
+<td>单色主题（灰度&#x2F;黑白配色）</td>
+<td>按需移植（如需单色风格时用）</td>
+</tr>
+<tr>
+<td>simple</td>
+<td>简化主题（简洁外观、较少样式）</td>
+<td>按需移植（如需极简界面时用）</td>
+</tr>
+<tr>
+<td>lv_theme.c</td>
+<td>主题系统主实现文件</td>
+<td>建议移植（使用主题功能时必须）</td>
+</tr>
+<tr>
+<td>lv_theme.h</td>
+<td>主题系统主头文件</td>
+<td>建议移植（使用主题功能时必须）</td>
+</tr>
+<tr>
+<td>lv_theme_private.h</td>
+<td>主题系统私有头文件</td>
+<td>建议移植</td>
+</tr>
+</tbody></table>
+<h5 id="widgets"><a href="#widgets" class="headerlink" title="widgets"></a>widgets</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730152407221.png" alt="image-20250730152407221"></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用描述</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>button</strong></td>
+<td>按钮控件</td>
+<td><code>建议移植</code>（常用控件）</td>
+</tr>
+<tr>
+<td><strong>image</strong></td>
+<td>图片控件</td>
+<td><code>建议移植</code>（常用控件）</td>
+</tr>
+<tr>
+<td><strong>label</strong></td>
+<td>文字标签控件</td>
+<td><code>建议移植</code>（常用控件）</td>
+</tr>
+<tr>
+<td><strong>bar</strong></td>
+<td>进度条控件</td>
+<td>按需移植（常用，建议加）</td>
+</tr>
+<tr>
+<td>arc</td>
+<td>圆弧控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>arclabel</td>
+<td>沿圆弧排布的文字控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>buttonmatrix</td>
+<td>按钮矩阵控件（如键盘&#x2F;九宫格）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>calendar</td>
+<td>日历控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>canvas</td>
+<td>画布控件（可自绘像素）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>chart</td>
+<td>图表控件（折线&#x2F;柱状&#x2F;饼图）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>checkbox</td>
+<td>复选框控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>dropdown</td>
+<td>下拉框控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>imagebutton</td>
+<td>图片按钮控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>keyboard</td>
+<td>屏幕软键盘控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>led</td>
+<td>LED指示灯控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>line</td>
+<td>线段控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>list</td>
+<td>列表控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>lottie</td>
+<td>Lottie 动画控件</td>
+<td>按需移植（需矢量动画时才用）</td>
+</tr>
+<tr>
+<td>menu</td>
+<td>菜单控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>msgbox</td>
+<td>消息框控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>objx_templ</td>
+<td>LVGL对象扩展模板（自定义&#x2F;开发用）</td>
+<td>按需移植（开发自定义控件时用）</td>
+</tr>
+<tr>
+<td>property</td>
+<td>属性面板控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>roller</td>
+<td>转轮选择控件（如日期&#x2F;时间选择器）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>刻度尺&#x2F;标尺控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>slider</td>
+<td>滑块控件（用于调节音量、亮度等数值）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>span</td>
+<td>富文本&#x2F;多样式文本片段控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>spinbox</td>
+<td>数字步进框控件（带加减按钮的数字输入）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>spinner</td>
+<td>加载&#x2F;等待动画控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>switch</td>
+<td>开关控件（类似手机设置中的开关）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>table</td>
+<td>表格控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>tabview</td>
+<td>标签页控件（多页面切换）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>textarea</td>
+<td>多行文本输入框控件</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>tileview</td>
+<td>平铺视图控件（多页面自由滑动切换）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>win</td>
+<td>窗口控件（带标题栏和关闭按钮的窗口，仿桌面风格）</td>
+<td>按需移植</td>
+</tr>
+<tr>
+<td>3dtexture</td>
+<td>三维纹理控件（罕用）</td>
+<td>按需移植（需3D纹理时才用）</td>
+</tr>
+<tr>
+<td>animimage</td>
+<td>动图控件（如GIF&#x2F;APNG序列）</td>
+<td>按需移植（需显示动图时才用）</td>
+</tr>
+</tbody></table>
+<h5 id="driver"><a href="#driver" class="headerlink" title="driver"></a>driver</h5><p>这里面的驱动不使用的话直接都不移植即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730144949080.png" alt="image-20250730144949080"></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>display</td>
+<td>各种显示屏驱动适配示例（PC&#x2F;仿真&#x2F;开发板用较多）</td>
+<td>按需移植（STM32移植通常不用，可参考）</td>
+</tr>
+<tr>
+<td>evdev</td>
+<td>Linux下输入设备（event device）驱动适配</td>
+<td>按需移植（PC&#x2F;Linux仿真环境用）</td>
+</tr>
+<tr>
+<td>glfw</td>
+<td>GLFW库适配（PC端窗口&#x2F;输入&#x2F;显示&#x2F;键鼠）</td>
+<td>按需移植（PC端&#x2F;仿真用）</td>
+</tr>
+<tr>
+<td>libinput</td>
+<td>Linux下libinput输入库适配</td>
+<td>按需移植（Linux桌面或嵌入式开发用）</td>
+</tr>
+<tr>
+<td>nuttx</td>
+<td>NuttX RTOS平台驱动适配</td>
+<td>按需移植（用NuttX RTOS才用）</td>
+</tr>
+<tr>
+<td>qnx</td>
+<td>QNX操作系统下驱动适配</td>
+<td>按需移植（用QNX才用）</td>
+</tr>
+<tr>
+<td>sdl</td>
+<td>SDL库适配（PC端仿真、窗口、输入输出等）</td>
+<td>按需移植（PC仿真&#x2F;演示用）</td>
+</tr>
+<tr>
+<td>uefi</td>
+<td>UEFI固件环境下驱动适配</td>
+<td>按需移植（做固件开发才用）</td>
+</tr>
+<tr>
+<td>wayland</td>
+<td>Linux Wayland窗口系统驱动适配</td>
+<td>按需移植（Wayland桌面环境才用）</td>
+</tr>
+<tr>
+<td>windows</td>
+<td>Windows平台下输入&#x2F;显示驱动适配</td>
+<td>按需移植（Windows仿真&#x2F;开发才用）</td>
+</tr>
+<tr>
+<td>x11</td>
+<td>Linux X11窗口系统驱动适配</td>
+<td>按需移植（X11桌面环境才用）</td>
+</tr>
+</tbody></table>
+<h5 id="other"><a href="#other" class="headerlink" title="other"></a>other</h5><p>不用就都不移植</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730151534228.png" alt="image-20250730151534228"></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用描述</th>
+<th>必要性（必须移植、建议移植、按需移植）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file_explorer</td>
+<td>文件浏览器相关功能&#x2F;示例</td>
+<td>按需移植（需文件管理功能时才用）</td>
+</tr>
+<tr>
+<td>font_manager</td>
+<td>字体管理扩展</td>
+<td>按需移植（需高级字体管理时才用）</td>
+</tr>
+<tr>
+<td>fragment</td>
+<td>界面分片功能（类似Android Fragment）</td>
+<td>按需移植（需动态界面切换时才用）</td>
+</tr>
+<tr>
+<td>gridnav</td>
+<td>网格导航控件</td>
+<td>按需移植（需网格导航时才用）</td>
+</tr>
+<tr>
+<td>ime</td>
+<td>输入法扩展</td>
+<td>按需移植（需自定义输入法时才用）</td>
+</tr>
+<tr>
+<td>imgfont</td>
+<td>图片字体支持</td>
+<td>按需移植（需图片字体时才用）</td>
+</tr>
+<tr>
+<td>monkey</td>
+<td>UI自动化测试工具</td>
+<td>按需移植（需UI自动测试时才用）</td>
+</tr>
+<tr>
+<td>observer</td>
+<td>观察者模式实现</td>
+<td>按需移植（需事件订阅&#x2F;发布时才用）</td>
+</tr>
+<tr>
+<td>snapshot</td>
+<td>屏幕&#x2F;控件快照功能</td>
+<td>按需移植（需截图&#x2F;快照时才用）</td>
+</tr>
+<tr>
+<td>sysmon</td>
+<td>系统监控（如内存&#x2F;帧率等）</td>
+<td>按需移植（需性能监控时才用）</td>
+</tr>
+<tr>
+<td>test</td>
+<td>LVGL自带的测试代码</td>
+<td>按需移植（开发调试或自测时才用）</td>
+</tr>
+<tr>
+<td>translation</td>
+<td>国际化&#x2F;多语言支持</td>
+<td>按需移植（需多语言界面时才用）</td>
+</tr>
+<tr>
+<td>vg_lite_tvg</td>
+<td>VG-Lite格式矢量图形支持</td>
+<td>按需移植（需VG-Lite矢量图时才用）</td>
+</tr>
+<tr>
+<td>xml</td>
+<td>XML相关功能&#x2F;解析</td>
+<td>按需移植（需XML数据支持时才用）</td>
+</tr>
+</tbody></table>
+<h3 id="头文件添加"><a href="#头文件添加" class="headerlink" title="头文件添加"></a>头文件添加</h3><p>最后添加lvgl库所有的头文件搜索路径即可，四个都要添加，不能缺少，否则可能会出现找不到头文件错误</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730172424510.png" alt="image-20250730172424510"></p>
+<h3 id="启用lv-conf-h"><a href="#启用lv-conf-h" class="headerlink" title="启用lv_conf.h"></a>启用lv_conf.h</h3><p>我们在lvgl配置文件lv_conf.h，将此处的<code>0</code>修改为<code>1</code>，启用该配置文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730183943099.png" alt="image-20250730183943099"></p>
+<blockquote>
+<p><strong>关于lv_conf.h</strong>:</p>
+<p><code>lv_conf.h </code>是lvgl的配置文件,主要用于配置LVGL库要不要编译哪些功能、用多大内存、支不支持某些控件&#x2F;主题&#x2F;库、底层适配方式等。</p>
+<p><strong>这个文件就是在<code>裁剪</code>库的功能和适配你的硬件&#x2F;需求</strong>。</p>
+</blockquote>
+<p><strong>这里启用后就能进行编译了，如果编译报错可以看是否是下面的问题！</strong></p>
+<h3 id="编译报错"><a href="#编译报错" class="headerlink" title="编译报错"></a>编译报错</h3><h4 id="找不到头文件"><a href="#找不到头文件" class="headerlink" title="找不到头文件"></a>找不到头文件</h4><p>然后进行编译操作，可以发现有很多error，这些都是由于<code>lv_conf_internal.h</code>找不到<code>../../lv_conf.h</code>造成的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730170902539.png" alt="image-20250730170902539"></p>
+<p>我们可以看到由于没有宏定义，<code>lv_conf_internal.h</code>包含<code>lv_conf.h</code>的路径的方法是第三种：<code>../../lv_conf.h</code></p>
+<p>然而我们的lv_conf.h的实际路径是<code>../lv_conf.h</code>，所以找不到</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730171128450.png" alt="image-20250730171128450"></p>
+<p><strong>解决方法</strong>：</p>
+<p>在预处理器添加宏定义<code>LV_CONF_INCLUDE_SIMPLE</code>，让<code>lv_conf_internal.h</code>包含头文件方式修改为<strong>自动查找头文件搜索路径</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250730171652670.png" alt="image-20250730171652670"></p>
+<h2 id="关于移植的一些问题"><a href="#关于移植的一些问题" class="headerlink" title="关于移植的一些问题"></a>关于移植的一些问题</h2><p>移植的时候尽量全部移植，没事不要去裁剪，因为裁剪过后，如果进行了函数调用，找不到.c文件，会报链接错误。</p>
+<p><strong>我的疑问：如果全部移植，编译时间那么久，不会导致最终的固件体积增大吗</strong>？</p>
+<p><code>不会</code>。因为添加到工程的所有.c文件在编译阶段时都会被单独编译成目标文件(.o&#x2F;.obj)以供后续链接使用，这就是为什么编译时间久的原因。</p>
+<p>然而，最终只有使用到的代码，才会被链接，最终算入到固件(.bin&#x2F;.hex)体积中，固件体积并不会因为编译时间长而改变。</p>
+<h1 id="修改LVGL配置文件"><a href="#修改LVGL配置文件" class="headerlink" title="修改LVGL配置文件"></a>修改LVGL配置文件</h1><p><code>lv_conf.h</code>是LVGL的<strong>主配置文件</strong>，用于打开&#x2F;关闭LVGL的各类功能、定义分辨率、颜色格式、内存策略、日志等。</p>
+<p><strong>在实际使用时我们必须对其进行配置，裁剪我们不需要的功能，优化固件大小等</strong></p>
+<p>下面是一些可能会修改的地方进行一个介绍</p>
+<h2 id="显示屏"><a href="#显示屏" class="headerlink" title="显示屏"></a>显示屏</h2><h3 id="颜色深度"><a href="#颜色深度" class="headerlink" title="颜色深度"></a>颜色深度</h3><p>我们LCD设置的是RGB565(16bit)表示像素的颜色深度，所有设置为16</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731182134067.png" alt="image-20250731182134067"></p>
+<h3 id="字节序"><a href="#字节序" class="headerlink" title="字节序"></a>字节序</h3><p>该配置项作用：<strong>设置16位颜色（RGB565）数据在内存中的高低字节顺序</strong>（大端&#x2F;小端）。</p>
+<p>在<code>LVGL v9.0</code>之后已经移除了该配置，会自动根据你传给<code>flush_cb</code>的像素缓冲区格式和显示驱动的要求来处理字节顺序。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731203914835.png" alt="image-20250731203914835"></p>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><h3 id="内存池介绍"><a href="#内存池介绍" class="headerlink" title="内存池介绍"></a>内存池介绍</h3><p>LVGL在运行时会不断创建、销毁控件（比如按钮、标签、图片等），它需要用<code>lv_malloc</code>等函数动态分配内存。</p>
+<p>为了适配嵌入式系统（有些没有标准库的<code>malloc/free</code>，或者用外部SRAM），<strong>LVGL自带一套内存管理机制</strong>，你可以把一块内存固定分配给LVGL，全部动态分配都在这块里面进行，互不干扰主程序其他部分。</p>
+<h3 id="分配内存池大小"><a href="#分配内存池大小" class="headerlink" title="分配内存池大小"></a>分配内存池大小</h3><p>lv_conf.h文件中这里可以看到这里可以设置供<code>lv_malloc</code>使用的内存大小，这个大小根据页面<code>复杂程度</code>和<code>控件多少</code>进行分配，使用时根据使用内存大小<code>自行修改</code>即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731183659020.png" alt="image-20250731183659020"></p>
+<p>这里分配的是<code>64K</code>，所有LVGL控件、动画、图片缓冲、内部结构体等动态分配的内存，<strong>都只能用这64KB</strong>，用完就<code>lv_malloc</code>失败，控件创建会报错！</p>
+<p><strong>假设使用的是STM32F411CEU6，他的SRAM是128KB，如果我们分配64KB给LVGL，那么剩下的64KB就是给主程序栈、全局变量等的空间，相当于把STM32的SRAM划分一部分专门给LVGL分配内存！</strong></p>
+<blockquote>
+<p>请注意分配给LVGL的内存不要浪费，如果剩下的空间较少的话，就会导致MCU其他程序分配空间不够，运行失败!</p>
+</blockquote>
+<h2 id="显示刷新与输入设备"><a href="#显示刷新与输入设备" class="headerlink" title="显示刷新与输入设备"></a>显示刷新与输入设备</h2><h3 id="刷新周期"><a href="#刷新周期" class="headerlink" title="刷新周期"></a>刷新周期</h3><p>该参数表示界面刷新的<code>默认频率</code>，单位ms，数值越小刷新越快，这里表示每33ms刷新一次，理论上帧率就是33FPS(1000&#x2F;33)</p>
+<p>我们想要60FPS的话，就设置16~17ms左右即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731185124033.png" alt="image-20250731185124033"></p>
+<p><strong>我们开发的时候需要兼顾刷新率和功耗等,所以应该实际测试并做调整!</strong></p>
+<p><code>刷新越快</code>：动画更流畅，但是MCU负担大，功耗大</p>
+<p><code>刷新越慢</code>：动画卡顿，界面响应不及时，体验不好，但是更省资源，功耗更低</p>
+<h3 id="读取周期"><a href="#读取周期" class="headerlink" title="读取周期"></a>读取周期</h3><p>用于设置<strong>输入设备（如触摸屏、按键）读取的默认周期</strong>，单位是ms。</p>
+<p>在<code>LVGL 9.0</code>之后删除了该配置项，<strong>输入设备读取周期请在注册驱动时用<code>indev_drv.read_period</code>成员单独设置。</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731204209007.png" alt="image-20250731204209007"></p>
+<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><p>这是LVGL v9.0及以后新加的配置项，用于<strong>指定你用的操作系统类型</strong>（比如FreeRTOS、CMSIS RTOS2、裸机等）。LVGL的多任务保护、互斥锁、延时等底层机制会根据这个选项自动适配对应的OS API。</p>
+<p>这样LVGL才能<strong>正确地实现多线程安全和操作系统相关功能</strong>，比如保护GUI资源、防止多线程同时操作界面导致崩溃。</p>
+<p>我这里使用的FreeRTOS的操作系统，所以修改为<code>LV_OS_FREERTOS</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731205226672.png" alt="image-20250731205226672"></p>
+<blockquote>
+<p>两种选择区别：</p>
+<p><strong>LV_OS_FREERTOS</strong>: LVGL 直接调用 FreeRTOS 的原生 API（如 <code>xTaskCreate</code>, <code>xSemaphoreTake</code>, <code>vTaskDelay</code> 等）。</p>
+<p><strong>LV_OS_CMSIS_RTOS2</strong>： LVGL 通过适配层访问操作系统功能（如任务、信号量等），调用的是 CMSIS-RTOS v2 的标准 API（如 <code>osThreadNew</code>, <code>osSemaphoreAcquire</code>）。</p>
+</blockquote>
+<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>这里是对启用的字体大小做配置，这里表示只启用了14号的<code>Montserrat</code>字体</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731190039235.png" alt="image-20250731190039235"></p>
+<p>我们使用时将对应需要的字体大小的宏设置为1即可，该字体就会被编译进固件。</p>
+<blockquote>
+<p>注意：只启用需要的字号，可以节省Flash空间，不要都开，因为启用的字体都会被编译进固件中，占用固件体积</p>
+</blockquote>
+<h2 id="控件启用-widget"><a href="#控件启用-widget" class="headerlink" title="控件启用(widget)"></a>控件启用(widget)</h2><p>这里主要是对lvgl中各种控件(widgets)功能模块的开关和细节选项进行配置，以下是配置的作用：</p>
+<ul>
+<li><p><code>裁剪代码体积</code>：只打开你项目实际需要使用的控件，未用的全部关闭，可以让固件更小、RAM占用更少，性能更高。</p>
+</li>
+<li><p><strong>定制控件行为</strong>：可以让某些控件有自带默认内容（比如按钮、标签、下拉框等），也可以自定义某些细节（如日历的星期名、月份名、密码明文显示时长等）。</p>
+</li>
+<li><p><strong>依赖关系</strong>：某些控件依赖于其它控件，比如滑块依赖进度条、下拉框依赖标签。关闭时要注意依赖。</p>
+</li>
+</ul>
+<h3 id="默认内容开启"><a href="#默认内容开启" class="headerlink" title="默认内容开启"></a>默认内容开启</h3><p><code>LV_WIDGETS_HAS_DEFAULT_VALUE</code>：该选项可是否让控件自动带有默认内容，比如按钮带默认标签、下拉框带默认选项等</p>
+<p>设置为0: 比如新建按钮矩阵会自带 “Btn1”, “Btn2”… 这些默认项，方便测试和快速开发。</p>
+<p>设置为1： 所有控件默认内容为空，需要你手动设置内容，更加“干净”。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731195733241.png" alt="image-20250731195733241"></p>
+<h3 id="控件使能"><a href="#控件使能" class="headerlink" title="控件使能"></a>控件使能</h3><p>这些都是控制<strong>是否编译进该控件类型支持</strong>的宏。如果不用某个控件，建议关掉（设为0），<code>可以减少固件体积和内存消耗</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731200038636.png" alt="image-20250731200038636"></p>
+<p>下面是所有的配置项，根据需求开关即可</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>作用说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>LV_WIDGETS_HAS_DEFAULT_VALUE</strong></td>
+<td>控件创建时自动带有默认内容（如按钮有默认标签，日历有默认选项等）</td>
+</tr>
+<tr>
+<td>LV_USE_ANIMIMG</td>
+<td>启用动画图片控件（可播放帧动画图片）</td>
+</tr>
+<tr>
+<td>LV_USE_ARC</td>
+<td>启用弧形控件（用于仪表盘等圆弧显示）</td>
+</tr>
+<tr>
+<td>LV_USE_ARCLABEL</td>
+<td>启用弧形文字控件（文字沿圆弧排列显示）</td>
+</tr>
+<tr>
+<td>LV_USE_BAR</td>
+<td>启用条形&#x2F;进度条控件</td>
+</tr>
+<tr>
+<td>LV_USE_BUTTON</td>
+<td>启用普通按钮控件</td>
+</tr>
+<tr>
+<td>LV_USE_BUTTONMATRIX</td>
+<td>启用按钮矩阵控件（如数字键盘）</td>
+</tr>
+<tr>
+<td>LV_USE_CALENDAR</td>
+<td>启用日历控件（显示日期、支持周起始日、月份名等设置）</td>
+</tr>
+<tr>
+<td>LV_USE_CANVAS</td>
+<td>启用画布控件（可自定义绘图）</td>
+</tr>
+<tr>
+<td>LV_USE_CHART</td>
+<td>启用图表控件（显示折线、柱状等数据图）</td>
+</tr>
+<tr>
+<td>LV_USE_CHECKBOX</td>
+<td>启用复选框控件</td>
+</tr>
+<tr>
+<td>LV_USE_DROPDOWN</td>
+<td>启用下拉框控件（依赖label）</td>
+</tr>
+<tr>
+<td>LV_USE_IMAGE</td>
+<td>启用图片控件（依赖label）</td>
+</tr>
+<tr>
+<td>LV_USE_IMAGEBUTTON</td>
+<td>启用图片按钮控件</td>
+</tr>
+<tr>
+<td>LV_USE_KEYBOARD</td>
+<td>启用虚拟键盘控件</td>
+</tr>
+<tr>
+<td>LV_USE_LABEL</td>
+<td>启用标签（文本）控件</td>
+</tr>
+<tr>
+<td>LV_USE_LED</td>
+<td>启用LED指示灯控件</td>
+</tr>
+<tr>
+<td>LV_USE_LINE</td>
+<td>启用线段控件</td>
+</tr>
+<tr>
+<td>LV_USE_LIST</td>
+<td>启用列表控件</td>
+</tr>
+<tr>
+<td>LV_USE_LOTTIE</td>
+<td>启用Lottie动画控件（动画矢量图，依赖canvas和thorvg库）</td>
+</tr>
+<tr>
+<td>LV_USE_MENU</td>
+<td>启用菜单控件</td>
+</tr>
+<tr>
+<td>LV_USE_MSGBOX</td>
+<td>启用消息框控件</td>
+</tr>
+<tr>
+<td>LV_USE_ROLLER</td>
+<td>启用滚轮选择器控件（依赖label）</td>
+</tr>
+<tr>
+<td>LV_USE_SCALE</td>
+<td>启用刻度尺控件</td>
+</tr>
+<tr>
+<td>LV_USE_SLIDER</td>
+<td>启用滑块控件（依赖bar）</td>
+</tr>
+<tr>
+<td>LV_USE_SPAN</td>
+<td>启用富文本控件（支持一行多样式文本）</td>
+</tr>
+<tr>
+<td>LV_USE_SPINBOX</td>
+<td>启用数字微调控件</td>
+</tr>
+<tr>
+<td>LV_USE_SPINNER</td>
+<td>启用加载等待动画控件</td>
+</tr>
+<tr>
+<td>LV_USE_SWITCH</td>
+<td>启用开关控件（类似手机设置中的滑动开关）</td>
+</tr>
+<tr>
+<td>LV_USE_TABLE</td>
+<td>启用表格控件</td>
+</tr>
+<tr>
+<td>LV_USE_TABVIEW</td>
+<td>启用分页栏控件（多标签切换，如微信顶部栏目）</td>
+</tr>
+<tr>
+<td>LV_USE_TEXTAREA</td>
+<td>启用多行文本输入框（依赖label，可用于输入、密码框等）</td>
+</tr>
+<tr>
+<td>LV_USE_TILEVIEW</td>
+<td>启用多页面平铺控件（可滑动切换页面）</td>
+</tr>
+<tr>
+<td>LV_USE_WIN</td>
+<td>启用窗口控件（带标题栏、按钮的窗口）</td>
+</tr>
+<tr>
+<td>LV_USE_3DTEXTURE</td>
+<td>启用3D纹理控件（一般很少用，默认关闭）</td>
+</tr>
+</tbody></table>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p><strong>LVGL主题（Theme）相关的选项</strong>，用于设置界面整体风格、色彩、动效等。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731201508903.png" alt="image-20250731201508903"></p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>作用说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LV_USE_THEME_DEFAULT</td>
+<td>启用“默认主题”，一个功能完整、效果美观的主题。</td>
+</tr>
+<tr>
+<td>LV_THEME_DEFAULT_DARK</td>
+<td>配合默认主题：0为浅色模式（Light），1为深色模式（Dark）。</td>
+</tr>
+<tr>
+<td>LV_THEME_DEFAULT_GROW</td>
+<td>按钮等控件按下时是否“放大”动效（1&#x3D;有动态放大，0&#x3D;无）。</td>
+</tr>
+<tr>
+<td>LV_THEME_DEFAULT_TRANSITION_TIME</td>
+<td>主题内控件切换动画的默认时长，单位毫秒（ms）。</td>
+</tr>
+<tr>
+<td><strong>LV_USE_THEME_SIMPLE</strong></td>
+<td>启用“简单主题”，样式很简洁、适合自定义二次开发。</td>
+</tr>
+<tr>
+<td><strong>LV_USE_THEME_MONO</strong></td>
+<td>启用“单色主题”，为黑白&#x2F;单色屏显示设计，使用彩屏时应设置为0</td>
+</tr>
+</tbody></table>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p><strong>LVGL布局系统的配置项</strong>，决定你的界面控件能否使用更高级的自动布局方式，不使用都<code>设置为0</code>即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731201755812.png" alt="image-20250731201755812"></p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>作用说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LV_USE_FLEX</td>
+<td>启用Flex布局，类似CSS的Flexbox，支持弹性排列、自动换行、对齐等。适合动态、响应式界面。</td>
+</tr>
+<tr>
+<td>LV_USE_GRID</td>
+<td>启用Grid布局，类似CSS的Grid，支持复杂的网格（行&#x2F;列）布局，适合表单、面板等场景。</td>
+</tr>
+</tbody></table>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>还有一些其他的配置，使用的时候再看即可</p>
+<ul>
+<li>启用性能监控器以查看 CPU 和帧率：</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731204544393.png" alt="image-20250731204544393"></p>
+<h2 id="编译报错-1"><a href="#编译报错-1" class="headerlink" title="编译报错"></a>编译报错</h2><p>如果发现<code>关闭某些控件</code>后，出现编译报错的现象，很大概率是因为部分控件之间有相互依赖关系，<code>必须同时开启或关闭</code>，如果一个开启一个关闭就可能会导致编译失败</p>
+<p>比如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> LV_USE_SCALE 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LV_USE_LINE 1 </span></span><br><span class="line"><span class="comment">// 必须一起开</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LV_USE_SCALE 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LV_USE_LINE 0</span></span><br><span class="line"><span class="comment">// 这样就会导致lv_scale.c中用到Line相关API时就会报错</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="修改LVGL移植层"><a href="#修改LVGL移植层" class="headerlink" title="修改LVGL移植层"></a>修改LVGL移植层</h1><h2 id="移植层文件启用"><a href="#移植层文件启用" class="headerlink" title="移植层文件启用"></a>移植层文件启用</h2><p>编译通过，修改LVGL配置文件过后，就该开始适配对应的<code>显示驱动</code>、<code>触摸驱动</code>、<code>文件系统</code>等</p>
+<p>我们移植过来时的移植层文件中，由于规范了命名(去掉了template后缀)，所以还需要对对应的.c和.h文件进行<code>修改</code>和<code>启用</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731214229853.png" alt="image-20250731214229853"></p>
+<p>这里我的项目中只使用了<code>显示驱动适配</code>、<code>输入设备适配</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731215517535.png" alt="image-20250731215517535"></p>
+<p>移植层中所有我们需要使用的所有<code>.c</code>文件中和对应的<code>.h</code>文件，都要启用和修改，具体每个文件修改位置如下:</p>
+<p><code>lv_port_xxx.h</code>:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731215233116.png" alt="image-20250731215233116"></p>
+<p><code>lv_port_xxx.c</code>:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250731214510730.png" alt="image-20250731214510730"></p>
+<h2 id="移植显示驱动"><a href="#移植显示驱动" class="headerlink" title="移植显示驱动"></a>移植显示驱动</h2><p>在<code>lv_port_disp.c</code>文件中，主要注意的就只有<code>lv_port_disp_init</code>和<code>disp_flush</code>，以下对这两个分别进行介绍</p>
+<h3 id="设置分辨率"><a href="#设置分辨率" class="headerlink" title="设置分辨率"></a>设置分辨率</h3><p>在<code>lv_port_disp.c</code>中由这几个宏定义，我们需要修改为自己的大小(lvgl v9.0之后才有，更低版本没有需要自己定义)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802161130708.png" alt="image-20250802161130708"></p>
+<p>我使用的是240*280的屏幕</p>
+<p><code>MY_DISP_HOR_RES</code>: 水平分辨率，我设置为240</p>
+<p><code>MY_DISP_VER_RES</code>: 垂直分辨率，我设置为280</p>
+<p><code>BYTE_PER_PIXEL</code>: 每个像素所占字节数，我们LCD设置的是rgb565(16bit)，所以代表2字节</p>
+<h3 id="lv-port-disp-init"><a href="#lv-port-disp-init" class="headerlink" title="lv_port_disp_init"></a>lv_port_disp_init</h3><p><code>lvgl v9.x版本往上流程具有一定的修改，和老版本使用的方式不同!</code></p>
+<p>这个函数主要是三部分组成: </p>
+<ol>
+<li>初始化显示屏</li>
+<li>创建显示对象并设置刷新回调</li>
+<li>显示缓冲区和缓冲配置示例</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250801223651638.png" alt="image-20250801223651638"></p>
+<h4 id="初始化显示屏"><a href="#初始化显示屏" class="headerlink" title="初始化显示屏"></a>初始化显示屏</h4><p>这里主要是我们完成底层硬件显示屏的初始化，初始化SPI、LCD控制器、设置背光等</p>
+<p><code>但是这里我们一般不使用，因为在我们的项目中会有集中初始化的地方</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250801224346896.png" alt="image-20250801224346896"></p>
+<h4 id="创建显示对象并设置刷新回调"><a href="#创建显示对象并设置刷新回调" class="headerlink" title="创建显示对象并设置刷新回调"></a>创建显示对象并设置刷新回调</h4><p>这里是在LVGL内部创建一个<code>显示对象</code>，并告诉LVGL如何把渲染好的像素数据<code>刷新</code>到屏幕上。</p>
+<ul>
+<li><p><code>lv_display_create</code>：创建一个LVGL显示驱动实例，传参就是我们设置的分辨率的宏定义。</p>
+</li>
+<li><p><code>lv_display_set_flush_cb</code>：设置<code>刷新回调函数</code>，LVGL每次有画面要显示时会调用你写的<code>disp_flush</code>函数，把一个区域的数据通过SPI等方式传给屏幕。</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250801224604611.png" alt="image-20250801224604611"></p>
+<h4 id="显示缓冲区"><a href="#显示缓冲区" class="headerlink" title="显示缓冲区"></a>显示缓冲区</h4><h5 id="显示缓冲区介绍"><a href="#显示缓冲区介绍" class="headerlink" title="显示缓冲区介绍"></a>显示缓冲区介绍</h5><p><strong>LVGL显示缓冲区</strong>使用的是RAM空间，LVGL把要渲染的图形的像素内容先放到这个缓冲区，然后我们在<code>flush_cb</code>回调中把这块内容传给实际的LCD屏幕。</p>
+<blockquote>
+<p>为什么要用缓冲区？</p>
+<ul>
+<li><strong>解耦渲染和传输</strong>：LVGL的图形引擎在内存中先完成绘制，不直接操作屏幕——这样可以用复杂算法、动画、混合等技术。</li>
+<li><strong>提升效率</strong>：你可以用DMA等高效机制将缓冲区内容一次性传输到LCD，而不是逐像素刷屏。</li>
+<li><strong>节约资源</strong>：缓冲区可以只分配部分区域（比如10行），不用整个屏幕都占RAM，适合资源受限的MCU。</li>
+<li><strong>支持双缓冲&#x2F;全屏刷新</strong>：可实现并行渲染和刷屏、无撕裂动画。</li>
+</ul>
+</blockquote>
+<p>lvgl在为我们提供了三种显示缓冲的方式：<code>单缓冲区</code>、<code>双缓冲区</code>、<code>全屏双缓冲</code>，使用时在<code>lv_port_disp_init</code>注释掉另外两种的代码或使用条件编译控制使用的方法即可</p>
+<p>下面将介绍工作原理与各方式的优劣</p>
+<h5 id="LVGL显示工作原理"><a href="#LVGL显示工作原理" class="headerlink" title="LVGL显示工作原理"></a>LVGL显示工作原理</h5><ol>
+<li><strong>渲染阶段</strong>：LVGL首先在内存中的显示缓冲区里<code>渲染</code>出一块区域的像素数据（比如10行），将所有控件、图片、文字等按照你的界面需求画在缓冲区里。</li>
+<li><strong>刷新阶段</strong>：LVGL完成这一块的渲染后，调用你的<code>flush_cb</code>回调，把刚刚渲染好的像素数据交给你。</li>
+<li><strong>数据传输</strong>：你在<code>flush_cb</code>里，使用DMA或CPU把这块缓冲区的像素数据“刷新”到LCD屏幕的对应位置，让实际屏幕内容发生变化。</li>
+<li><strong>通知完成</strong>：当数据传输（刷新）完成后，你通知LVGL（通常调用<code>lv_disp_flush_ready()</code>），告知上一块区域刷屏已结束。</li>
+<li><strong>循环过程</strong>：LVGL继续在缓冲区<code>渲染</code>下一块区域，然后重复上述<code>渲染→刷新</code>过程，直到整帧内容全部显示到屏幕上。</li>
+</ol>
+<h5 id="单缓冲区-部分缓冲"><a href="#单缓冲区-部分缓冲" class="headerlink" title="单缓冲区(部分缓冲)"></a>单缓冲区(部分缓冲)</h5><p>buf_1_1：分配的缓冲区，一般至少分配屏幕的10行像素数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802162108852.png" alt="image-20250802162108852"></p>
+<ul>
+<li><p><code>优点</code>：占用内存最少，适合小RAM MCU。</p>
+</li>
+<li><p><code>缺点</code>：刷屏期间LVGL必须等传输完才能画下一块，渲染和刷屏不能并行，效率略低</p>
+</li>
+</ul>
+<p><strong>单缓冲区适合内存极度紧张的MCU，界面简单、刷新要求不高!</strong></p>
+<h5 id="双缓冲区（部分缓冲）"><a href="#双缓冲区（部分缓冲）" class="headerlink" title="双缓冲区（部分缓冲）"></a>双缓冲区（部分缓冲）</h5><p>分配两块同样大小的缓冲区。LVGL在一块缓冲区<code>渲染</code>的同时，用DMA把另一块缓冲区的数据<code>刷新</code>到LCD。渲染和刷屏可以<code>并行</code>，效率高，适合使用DMA传输的情况。</p>
+<p><strong>我们通常就是使用这种方式配合DMA进行传输，在使用时可以根据RAM的大小，适当提高缓冲区的大小，但是最好设置为一次刷新&gt;&#x3D;10行！</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802164830328.png" alt="image-20250802164830328"></p>
+<ul>
+<li><p><code>优点</code>：效率高，动画流畅，推荐DMA场景使用。</p>
+</li>
+<li><p><code>缺点</code>：比单缓冲多占用一份缓冲区内存，但一般MCU都能承受。</p>
+</li>
+</ul>
+<p><strong>双缓冲区适合有DMA的MCU，RAM中等，界面需要流畅滚动、动画等。</strong></p>
+<h5 id="全屏双缓冲-全屏缓冲"><a href="#全屏双缓冲-全屏缓冲" class="headerlink" title="全屏双缓冲(全屏缓冲)"></a>全屏双缓冲(全屏缓冲)</h5><p>分配两块<code>全屏大小</code>的缓冲区。LVGL每次都将整屏内容渲染到缓冲区，然后一次性刷到LCD。适合直接切换帧缓地址的显示器（如外接显存或高级MCU）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802165339302.png" alt="image-20250802165339302"></p>
+<p><code>优点</code>：画面最流畅，无撕裂、无闪烁，支持复杂动画。</p>
+<p><code>缺点</code>：占用内存极大（如240x280x2&#x3D;134KB一块），普通MCU很难承受。</p>
+<p><strong>全屏双缓冲适合高端MCU、带外部RAM、智能屏等，动画复杂、全屏刷新需求高！</strong></p>
+<h5 id="API"><a href="#API" class="headerlink" title="API"></a>API</h5><ul>
+<li>缓冲区设置相关函数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">lv_display_set_buffers</span><span class="params">(</span></span><br><span class="line"><span class="params">    <span class="type">lv_display_t</span> * disp,   <span class="comment">// 显示对象</span></span></span><br><span class="line"><span class="params">    <span class="type">void</span> * buf1,           <span class="comment">// 第一块缓冲区指针</span></span></span><br><span class="line"><span class="params">    <span class="type">void</span> * buf2,           <span class="comment">// 第二块缓冲区指针（可为NULL）</span></span></span><br><span class="line"><span class="params">    <span class="type">size_t</span> size_in_bytes,  <span class="comment">// 第一块缓冲区的字节数</span></span></span><br><span class="line"><span class="params">    <span class="type">lv_display_render_mode_t</span> render_mode <span class="comment">// 渲染模式</span></span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>disp</strong>：由 <code>lv_display_create</code> 创建的显示对象指针</p>
+</li>
+<li><p><strong>buf1</strong>：第一块缓冲区地址（如 <code>uint8_t buf[宽*高*字节/像素]</code>）</p>
+</li>
+<li><p><strong>buf2</strong>：第二块缓冲区地址（如需双缓冲，否则可传 NULL）</p>
+</li>
+<li><p><strong>size_in_bytes</strong>：缓冲区的实际字节数（不是像素数！）</p>
+</li>
+<li><p>render_mode</p>
+<ul>
+<li><p><code>LV_DISPLAY_RENDER_MODE_PARTIAL</code>：部分渲染（如只分配10行缓冲区，适合RAM小）</p>
+</li>
+<li><p><code>LV_DISPLAY_RENDER_MODE_DIRECT</code>：全屏双缓冲（适合RAM充足，支持无闪烁动画）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="disp-flush"><a href="#disp-flush" class="headerlink" title="disp_flush"></a>disp_flush</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802171013290.png" alt="image-20250802171013290"></p>
+<p>在初始化的过程中我们使用<code>  lv_display_set_flush_cb</code>函数设置了刷新回调函数，现在就该对我们的刷新回调函数进行一个实现了</p>
+<p>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">disp_flush</span><span class="params">(<span class="type">lv_display_t</span> * disp_drv, <span class="type">const</span> <span class="type">lv_area_t</span> * area, <span class="type">uint8_t</span> * px_map)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>disp_drv</code>：LVGL的显示驱动结构体，里面有各种屏幕配置参数（一般用不到）。</li>
+<li><code>area</code>：定义了需要刷新的屏幕矩形区域（起始坐标<code>x1,y1</code>，结束坐标<code>x2,y2</code>）。<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802171749963.png" alt="image-20250802171749963"></li>
+</ul>
+</li>
+<li><code>px_map</code>：指向这块区域的<strong>像素数据</strong>，格式取决于我们配置的色深（如RGB565 2字节&#x2F;像素）。</li>
+</ul>
+<h4 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h4><p>我们移植过来的时候，lvgl给出的示例回调函数如下，使用的是<code>最简单</code>也是<code>最耗时</code>的方式，逐个将所有像素显示到屏幕上</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802171155166.png" alt="image-20250802171155166"></p>
+<p>我们将对其流程进行一个拆解</p>
+<h5 id="判断是否允许刷新"><a href="#判断是否允许刷新" class="headerlink" title="判断是否允许刷新"></a>判断是否允许刷新</h5><p>lvgl v9.x新增内容，这个变量定义在上方</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802172103951.png" alt="image-20250802172103951"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802172042347.png" alt="image-20250802172042347"></p>
+<p>比如某些时刻禁止刷屏时可以使用</p>
+<h5 id="像素刷新逻辑"><a href="#像素刷新逻辑" class="headerlink" title="像素刷新逻辑"></a>像素刷新逻辑</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802172221877.png" alt="image-20250802172221877"></p>
+<p>工作原理：遍历<code>area</code>定义的区域，把<code>px_map</code>里的每个像素输送到对应的屏幕坐标。</p>
+<ul>
+<li>这里的<code>put_px(x, y, *px_map)</code>是示例，实际应替换成我们的<code>LCD底层驱动</code>的写像素的接口。</li>
+<li><code>px_map++</code>是指向下一像素（如果RGB565则每次应加2字节）。</li>
+</ul>
+<h5 id="刷新完成通知"><a href="#刷新完成通知" class="headerlink" title="刷新完成通知"></a>刷新完成通知</h5><p>LVGL要求我们<strong>务必在数据送完屏幕后调用它</strong>，告诉图形库我们准备好下次刷新了，否则界面不会继续渲染后续内容。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250802172350597.png" alt="image-20250802172350597"></p>
+<p>这个函数非常重要</p>
+<ul>
+<li>如果我们使用DMA异步传输，应该在DMA完成中断里调用，而不是在这里立即调用。</li>
+</ul>
+<h4 id="常用做法"><a href="#常用做法" class="headerlink" title="常用做法"></a>常用做法</h4><p>上面的示例是最简单，但最耗时的做法，我们实际开发过程中并不会这么做，以下就介绍一下实际开发过程中的做法</p>
+<h5 id="DMA批量传输"><a href="#DMA批量传输" class="headerlink" title="DMA批量传输"></a>DMA批量传输</h5><p>我们可以使用SPI的DMA方式直接将所有的像素数据批量传输给LCD，然后在DMA传输完成后的SPI传输完成的中断回调函数中执行刷新完成通知</p>
+<p>不再逐点的去写,这样就可以由很快的速度了</p>
+<p>具体可以看逻辑开发的<code>使用DMA驱动SPI显示屏</code>笔记</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250803231209441.png" alt="image-20250803231209441"></p>
+<h2 id="移植触摸驱动"><a href="#移植触摸驱动" class="headerlink" title="移植触摸驱动"></a>移植触摸驱动</h2><p>在<code>lv_port_indev.c</code>文件中，有多种触摸的方式<code>触摸屏</code>、<code>鼠标</code>、<code>键盘</code>、<code>编码器</code>、<code>按钮</code>，我们通常只会选择一种进行移植，以下介绍移植触摸屏相关的内容</p>
+<h3 id="lv-port-indev-init"><a href="#lv-port-indev-init" class="headerlink" title="lv_port_indev_init"></a>lv_port_indev_init</h3><p><code>lvgl v9.x版本往上流程具有一定的修改，和老版本使用的方式不同!</code></p>
+<p>这个函数主要是三部分组成: </p>
+<ol>
+<li>初始化输入设备</li>
+<li>创建输入对象</li>
+<li>设置刷新回调函数</li>
+</ol>
+<p>lvgl将所有的输入设备初始化都放进去了，我们只需要保留我们需要输入设备即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807173520613.png" alt="image-20250807173520613"></p>
+<p>这里我们只需要触摸屏，所以仅保留触摸屏的初始化，最终效果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807173712546.png" alt="image-20250807173712546"></p>
+<p>还有就是，前面的函数声明和变量定义也仅保留需要的输入设备，我这里只剩下了触摸屏的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807173840403.png" alt="image-20250807173840403"></p>
+<h3 id="touchpad-init"><a href="#touchpad-init" class="headerlink" title="touchpad_init"></a>touchpad_init</h3><p>触摸屏的初始化函数，可以在这里放触摸的初始化函数，也可以自己安排初始化(保证在lvgl初始化前)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807174123810.png" alt="image-20250807174123810"></p>
+<h3 id="touchpad-read"><a href="#touchpad-read" class="headerlink" title="touchpad_read"></a>touchpad_read</h3><p>该函数就是我们之前注册的回调函数，由lvgl调用读取触摸屏输入</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807174509121.png" alt="image-20250807174509121"></p>
+<p>这里主要会使用<code>touchpad_is_pressed</code>先判断触摸是被是否按下，确认按下后，在调用<code>touchpad_get_xy</code>获取触摸点的坐标</p>
+<p>我们需要移植的也就是这两个函数</p>
+<h3 id="touchpad-is-pressed"><a href="#touchpad-is-pressed" class="headerlink" title="touchpad_is_pressed"></a>touchpad_is_pressed</h3><p>该函数用于判断触摸是否被按下，初始是这样的：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807174755432.png" alt="image-20250807174755432"></p>
+<p>我们移植的话，只需要调用触摸驱动对应的API获取按下的手指个数，进行判断是否被按下(个数&gt;0就按下了)，然后返回<code>true</code>即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807174834467.png" alt="image-20250807174834467"></p>
+<h3 id="touchpad-get-xy"><a href="#touchpad-get-xy" class="headerlink" title="touchpad_get_xy"></a>touchpad_get_xy</h3><p>该函数用于触摸按下后，获取按下位置的坐标x和y，我们需要做的就是将触摸获取到的坐标赋值给xy，供lvgl使用</p>
+<p>初始是这样的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807175204575.png" alt="image-20250807175204575"></p>
+<p>我们调用触摸芯片获取触摸点坐标的函数<code>CST816T_Get_Postiton</code>，该函数会将xy坐标存储在该类型的结构体<code>CST816T_Get_Position</code>中</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807175758084.png" alt="image-20250807175758084"></p>
+<p>然后我们将坐标赋值给x,y变量即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807175259909.png" alt="image-20250807175259909"></p>
+<h1 id="配置和启动LVGL"><a href="#配置和启动LVGL" class="headerlink" title="配置和启动LVGL"></a>配置和启动LVGL</h1><p>以上移植完成后，我们还需要配置LVGL的<code>时基</code>，同时周期性调用LVGL的任务处理函数<code>lv_task_handler()</code>使LVGL运行起来</p>
+<h2 id="配置时基"><a href="#配置时基" class="headerlink" title="配置时基"></a>配置时基</h2><p>时基（LV_TICK）作为LVGL的核心时间管理机制，用于驱动动画、任务（lv_task）、输入处理等功能，详细介绍见<code>LVGL调度</code>笔记</p>
+<h3 id="FreeRTOS"><a href="#FreeRTOS" class="headerlink" title="FreeRTOS"></a>FreeRTOS</h3><h4 id="使用FreeRTOS的钩子函数"><a href="#使用FreeRTOS的钩子函数" class="headerlink" title="使用FreeRTOS的钩子函数"></a>使用FreeRTOS的钩子函数</h4><p>FreeRTOS的钩子函数<code>vApplicationTickHook()</code>会在每次系统时钟节拍（tick）中断时被调用(通常是SysTick中断)，详细介绍见笔记或官方文档</p>
+<p>下面我们来介绍如何进行配置</p>
+<p>1.在<code>FreeRTOSConfig.h</code>中配置<code>configUSE_IDLE_HOOK</code> 为 <code>1</code>，启用钩子函数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807222131884-1756483158966-163.png" alt="image-20250807222131884"></p>
+<p>​	</p>
+<p>运行周期：由<code>configTICK_RATE_HZ</code>决定， 一般设置为1000，也就是1ms</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807222225838-1756483158966-164.png" alt="image-20250807222225838"></p>
+<ol start="2">
+<li>自己实现<code>vApplicationTickHook</code>，里面调用<code>lv_tick_inc(1)</code>，告诉LVGL已经过去了1ms</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">vApplicationTickHook</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 告诉lvgl已经过去了1毫秒</span></span><br><span class="line">	lv_tick_inc(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注意：vApplicationTickHook() 从ISR内执行，因此必须非常短，且不能被阻塞!</strong></p>
+<h4 id="单任务控制"><a href="#单任务控制" class="headerlink" title="单任务控制"></a>单任务控制</h4><p>单独创建一个任务，每过10ms就调用一次<code>lv_tick_inc(10)</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* LVGL 时间源 */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">LVGLTick</span><span class="params">(<span class="type">void</span> <span class="type">const</span> * argument)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">for</span>(;;)</span><br><span class="line">  &#123;</span><br><span class="line">    lv_tick_inc(<span class="number">10</span>);</span><br><span class="line">    osDelay(<span class="number">10</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="裸机"><a href="#裸机" class="headerlink" title="裸机"></a>裸机</h3><h4 id="使用SysTick中断"><a href="#使用SysTick中断" class="headerlink" title="使用SysTick中断"></a>使用SysTick中断</h4><p>确保HAL库使用SysTick作为时基，在**SysTick_Handler()**中调用即可<code>lv_tick_inc(1)</code></p>
+<h4 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h4><p>自己配置一个1ms中断的定时器，在内部调用<code>lv_tick_inc(1)</code>即可</p>
+<h2 id="周期性调用lvgl任务处理"><a href="#周期性调用lvgl任务处理" class="headerlink" title="周期性调用lvgl任务处理"></a>周期性调用lvgl任务处理</h2><p>我们必须在循环中间隔5~20ms持续调用<code>lv_task_handler()</code> 来处理LVGL的所有任务，否则所有UI刷新、动画、事件分发等<code>任务</code>操作都不会执行，也就不会更新</p>
+<ul>
+<li>在使用LVGL时，通常伴随RTOS的使用，所以我们都是将lvgl任务处理单独由一个任务执行，保证<code>lv_task_handler()</code>周期性的被调用处理所有的事件(UI刷新，输入检测等)</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* LVGL Handler task，驱动LVGL运行 */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">LvglHandlerTask</span><span class="params">(<span class="type">void</span> *argument)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		 lv_task_handler(); <span class="comment">// 调用lvgl的事务处理 </span></span><br><span class="line">		 osDelay(<span class="number">5</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>或者在主循环中调用也可以</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="number">1</span>)								</span><br><span class="line">&#123; </span><br><span class="line">		lv_timer_handler(); <span class="comment">//调用lvgl的事务处理 </span></span><br><span class="line">		delay_ms(<span class="number">1</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="移植成功与否测试"><a href="#移植成功与否测试" class="headerlink" title="移植成功与否测试"></a>移植成功与否测试</h1><h2 id="显示驱动测试"><a href="#显示驱动测试" class="headerlink" title="显示驱动测试"></a>显示驱动测试</h2><p>随便在一个任务或者main函数中进行：</p>
+<p>1.LCD初始化</p>
+<p>2.LVGL初始化</p>
+<p>3.画一个按钮</p>
+<p>4.启动LVGL的任务处理</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250805141614519.png" alt="image-20250805141614519"></p>
+<p>然后下载到MCU中，看看是否显示正常，触摸正常</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807230309201.png" alt="image-20250807230309201"></p>
+<h2 id="触摸驱动测试"><a href="#触摸驱动测试" class="headerlink" title="触摸驱动测试"></a>触摸驱动测试</h2><p>触摸必须保证配置了LVGL时基，否则不会生效</p>
+<p>和显示测试一样,随便在一个任务或者main函数中进行：</p>
+<p>1.LCD初始化</p>
+<p>2.LVGL初始化</p>
+<p>3.画一个按钮</p>
+<p>4.启动LVGL的任务处理</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250805141614519.png" alt="image-20250805141614519"></p>
+<p>点击按钮，按钮启用即证明触摸移植成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../assets/image-20250807230014498.png" alt="image-20250807230014498"></p>
+<h1 id="移植遇到的问题"><a href="#移植遇到的问题" class="headerlink" title="移植遇到的问题"></a>移植遇到的问题</h1><h2 id="LVGL触摸回调函数不触发"><a href="#LVGL触摸回调函数不触发" class="headerlink" title="LVGL触摸回调函数不触发"></a>LVGL触摸回调函数不触发</h2><p>首先检查没有lvgl的时候，触摸驱动是否正常，如果正常，多半是LVGL配置的时基出了问题，检查是否调用<code>lv_tick_inc(1)</code>。</p>
+<p>没有调用，没有通知LVGL时间流逝，即使调用了<code>lv_task_handler()</code>，也不会执行所有的任务处理</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://i.postimg.cc/fbN6bFqP/20220206101541-14a48.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://i.postimg.cc/fbN6bFqP/20220206101541-14a48.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">THEDI</div><div class="post-copyright__author_desc">我想睡到12点!</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://www.thekqd.top/2025/08/29/LVGL%E7%A7%BB%E6%A4%8D%E5%88%B0STM32/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://www.thekqd.top/2025/08/29/LVGL%E7%A7%BB%E6%A4%8D%E5%88%B0STM32/')">LVGL移植到STM32</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://www.thekqd.top/2025/08/29/LVGL%E7%A7%BB%E6%A4%8D%E5%88%B0STM32/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=LVGL移植到STM32&amp;url=https://www.thekqd.top/2025/08/29/LVGL%E7%A7%BB%E6%A4%8D%E5%88%B0STM32/&amp;pic=/assets/14.webp" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.thekqd.top" target="_blank">THEDI的仓库</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/LVGL/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>LVGL<span class="tagsPageCount">7</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/assets/213.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/08/29/LVGL%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/21.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">LVGL内存优化</div></div></a></div><div class="next-post pull-right"><a href="/2025/08/29/SquareLine%E7%9A%84%E4%BD%BF%E7%94%A8/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/wallhaven-76y9e9.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SquareLine的使用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/08/29/LVGL%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/" title="LVGL内存优化"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/21.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-08-29</div><div class="title">LVGL内存优化</div></div></a></div><div><a href="/2025/08/29/LVGL%E5%9F%BA%E7%A1%80/" title="LVGL基础"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/20.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-08-29</div><div class="title">LVGL基础</div></div></a></div><div><a href="/2025/08/29/LVGL%E8%B0%83%E5%BA%A6/" title="LVGL调度"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/36.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-08-29</div><div class="title">LVGL调度</div></div></a></div><div><a href="/2025/08/29/LVGL%E8%B0%83%E8%AF%95/" title="LVGL调试"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/28.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-08-29</div><div class="title">LVGL调试</div></div></a></div><div><a href="/2025/08/29/SquareLine%E7%9A%84%E4%BD%BF%E7%94%A8/" title="SquareLine的使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/wallhaven-76y9e9.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-08-29</div><div class="title">SquareLine的使用</div></div></a></div><div><a href="/2025/08/29/vscode%E6%90%AD%E5%BB%BALVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/" title="vscode搭建LVGL模拟器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/28.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-08-29</div><div class="title">vscode搭建LVGL模拟器</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://i.postimg.cc/fbN6bFqP/20220206101541-14a48.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">THEDI</h1><div class="author-info__desc">我想睡到12点!</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="/assets/QRCode.jpg" target="_blank" title="微信"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-weixin"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/" target="_blank" title="B站"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a><a class="social-icon faa-parent animated-hover" href="mailto:1244381125@qq.com" target="_blank" title="QQ邮箱"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youxiang"></use></svg></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">不要偷看我的博客!</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(null) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E6%A4%8DLVGL%E5%88%B0STM32"><span class="toc-number">1.</span> <span class="toc-text">移植LVGL到STM32</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E8%8E%B7%E5%8F%96"><span class="toc-number">1.1.</span> <span class="toc-text">源码获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E6%A4%8D"><span class="toc-number">1.2.</span> <span class="toc-text">移植</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#src%E6%BA%90%E7%A0%81"><span class="toc-number">1.2.1.</span> <span class="toc-text">src源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E6%A4%8D%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">移植文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.3.</span> <span class="toc-text">配置文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">工程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.3.1.</span> <span class="toc-text">源文件添加</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#conf%E7%BB%84"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">conf组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#port%E7%BB%84"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">port组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#src%E7%BB%84"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">src组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A7%BB%E6%A4%8D%E6%80%BB%E8%A7%88%E8%A1%A8%E6%A0%BC"><span class="toc-number">1.3.1.3.1.</span> <span class="toc-text">移植总览表格</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#draw"><span class="toc-number">1.3.1.3.2.</span> <span class="toc-text">draw</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#layout"><span class="toc-number">1.3.1.3.3.</span> <span class="toc-text">layout</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#libs"><span class="toc-number">1.3.1.3.4.</span> <span class="toc-text">libs</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#misc"><span class="toc-number">1.3.1.3.5.</span> <span class="toc-text">misc</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#osal"><span class="toc-number">1.3.1.3.6.</span> <span class="toc-text">osal</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#stdlib"><span class="toc-number">1.3.1.3.7.</span> <span class="toc-text">stdlib</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#themes"><span class="toc-number">1.3.1.3.8.</span> <span class="toc-text">themes</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#widgets"><span class="toc-number">1.3.1.3.9.</span> <span class="toc-text">widgets</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#driver"><span class="toc-number">1.3.1.3.10.</span> <span class="toc-text">driver</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#other"><span class="toc-number">1.3.1.3.11.</span> <span class="toc-text">other</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.3.2.</span> <span class="toc-text">头文件添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E7%94%A8lv-conf-h"><span class="toc-number">1.3.3.</span> <span class="toc-text">启用lv_conf.h</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%8A%A5%E9%94%99"><span class="toc-number">1.3.4.</span> <span class="toc-text">编译报错</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%BE%E4%B8%8D%E5%88%B0%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">找不到头文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%A7%BB%E6%A4%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">关于移植的一些问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9LVGL%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">修改LVGL配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E5%B1%8F"><span class="toc-number">2.1.</span> <span class="toc-text">显示屏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E6%B7%B1%E5%BA%A6"><span class="toc-number">2.1.1.</span> <span class="toc-text">颜色深度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="toc-number">2.1.2.</span> <span class="toc-text">字节序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B1%A0%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.2.1.</span> <span class="toc-text">内存池介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%E6%B1%A0%E5%A4%A7%E5%B0%8F"><span class="toc-number">2.2.2.</span> <span class="toc-text">分配内存池大小</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E5%88%B7%E6%96%B0%E4%B8%8E%E8%BE%93%E5%85%A5%E8%AE%BE%E5%A4%87"><span class="toc-number">2.3.</span> <span class="toc-text">显示刷新与输入设备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B7%E6%96%B0%E5%91%A8%E6%9C%9F"><span class="toc-number">2.3.1.</span> <span class="toc-text">刷新周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E5%91%A8%E6%9C%9F"><span class="toc-number">2.3.2.</span> <span class="toc-text">读取周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.4.</span> <span class="toc-text">操作系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%BD%93"><span class="toc-number">2.5.</span> <span class="toc-text">字体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E4%BB%B6%E5%90%AF%E7%94%A8-widget"><span class="toc-number">2.6.</span> <span class="toc-text">控件启用(widget)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%86%85%E5%AE%B9%E5%BC%80%E5%90%AF"><span class="toc-number">2.6.1.</span> <span class="toc-text">默认内容开启</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E4%BB%B6%E4%BD%BF%E8%83%BD"><span class="toc-number">2.6.2.</span> <span class="toc-text">控件使能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98"><span class="toc-number">2.7.</span> <span class="toc-text">主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E5%B1%80"><span class="toc-number">2.8.</span> <span class="toc-text">布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">2.9.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%8A%A5%E9%94%99-1"><span class="toc-number">2.10.</span> <span class="toc-text">编译报错</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9LVGL%E7%A7%BB%E6%A4%8D%E5%B1%82"><span class="toc-number">3.</span> <span class="toc-text">修改LVGL移植层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E6%A4%8D%E5%B1%82%E6%96%87%E4%BB%B6%E5%90%AF%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text">移植层文件启用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E6%A4%8D%E6%98%BE%E7%A4%BA%E9%A9%B1%E5%8A%A8"><span class="toc-number">3.2.</span> <span class="toc-text">移植显示驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%88%86%E8%BE%A8%E7%8E%87"><span class="toc-number">3.2.1.</span> <span class="toc-text">设置分辨率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lv-port-disp-init"><span class="toc-number">3.2.2.</span> <span class="toc-text">lv_port_disp_init</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%98%BE%E7%A4%BA%E5%B1%8F"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">初始化显示屏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%98%BE%E7%A4%BA%E5%AF%B9%E8%B1%A1%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%88%B7%E6%96%B0%E5%9B%9E%E8%B0%83"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">创建显示对象并设置刷新回调</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">显示缓冲区</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.2.2.3.1.</span> <span class="toc-text">显示缓冲区介绍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#LVGL%E6%98%BE%E7%A4%BA%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.2.3.2.</span> <span class="toc-text">LVGL显示工作原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%95%E7%BC%93%E5%86%B2%E5%8C%BA-%E9%83%A8%E5%88%86%E7%BC%93%E5%86%B2"><span class="toc-number">3.2.2.3.3.</span> <span class="toc-text">单缓冲区(部分缓冲)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8C%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%88%E9%83%A8%E5%88%86%E7%BC%93%E5%86%B2%EF%BC%89"><span class="toc-number">3.2.2.3.4.</span> <span class="toc-text">双缓冲区（部分缓冲）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%A8%E5%B1%8F%E5%8F%8C%E7%BC%93%E5%86%B2-%E5%85%A8%E5%B1%8F%E7%BC%93%E5%86%B2"><span class="toc-number">3.2.2.3.5.</span> <span class="toc-text">全屏双缓冲(全屏缓冲)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#API"><span class="toc-number">3.2.2.3.6.</span> <span class="toc-text">API</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#disp-flush"><span class="toc-number">3.2.3.</span> <span class="toc-text">disp_flush</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">示例程序</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%85%81%E8%AE%B8%E5%88%B7%E6%96%B0"><span class="toc-number">3.2.3.1.1.</span> <span class="toc-text">判断是否允许刷新</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%83%8F%E7%B4%A0%E5%88%B7%E6%96%B0%E9%80%BB%E8%BE%91"><span class="toc-number">3.2.3.1.2.</span> <span class="toc-text">像素刷新逻辑</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%B7%E6%96%B0%E5%AE%8C%E6%88%90%E9%80%9A%E7%9F%A5"><span class="toc-number">3.2.3.1.3.</span> <span class="toc-text">刷新完成通知</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%81%9A%E6%B3%95"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">常用做法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#DMA%E6%89%B9%E9%87%8F%E4%BC%A0%E8%BE%93"><span class="toc-number">3.2.3.2.1.</span> <span class="toc-text">DMA批量传输</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E6%A4%8D%E8%A7%A6%E6%91%B8%E9%A9%B1%E5%8A%A8"><span class="toc-number">3.3.</span> <span class="toc-text">移植触摸驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lv-port-indev-init"><span class="toc-number">3.3.1.</span> <span class="toc-text">lv_port_indev_init</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#touchpad-init"><span class="toc-number">3.3.2.</span> <span class="toc-text">touchpad_init</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#touchpad-read"><span class="toc-number">3.3.3.</span> <span class="toc-text">touchpad_read</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#touchpad-is-pressed"><span class="toc-number">3.3.4.</span> <span class="toc-text">touchpad_is_pressed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#touchpad-get-xy"><span class="toc-number">3.3.5.</span> <span class="toc-text">touchpad_get_xy</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8LVGL"><span class="toc-number">4.</span> <span class="toc-text">配置和启动LVGL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%97%B6%E5%9F%BA"><span class="toc-number">4.1.</span> <span class="toc-text">配置时基</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS"><span class="toc-number">4.1.1.</span> <span class="toc-text">FreeRTOS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8FreeRTOS%E7%9A%84%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.1.1.</span> <span class="toc-text">使用FreeRTOS的钩子函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BB%BB%E5%8A%A1%E6%8E%A7%E5%88%B6"><span class="toc-number">4.1.1.2.</span> <span class="toc-text">单任务控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%B8%E6%9C%BA"><span class="toc-number">4.1.2.</span> <span class="toc-text">裸机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8SysTick%E4%B8%AD%E6%96%AD"><span class="toc-number">4.1.2.1.</span> <span class="toc-text">使用SysTick中断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">4.1.2.2.</span> <span class="toc-text">定时器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%A8%E6%9C%9F%E6%80%A7%E8%B0%83%E7%94%A8lvgl%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86"><span class="toc-number">4.2.</span> <span class="toc-text">周期性调用lvgl任务处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E6%A4%8D%E6%88%90%E5%8A%9F%E4%B8%8E%E5%90%A6%E6%B5%8B%E8%AF%95"><span class="toc-number">5.</span> <span class="toc-text">移植成功与否测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E9%A9%B1%E5%8A%A8%E6%B5%8B%E8%AF%95"><span class="toc-number">5.1.</span> <span class="toc-text">显示驱动测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A6%E6%91%B8%E9%A9%B1%E5%8A%A8%E6%B5%8B%E8%AF%95"><span class="toc-number">5.2.</span> <span class="toc-text">触摸驱动测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E6%A4%8D%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">移植遇到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E8%A7%A6%E6%91%B8%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E4%B8%8D%E8%A7%A6%E5%8F%91"><span class="toc-number">6.1.</span> <span class="toc-text">LVGL触摸回调函数不触发</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/MQTT%E8%BF%9E%E6%8E%A5AWS-IoT/" title="MQTT连接AWS IoT"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/213.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MQTT连接AWS IoT"/></a><div class="content"><a class="title" href="/2025/08/30/MQTT%E8%BF%9E%E6%8E%A5AWS-IoT/" title="MQTT连接AWS IoT">MQTT连接AWS IoT</a><time datetime="2025-08-29T16:33:21.000Z" title="发表于 2025-08-30 00:33:21">2025-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/TLS%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/" title="TLS传输层安全协议"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/33.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="TLS传输层安全协议"/></a><div class="content"><a class="title" href="/2025/08/30/TLS%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/" title="TLS传输层安全协议">TLS传输层安全协议</a><time datetime="2025-08-29T16:31:07.000Z" title="发表于 2025-08-30 00:31:07">2025-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/" title="AWS介绍"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/28.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AWS介绍"/></a><div class="content"><a class="title" href="/2025/08/30/AWS%E4%BB%8B%E7%BB%8D/" title="AWS介绍">AWS介绍</a><time datetime="2025-08-29T16:28:11.000Z" title="发表于 2025-08-30 00:28:11">2025-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/PCB%E8%AE%BE%E8%AE%A1-%E5%9F%BA%E4%BA%8E%E7%AB%8B%E5%88%9BEDA/" title="PCB设计(基于立创EDA)"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/26.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PCB设计(基于立创EDA)"/></a><div class="content"><a class="title" href="/2025/08/30/PCB%E8%AE%BE%E8%AE%A1-%E5%9F%BA%E4%BA%8E%E7%AB%8B%E5%88%9BEDA/" title="PCB设计(基于立创EDA)">PCB设计(基于立创EDA)</a><time datetime="2025-08-29T16:20:05.000Z" title="发表于 2025-08-30 00:20:05">2025-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/30/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="加密算法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/5.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="加密算法"/></a><div class="content"><a class="title" href="/2025/08/30/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="加密算法">加密算法</a><time datetime="2025-08-29T16:12:06.000Z" title="发表于 2025-08-30 00:12:06">2025-08-30</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://www.dogecloud.com/" style="margin-inline:5px" data-title="本站使用多吉云为静态资源提供CDN加速" title="本站使用多吉云为静态资源提供CDN加速"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg" alt="本站使用多吉云为静态资源提供CDN加速"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="/" title="THEDI" target="_blank">THEDI</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">8</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/keqiudi/keqiudi.github.io" title="我的博客仓库"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="我的博客仓库"/><span class="back-menu-item-text">我的博客仓库</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AWS/" style="font-size: 0.88rem;">AWS<sup>2</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>2</sup></a><a href="/tags/CLion/" style="font-size: 0.88rem;">CLion<sup>2</sup></a><a href="/tags/CMake/" style="font-size: 0.88rem;">CMake<sup>1</sup></a><a href="/tags/ESP32/" style="font-size: 0.88rem;">ESP32<sup>1</sup></a><a href="/tags/FreeRTOS/" style="font-size: 0.88rem;">FreeRTOS<sup>5</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/LCD/" style="font-size: 0.88rem;">LCD<sup>2</sup></a><a href="/tags/LVGL/" style="font-size: 0.88rem;">LVGL<sup>7</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>8</sup></a><a href="/tags/MySQL/" style="font-size: 0.88rem;">MySQL<sup>2</sup></a><a href="/tags/PCB/" style="font-size: 0.88rem;">PCB<sup>2</sup></a><a href="/tags/QT/" style="font-size: 0.88rem;">QT<sup>1</sup></a><a href="/tags/keil/" style="font-size: 0.88rem;">keil<sup>1</sup></a><a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/" style="font-size: 0.88rem;">云服务<sup>3</sup></a><a href="/tags/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" style="font-size: 0.88rem;">启动流程<sup>2</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 0.88rem;">嵌入式<sup>2</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">嵌入式安全<sup>3</sup></a><a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 0.88rem;">架构<sup>2</sup></a><a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 0.88rem;">环境配置<sup>4</sup></a><a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 0.88rem;">硬件<sup>5</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 0.88rem;">算法<sup>3</sup></a><a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 0.88rem;">调试<sup>5</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 THEDI 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/01/2022 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.60.0/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script async src="//at.alicdn.com/t/c/font_4169545_k8d3mxnig4s.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
