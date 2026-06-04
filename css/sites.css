@@ -1,4 +1,4 @@
-/* ����ҳ����ʽ - ����ർ���� */
+/* 导航页面样式 - 左侧导航栏 */
 .nav-wrapper {
     display: flex;
     max-width: none;
@@ -8,7 +8,7 @@
     min-height: 100vh;
 }
 
-/* ��ർ���� */
+/* 左侧导航栏 */
 .nav-sidebar {
     width: 220px;
     min-width: 220px;
@@ -25,7 +25,7 @@
     z-index: 100;
 }
 
-/* �Զ����������ʽ */
+/* 自定义滚动条样式 */
 .nav-sidebar::-webkit-scrollbar {
     width: 6px;
 }
@@ -71,42 +71,66 @@
 }
 
 .nav-menu li::before {
-    display: none; /* �Ƴ�Ĭ�ϵ��б���� */
+    display: none;
 }
 
 .nav-link {
     display: block;
-    padding: 12px 15px 12px 0px;
+    padding: 14px 15px 14px 0px;
     color: var(--anzhiyu-fontcolor);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 0;
     font-size: 1.0em;
-    transition: all 0.3s ease;
+    transform: translateX(0);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                color 0.3s ease,
+                background 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
     position: relative;
-    margin-bottom: 4px;
+    margin-bottom: 0;
     margin-left: 0 !important;
-    border: none !important;
     outline: none !important;
     box-shadow: none !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    /* 分隔线：每一级之间都有横线 */
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
 
+/* 每一级之间都要有横线间隔，包括最后一项 */
 .nav-link:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
 
 .nav-link:hover {
-    background: rgba(66, 90, 239, 0.1);
-    color: #425AEF;
+    transform: translateX(12px);
     text-decoration: none;
+    color: #425AEF !important;
+    background: linear-gradient(90deg, rgba(66, 90, 239, 0.08) 0%, rgba(66, 90, 239, 0.02) 40%, transparent 100%) !important;
+    border-radius: 0 8px 8px 0;
+    box-shadow: inset 2px 0 0 0 rgba(66, 90, 239, 0.35);
 }
 
+/* 当前激活分类 - 左侧高亮条 + 文字突出 */
 .nav-link.active {
-    background: rgba(66, 90, 239, 0.15);
-    color: #5a7cff;
+    font-weight: 600;
+    color: #425AEF !important;
+    background: linear-gradient(90deg, rgba(66, 90, 239, 0.12) 0%, rgba(66, 90, 239, 0.03) 40%, transparent 100%) !important;
+    box-shadow: inset 3px 0 0 0 #425AEF;
+    border-radius: 0 8px 8px 0;
+    padding-left: 10px;
+    transform: translateX(0);
 }
 
-/* ǿ���Ƴ��κο��ܵ��б������ʽ */
+.nav-link.active:hover {
+    transform: translateX(8px);
+    background: linear-gradient(90deg, rgba(66, 90, 239, 0.15) 0%, rgba(66, 90, 239, 0.04) 40%, transparent 100%) !important;
+    box-shadow: inset 3px 0 0 0 #425AEF, inset 2px 0 0 0 rgba(66, 90, 239, 0.2);
+}
+
+/* 强制移除任何可能的列表样式 */
 .nav-menu, .nav-menu li, .nav-link {
     list-style-type: none !important;
     list-style: none !important;
@@ -120,18 +144,7 @@
     display: none !important;
 }
 
-.nav-link:hover {
-    background: rgba(66, 90, 239, 0.1);
-    color: #425AEF;
-    text-decoration: none;
-}
-
-.nav-link.active {
-    background: rgba(66, 90, 239, 0.15);
-    color: #5a7cff;
-}
-
-/* �Ҳ������� */
+/* 右侧内容区 */
 .nav-content {
     flex: 1;
     min-width: 0;
@@ -146,7 +159,7 @@
     font-weight: 600;
     margin: 30px 0 20px 0;
     padding-bottom: 8px;
-    border-bottom: 2px solid #3b82f6;
+    border-bottom: 1px solid #e5e7eb;
     position: relative;
 }
 
@@ -162,13 +175,14 @@
 }
 
 .nav-card {
-    background: #fff;
+    background: #fff !important;
+    background-color: #fff !important;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
-    padding: 20px 30px;
+    padding: 16px 20px;
     text-decoration: none;
     color: #333;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
@@ -176,8 +190,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 110px;
-    aspect-ratio: 2.2/1;
+    min-height: 100px;
+    aspect-ratio: 2/1;
+}
+
+/* 清除可能存在的伪元素蓝色效果 */
+.nav-card::before,
+.nav-card::after {
+    display: none !important;
 }
 
 .nav-card:hover {
@@ -185,35 +205,80 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     border-color: #d1d5db;
     text-decoration: none;
+    color: #333 !important;
+    background: #fff !important;
+    background-color: #fff !important;
+}
+
+/* 防止主题全局 a:hover 蓝色渗透到卡片子元素 */
+.nav-card:hover .nav-title {
     color: #333;
 }
 
-.nav-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #3b82f6, #60a5fa);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.nav-card:hover::before {
-    transform: scaleX(1);
+.nav-card:hover .nav-desc {
+    color: #666;
 }
 
 .nav-icon {
-    font-size: 1.8em;
-    width: 50px;
-    height: 50px;
+    font-size: 1.5em;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     color: #666;
     flex-shrink: 0;
+}
+
+/* nav-icon 中的官方 logo 图片 */
+.nav-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-card:hover .nav-icon img {
+    transform: scale(1.1);
+}
+
+/* 官方 logo mask 方案 — 用于 cdn.simpleicons.org 不支持的品牌 */
+.nav-icon-mask {
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.nav-card:hover .nav-icon-mask {
+    transform: scale(1.1);
+}
+/* 各品牌颜色 + SVG URL */
+.nav-icon-vscode {
+    background-color: #007ACC;
+    mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/visualstudiocode.svg");
+    -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/visualstudiocode.svg");
+}
+.nav-icon-aws {
+    background-color: #FF9900;
+    mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonwebservices.svg");
+    -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonwebservices.svg");
+}
+.nav-icon-openai {
+    background-color: #10A37F;
+    mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg");
+    -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg");
+}
+.nav-icon-codeium {
+    background-color: #4F46E5;
+    mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/codeium.svg");
+    -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/codeium.svg");
 }
 
 .nav-content-wrapper {
@@ -243,22 +308,62 @@
     text-align: center;
 }
 
-/* ��ɫģʽ���� */
+/* 暗色模式适配 */
 [data-theme="dark"] .nav-card {
-    background: #fff;
+    background: #fff !important;
+    background-color: #fff !important;
     border-color: #e5e7eb;
+}
+
+[data-theme="dark"] .nav-card::before,
+[data-theme="dark"] .nav-card::after {
+    display: none !important;
 }
 
 [data-theme="dark"] .nav-card:hover {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     border-color: #d1d5db;
+    color: #333 !important;
+    background: #fff !important;
+    background-color: #fff !important;
 }
+
+[data-theme="dark"] .nav-card:hover .nav-title {
+    color: #333;
+}
+
+[data-theme="dark"] .nav-link {
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .nav-link:last-child {
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .nav-link:hover {
+    border-bottom-color: rgba(255, 255, 255, 0.12) !important;
+    color: #8aa5ff !important;
+    background: linear-gradient(90deg, rgba(123, 147, 255, 0.12) 0%, rgba(123, 147, 255, 0.03) 40%, transparent 100%) !important;
+    box-shadow: inset 2px 0 0 0 rgba(123, 147, 255, 0.45);
+}
+
+[data-theme="dark"] .nav-link.active {
+    color: #7B93FF !important;
+    background: linear-gradient(90deg, rgba(123, 147, 255, 0.16) 0%, rgba(123, 147, 255, 0.04) 40%, transparent 100%) !important;
+    box-shadow: inset 3px 0 0 0 #7B93FF;
+}
+
+[data-theme="dark"] .nav-link.active:hover {
+    background: linear-gradient(90deg, rgba(123, 147, 255, 0.2) 0%, rgba(123, 147, 255, 0.06) 40%, transparent 100%) !important;
+    box-shadow: inset 3px 0 0 0 #7B93FF, inset 2px 0 0 0 rgba(123, 147, 255, 0.3);
+}
+
 
 [data-theme="dark"] .nav-content h2 {
     border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
-/* ��Ӧʽ��� */
+/* 响应式布局 */
 @media (max-width: 768px) {
     .nav-wrapper {
         flex-direction: column;
@@ -286,12 +391,14 @@
         gap: 5px;
     }
     
-.nav-menu li {
-    margin-bottom: 0;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}    .nav-link {
+    .nav-menu li {
+        margin-bottom: 0;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    .nav-link {
         padding: 8px 12px;
         font-size: 0.8em;
     }
@@ -302,15 +409,20 @@
     }
     
     .nav-card {
-        padding: 15px 10px;
-        min-height: 100px;
+        padding: 12px 14px;
+        min-height: 90px;
     }
-    
+
     .nav-icon {
-        font-size: 1.8em;
-        width: 50px;
-        height: 50px;
-        margin-bottom: 8px;
+        font-size: 1.4em;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 5px;
+    }
+
+    .nav-icon img {
+        width: 26px;
+        height: 26px;
     }
     
     .nav-title {
@@ -344,9 +456,15 @@
     }
     
     .nav-icon {
-        font-size: 1.4em;
-        width: 35px;
-        height: 35px;
+        font-size: 1.2em;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 4px;
+    }
+
+    .nav-icon img {
+        width: 22px;
+        height: 22px;
     }
     
     .nav-title {
@@ -358,7 +476,7 @@
     }
 }
 
-/* �е���Ļ���� */
+/* 中等屏幕适配 */
 @media (max-width: 1200px) and (min-width: 769px) {
     .nav-grid {
         grid-template-columns: repeat(3, 1fr);
