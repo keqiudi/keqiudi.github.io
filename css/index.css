@@ -6086,6 +6086,16 @@ body[data-type='about'] #web_bg {
     width: 100% !important;
   }
 }
+@media screen and (min-width: 900px) {
+  .layout > div:first-child {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -o-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
+  }
+}
 .layout.hide-aside {
   max-width: 1000px;
 }
@@ -9205,7 +9215,7 @@ h1.page-title + .tag-cloud-list {
 }
 @media screen and (min-width: 1200px) {
   #aside-content {
-    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 @media screen and (max-width: 1200px) {
@@ -9664,6 +9674,9 @@ h1.page-title + .tag-cloud-list {
   -o-transform: rotate(0);
   -ms-transform: rotate(0);
   transform: rotate(0);
+}
+#aside-content .card-categories .card-category-list > .parent > .child {
+  display: none;
 }
 #aside-content .card-webinfo .item-headline {
   display: none;
@@ -22947,9 +22960,10 @@ canvas#universe {
 }
 
 body[data-type="link"] main #page {
+  box-sizing: border-box;
   border: 0;
   box-shadow: none !important;
-  padding: 0 !important;
+  padding: 24px 28px 32px !important;
   background: transparent !important;
 }
 
@@ -22958,7 +22972,26 @@ body[data-type="link"] main #page {
 }
 
 .flink .anzhiyu-flink-list {
-  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 6px 0 10px;
+}
+
+body[data-type="link"] #flink-banners {
+  box-sizing: border-box;
+}
+
+body[data-type="link"] #flink-banners #skills-tags-group-all {
+  overflow: hidden;
+  width: calc(100% - 12px);
+  margin-inline: 6px;
+}
+
+@media screen and (max-width: 768px) {
+  body[data-type="link"] main #page {
+    padding: 18px 16px 24px !important;
+  }
 }
 
 /* 修复时间轴wowjs超出盒子 */
