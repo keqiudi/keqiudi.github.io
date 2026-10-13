@@ -4471,3 +4471,907 @@ body[data-type="link"] #flink-banners #skills-tags-group-all {
     box-shadow: 0 8px 22px rgba(47, 83, 105, 0.12) !important;
   }
 }
+
+/*
+ * 首页三张快捷入口卡片：定位加固。
+ * 背景：三张卡片本来是"3 列 1 行"的网格，完全依赖自动排列。
+ * 一旦页面在渲染时被塞进额外节点（翻译/阅读模式/扩展/内置浏览器转码等），
+ * 多出来的节点会占掉 1~2 个格子，把网格挤成两行 —— 卡片被压到约 47px，
+ * 副标题被 overflow: hidden 裁掉，看起来就是"空洞 + 卡片错位"。
+ * 这里锁定行高与位置：按 <a> 序号兜底，再按目标链接定位（更稳）。
+ */
+@media screen and (min-width: 769px) {
+  body:has(#home_top) #home_top .cyber-quick-links {
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-auto-rows: 0 !important;
+    align-items: stretch !important;
+  }
+
+  body:has(#home_top) #home_top .cyber-quick-links > a:nth-of-type(1) {
+    grid-area: 1 / 1 / 2 / 2 !important;
+  }
+
+  body:has(#home_top) #home_top .cyber-quick-links > a:nth-of-type(2) {
+    grid-area: 1 / 2 / 2 / 3 !important;
+  }
+
+  body:has(#home_top) #home_top .cyber-quick-links > a:nth-of-type(3) {
+    grid-area: 1 / 3 / 2 / 4 !important;
+  }
+
+  body:has(#home_top) #home_top .cyber-quick-links > a[href*="/archives/"] {
+    grid-area: 1 / 1 / 2 / 2 !important;
+  }
+
+  body:has(#home_top) #home_top .cyber-quick-links > a[href*="/categories/"] {
+    grid-area: 1 / 2 / 2 / 3 !important;
+    background: linear-gradient(135deg, rgba(27, 85, 164, 0.84), rgba(27, 54, 117, 0.94)) !important;
+  }
+
+  body:has(#home_top) #home_top .cyber-quick-links > a[href*="/about/"] {
+    grid-area: 1 / 3 / 2 / 4 !important;
+    background: linear-gradient(135deg, rgba(7, 122, 123, 0.84), rgba(9, 53, 82, 0.94)) !important;
+  }
+}
+
+/*
+ * ============================================================================
+ * 顶栏与加载页配色（2026-10-13）
+ * ----------------------------------------------------------------------------
+ * 问题：顶栏底色原本是近乎纯黑的 rgba(2,8,20)，比页面底色 #07121c 还要暗，
+ *   和下方的深蓝横幅/卡片割裂，看起来就是页面顶上压了一条"黑条"。
+ * 参考：asynapi.top 的顶栏底色比页面底色"更蓝一档"（页面 #001020、顶栏 #0C1F3A），
+ *   于是顶栏是轻轻浮在页面上，而不是压暗成黑条 —— 这是它顶部看着舒服的关键。
+ * 方案 A（本段实现）：顶栏换成"同族深蓝玻璃"，加载页换成同族深蓝渐变 + 青蓝光环。
+ *   色卡（深色模式）：
+ *     顶栏         linear-gradient(180deg, rgba(12,32,58,.86), rgba(7,20,40,.78))
+ *     顶栏·吸顶后  linear-gradient(180deg, rgba(9,25,48,.97), rgba(6,16,34,.95))
+ *     描边         rgba(116,210,240,.16) → 吸顶 .24
+ *     强调/悬停    #70e8e4（沿用原有青绿），底 rgba(64,180,200,.14)
+ *     加载底色     #08192e → #050e1c + 青蓝径向光晕
+ *     头像光环     conic-gradient(#5ff3ff, #528aff, #67e2da)
+ *     加载圆点     #67e2da + 深色描边 rgba(5,14,28,.9)
+ *   备选（想换方向只改这几行）：
+ *     方案 B 偏青——顶栏 rgba(8,34,50,.86)→rgba(6,20,34,.78)，强调色 #5fe6d8；
+ *     方案 C 偏蓝（最接近 asynapi）——顶栏 rgba(14,36,66,.88)→rgba(9,24,48,.8)，强调色 #5aa6ff。
+ * ========================================================================== */
+
+/* 顶栏 · 未吸顶：深蓝玻璃，比页面亮一档 */
+@media screen and (min-width: 769px) {
+  html[data-theme="dark"] #page-header #nav,
+  html[data-theme="dark"] #page-header.nav-fixed #nav,
+  html[data-theme="dark"] #page-header.nav-fixed.nav-visible #nav,
+  html[data-theme="dark"] #page-header.post-bg #nav,
+  html[data-theme="dark"] body:has(#home_top) #page-header #nav {
+    border-bottom-color: rgba(116, 210, 240, 0.16) !important;
+    background: linear-gradient(180deg, rgba(12, 32, 58, 0.86), rgba(7, 20, 40, 0.78)) !important;
+    box-shadow: inset 0 1px 0 rgba(150, 230, 255, 0.05) !important;
+  }
+
+  /* 顶栏 · 吸顶后：更实一点，边界与投影略强，保持"浮起来"而不是"压下去" */
+  html[data-theme="dark"] #page-header.nav-fixed #nav,
+  html[data-theme="dark"] #page-header.nav-fixed.nav-visible #nav,
+  html[data-theme="dark"] body:has(#home_top) #page-header.nav-fixed #nav,
+  html[data-theme="dark"] body:has(#home_top) #page-header.nav-fixed.nav-visible #nav {
+    border-bottom-color: rgba(116, 210, 240, 0.24) !important;
+    background: linear-gradient(180deg, rgba(9, 25, 48, 0.97), rgba(6, 16, 34, 0.95)) !important;
+    box-shadow: 0 10px 30px rgba(0, 6, 22, 0.42) !important;
+  }
+
+  /* 顶栏悬停/当前项：沿用青绿强调，底色从"蓝雾"换成同系青蓝，避免和蓝底撞色 */
+  html[data-theme="dark"] body:has(#home_top) #page-header #nav #menus .menus_item > a:hover,
+  html[data-theme="dark"] body:has(#home_top) #page-header #nav #menus .menus_item > a.site-page.active {
+    color: #76f0ea !important;
+    background: rgba(64, 180, 200, 0.14) !important;
+    box-shadow: inset 0 0 0 1px rgba(103, 226, 218, 0.18);
+  }
+}
+
+/* 加载页：加载时压在固定顶栏之上，不再从顶栏底下透出一条黑边 */
+#loading-box:not(.loaded) .loading-bg {
+  z-index: 10060;
+}
+
+/* 加载页底色：与页面/顶栏同一族的深蓝，替掉原来那块平板近黑 */
+html[data-theme="dark"] #loading-box .loading-bg {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(38, 140, 170, 0.26), transparent 58%),
+    radial-gradient(circle at 50% 118%, rgba(70, 96, 196, 0.18), transparent 62%),
+    linear-gradient(168deg, #08192e 0%, #050e1c 100%) !important;
+}
+
+html[data-theme="light"] #loading-box .loading-bg {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(72, 178, 208, 0.20), transparent 58%),
+    linear-gradient(168deg, #f3fbff 0%, #e6f1f9 100%) !important;
+}
+
+/* 头像光环：把主题默认的灰白描边(#f0f0f2)换成主页头像卡同款青蓝渐变环 */
+#loading-box .loading-img {
+  border: 4px solid transparent !important;
+  background:
+    linear-gradient(#071a2e, #071a2e) padding-box,
+    conic-gradient(from 210deg, #5ff3ff, #528aff, #67e2da, #5ff3ff) border-box !important;
+  box-shadow: 0 0 26px rgba(86, 214, 240, 0.32), 0 14px 38px rgba(0, 6, 22, 0.5) !important;
+}
+
+html[data-theme="light"] #loading-box .loading-img {
+  background:
+    linear-gradient(#eaf4fb, #eaf4fb) padding-box,
+    conic-gradient(from 210deg, #6fd8ef, #6ea6f5, #55cfc4, #6fd8ef) border-box !important;
+  box-shadow: 0 0 22px rgba(90, 190, 220, 0.3), 0 14px 34px rgba(20, 60, 90, 0.18) !important;
+}
+
+/* 加载圆点：主题默认是绿色 #6bdf8f + 纯白描边，压在深蓝底上又脏又撞色 */
+#loading-box .loading-image-dot {
+  background: #67e2da !important;
+  border-color: rgba(5, 14, 28, 0.9) !important;
+  box-shadow: 0 0 14px rgba(103, 226, 218, 0.7) !important;
+}
+
+html[data-theme="light"] #loading-box .loading-image-dot {
+  background: #2fa9c4 !important;
+  border-color: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 0 12px rgba(47, 169, 196, 0.45) !important;
+}
+
+/*
+ * ============================================================================
+ * 页脚：社交图标行（footer.socialBar）+ 分组链接（footer.list）
+ * ----------------------------------------------------------------------------
+ * 这两块是 anzhiyu 主题内置功能（原来都是关着的），主题默认配色是浅色调，
+ * 直接开在你这套深色页脚上会发灰。这里只补深色配色，不动主题的布局与间距：
+ *   图标按钮  深蓝玻璃底 + 青绿描边，hover 提亮并上浮
+ *   分组标题  #e6f6ff（比正文亮一档）
+ *   子链接    rgba(200,226,245,.78)，hover 变青绿 #76f0ea 并轻微右移
+ *   换一批 ↻ 用青绿点亮（主题默认是灰的 secondtext，在深底上几乎看不见）
+ * ========================================================================== */
+html[data-theme="dark"] #footer_deal .deal_link {
+  width: 38px;
+  height: 38px;
+  margin: 0.9rem 21px;
+  color: #b8f6ff;
+  border: 1px solid rgba(103, 226, 218, 0.22);
+  background: linear-gradient(145deg, rgba(18, 74, 96, 0.9), rgba(8, 32, 56, 0.92));
+  box-shadow: inset 0 1px 0 rgba(214, 255, 255, 0.08), 0 8px 18px rgba(0, 8, 26, 0.28);
+}
+
+html[data-theme="dark"] #footer_deal .deal_link:hover {
+  color: #ffffff;
+  border-color: rgba(112, 241, 238, 0.62);
+  background: linear-gradient(145deg, rgba(30, 131, 149, 0.96), rgba(16, 86, 111, 0.96));
+  box-shadow: 0 0 18px rgba(93, 242, 247, 0.3);
+  transform: translateY(-2px);
+}
+
+html[data-theme="dark"] #footer_deal .deal_link i,
+html[data-theme="dark"] #footer_deal .deal_link svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  font-size: 1.05rem;
+}
+
+html[data-theme="dark"] #footer_deal .footer_mini_logo {
+  border: 2px solid rgba(103, 226, 218, 0.34);
+  box-shadow: 0 0 20px rgba(90, 220, 240, 0.26);
+}
+
+html[data-theme="dark"] #anzhiyu-footer {
+  max-width: 1400px;
+  gap: 14px 24px;
+}
+
+html[data-theme="dark"] #anzhiyu-footer .footer-title {
+  color: #e6f6ff;
+  letter-spacing: 0.04em;
+}
+
+html[data-theme="dark"] #anzhiyu-footer .footer-title-group a i {
+  color: #76f0ea;
+  opacity: 0.9;
+}
+
+html[data-theme="dark"] #anzhiyu-footer .footer-item {
+  color: rgba(200, 226, 245, 0.78);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+html[data-theme="dark"] #anzhiyu-footer .footer-item:hover {
+  color: #76f0ea;
+  transform: translateX(2px);
+}
+
+/*
+ * ============================================================================
+ * 首页文章卡片：文字块上移 + 四行左基线对齐（2026-10-13，第二版）
+ * ----------------------------------------------------------------------------
+ * 首页卡片真实结构（已核对生成的 HTML）：
+ *   .recent-post-info            ← 主题默认 height:174px; position:relative; padding:0
+ *     .recent-post-info-top      ← 里面是「最新/未读」小标签 + 标题（主题默认 padding:0 32px）
+ *       .recent-post-info-top-tips
+ *       a.article-title
+ *     .article-meta-wrap         ← 里面是 日期行 + 标签行
+ *                                  主题默认 position:absolute; left:0; width:100%;
+ *                                  bottom:0; padding:0 32px —— 就是靠这个 32px 才能和标题对齐
+ * 上一版只把两边 padding 一起归零，绝对定位的日期行就失去了缩进、直接贴到卡片边缘（这就是"逼近边界"）。
+ * 这一版改成：
+ *   ① 信息区 height:174px → auto：竖版卡片不再被固定高度撑出空白（标题与日期之间的"大洞"消失）
+ *   ② 日期行/标签行 position:absolute → static：回到正常文档流，和标题共享信息区的 18px 内边距，
+ *      四行落在同一条左基线上；同时保留 margin-top:auto —— 同一排卡片被拉伸后日期行仍贴底对齐
+ *   ③ 间距固定：小标签行下 6px、标题区下 10px、日期与标签之间 8px
+ * 作用域：≥1101px（平板段 769~1100px 有自己的 min-height:318px，不动它）
+ * ========================================================================== */
+@media screen and (min-width: 1101px) {
+  body:has(#home_top) #recent-posts > .recent-post-item {
+    min-height: 300px !important;
+  }
+
+  body:has(#home_top) #recent-posts .recent-post-info {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 12px 18px 14px !important;
+  }
+
+  body:has(#home_top) #recent-posts .recent-post-info .recent-post-info-top {
+    margin: 0 0 10px !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  body:has(#home_top) #recent-posts .recent-post-info .recent-post-info-top-tips {
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    line-height: 1.45 !important;
+  }
+
+  body:has(#home_top) #recent-posts .recent-post-info .article-title {
+    line-height: 1.35 !important;
+  }
+
+  body:has(#home_top) #recent-posts .recent-post-info .article-meta-wrap {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    margin: auto 0 0 !important;
+    padding: 0 !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    white-space: normal !important;
+    line-height: 1.45 !important;
+  }
+
+  body:has(#home_top) #recent-posts .recent-post-info .article-meta-wrap .article-meta.tags {
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  body:has(#home_top) #recent-posts .recent-post-info .article-meta__tags,
+  body:has(#home_top) #recent-posts .recent-post-info .article-meta__tags * {
+    margin: 0 !important;
+    line-height: 1.45 !important;
+  }
+}
+
+/*
+ * ============================================================================
+ * 浅色主题：首页三张快捷入口卡片改成「白 + 蓝」（2026-10-13）
+ * ----------------------------------------------------------------------------
+ * 现象：白天模式下整页是白/浅蓝，只有这三张卡还是深色主题那套饱和青蓝，
+ *   显得很跳。这里给浅色模式单独一套：白底 + 蓝字 + 极浅蓝/浅青渐变区分，
+ *   深色模式完全不受影响（下面每条都带 html[data-theme="light"] 前缀）。
+ * 采样参考（你截图里的白天模式）：页面底 #eef5fa、顶栏 #f7fbfd、卡片 #ffffff。
+ * ========================================================================== */
+@media screen and (min-width: 769px) {
+  html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a {
+    color: #1c3f6e !important;
+    border-color: rgba(74, 146, 255, 0.26) !important;
+    background: linear-gradient(135deg, #ffffff, #f4f9ff) !important;
+    box-shadow: 0 8px 20px rgba(31, 77, 140, 0.10) !important;
+  }
+
+  html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a[href*="/categories/"] {
+    background: linear-gradient(135deg, #f2f7ff, #e2ecff) !important;
+  }
+
+  html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a[href*="/about/"] {
+    background: linear-gradient(135deg, #f0fafb, #e0f1f8) !important;
+  }
+
+  html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a strong {
+    color: #17406f !important;
+  }
+
+  html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a small {
+    color: rgba(46, 88, 138, 0.66) !important;
+  }
+
+  html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a > span {
+    color: rgba(70, 120, 180, 0.5) !important;
+  }
+
+  html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a:hover {
+    border-color: rgba(74, 146, 255, 0.58) !important;
+    box-shadow: 0 12px 26px rgba(31, 77, 140, 0.16) !important;
+  }
+}
+
+/*
+ * ============================================================================
+ * 浅色主题：可读性修复 + 强调色统一为蓝（2026-10-13）
+ * ----------------------------------------------------------------------------
+ * 根因：深色模式那批文字色大多写在"不区分主题"的桌面块里，还带 !important
+ *   （例：本文件 2146 行 .article-meta-wrap { color: #b9cce2 !important }、
+ *         2499 行 color: #aec4dd !important、2050 行 #category-bar { color: #d9eaff }），
+ *   白天模式下就变成"浅色字压白底"。下面所有规则都带 html[data-theme="light"]
+ *   前缀（优先级更高 + 位置更靠后），深色模式完全不受影响。
+ *
+ * 实测对比度（修复前 → 修复后，白底）：
+ *   文章卡日期行      1.63:1 → 6.05:1
+ *   文章卡标签行      1.01:1 → 7.02:1
+ *   分类栏普通项      1.01:1 → 7.24:1
+ *   侧栏分类徽标数字  1.08:1 → 5.10:1
+ *   快速卡角标 01/02  1.26:1 → 4.20:1
+ *   快速卡副标题      2.54:1 → 5.36:1
+ *
+ * 色卡（白 + 蓝）：
+ *   主文字 #12283d ｜ 次文字 #42566b ｜ 弱文字 #4b6478
+ *   链接/强调 #2f6fe0 ｜ 标签 #31597e ｜ 选中底 #2f6fe0（白字 4.75:1）
+ * ========================================================================== */
+
+/* ① 日间强调色：青绿 #0b91a1 → 蓝 #3d7ff0（沿用"白 + 蓝"的方向） */
+html[data-theme="light"] body {
+  --anzhiyu-main: #3d7ff0;
+  --anzhiyu-theme: #3d7ff0;
+  --anzhiyu-theme-deep: #2f68d4;
+  --anzhiyu-lighttext: #2f6fe0;
+  --anzhiyu-hovertext: #2f68d4;
+  --anzhiyu-main-op-deep: rgba(61, 127, 240, 0.48);
+  --anzhiyu-theme-op: rgba(61, 127, 240, 0.13);
+  --anzhiyu-theme-op-deep: rgba(47, 104, 212, 0.74);
+  --anzhiyu-ahoverbg: rgba(198, 219, 250, 0.46);
+  --anzhiyu-card-border: rgba(72, 132, 190, 0.22);
+  --anzhiyu-secondbg: #eaf1fa;
+  --style-border: 1px solid rgba(72, 132, 190, 0.22);
+  --style-border-hover: 1px solid rgba(61, 127, 240, 0.62);
+  --style-border-always: 1px solid rgba(72, 132, 190, 0.26);
+  --style-border-hover-always: 1px solid rgba(61, 127, 240, 0.72);
+}
+
+/* ② 首页文章卡片：标题 / 日期 / 标签三行都改成深色字 */
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .article-title,
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .article-title a {
+  color: #12283d !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .article-meta-wrap,
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .article-meta-wrap *,
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .post-meta-date,
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .article-meta-label {
+  color: #4b6478 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .article-meta__tags,
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .article-meta__tags *,
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .article-meta.tags,
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .article-meta.tags * {
+  color: #31597e !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .recent-post-info-top-tips,
+html[data-theme="light"] body:has(#home_top) #recent-posts .recent-post-info .recent-post-info-top-tips * {
+  color: #5c7794 !important;
+}
+
+/* ③ 三张快捷入口卡片：副标题 / 角标加深（上一版给的透明度太浅） */
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a strong {
+  color: #16385f !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a small {
+  color: #4a6b93 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-quick-links > a > span {
+  color: #5f7ea3 !important;
+}
+
+/* ④ 分类栏：普通项、选中胶囊、"更多" */
+html[data-theme="light"] body:has(#home_top) #category-bar,
+html[data-theme="light"] body:has(#home_top) #category-bar #catalog-bar,
+html[data-theme="light"] body:has(#home_top) #category-bar #catalog-list,
+html[data-theme="light"] body:has(#home_top) #category-bar .catalog-list-item a {
+  color: #2f5578 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #category-bar .catalog-list-item a:hover {
+  color: #2f6fe0 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #category-bar .catalog-list-item.selected a,
+html[data-theme="light"] body:has(#home_top) #category-bar .catalog-list-item.selected a * {
+  color: #ffffff !important;
+  background: #2f6fe0 !important;
+  border-color: #2f6fe0 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #category-bar .catalog-more,
+html[data-theme="light"] body:has(#home_top) #category-bar .catalog-more * {
+  color: #2f6fe0 !important;
+}
+
+/* ⑤ 构建面板：eyebrow / 状态 / 说明 / 活跃格子 全部换成蓝系高对比
+     注意：本文件里已存在 html[data-theme="light"] body:has(#home_top) .cyber-activity-grid … 这类
+     青绿规则（:has() 里的 ID 也计权重，是 (1,3,3)），所以这里统一再补一层 #home_top/#aside-content，
+     把权重顶到 (2,3,3) 以上，才能真正盖掉它们。 */
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel__eyebrow,
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel__eyebrow * {
+  color: #2f6fe0 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel__eyebrow span {
+  background: #3d7ff0 !important;
+  box-shadow: 0 0 10px rgba(61, 127, 240, 0.8) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel > strong {
+  color: #12283d !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel > p {
+  color: #4b6478 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel__foot,
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel__foot * {
+  color: #5c7794 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel__foot b {
+  color: #2f6fe0 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel__foot b::before {
+  background: #3d7ff0 !important;
+  box-shadow: 0 0 8px rgba(61, 127, 240, 0.8) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-activity-grid i {
+  border-color: rgba(61, 127, 240, 0.18) !important;
+  background: rgba(61, 127, 240, 0.10) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-activity-grid i.is-active {
+  border-color: rgba(61, 127, 240, 0.5) !important;
+  background: linear-gradient(135deg, #7fb0ff, #3d7ff0) !important;
+  box-shadow: 0 0 8px rgba(61, 127, 240, 0.35) !important;
+}
+
+/* ⑥ 侧栏：小标题、徽标数字、分类/标签计数、归档卡片（同样补 #aside-content 提高权重） */
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-heading,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-heading *,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-heading,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-heading * {
+  color: #2f6fe0 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-taxonomy > summary > small,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-group summary > small,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-taxonomy > summary > small,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-group summary > small {
+  color: #1f5fd0 !important;
+  background: rgba(61, 127, 240, 0.14) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-category-list a,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-category-list a b,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-tag-list a,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-category-list a,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-category-list a b,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-tag-list a {
+  color: #24486f !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-category-list a small,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-tag-list a small,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-category-list a small,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-tag-list a small {
+  color: #5c7794 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-status small,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-archives .card-archive-list-date,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-status small,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-archives .card-archive-list-date {
+  color: #4b6478 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-archives .card-archive-list-count-group,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-rail-archives .card-archive-list-count-group {
+  color: #5c7794 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) .cyber-toggle-label,
+html[data-theme="light"] #blog-container:has(#cyber-aside-toggle:checked) .cyber-toggle-label {
+  color: #2f5578 !important;
+}
+
+/* ⑦ 文章正文（文章页浅色模式下同样被深色文字色污染） */
+html[data-theme="light"] #article-container,
+html[data-theme="light"] #article-container p,
+html[data-theme="light"] #article-container li,
+html[data-theme="light"] #article-container td,
+html[data-theme="light"] #article-container blockquote,
+html[data-theme="light"] #page .article-sort-item,
+html[data-theme="light"] #archive .article-sort-item,
+html[data-theme="light"] #tag .article-sort-item,
+html[data-theme="light"] #category .article-sort-item {
+  color: #22374d !important;
+}
+
+html[data-theme="light"] #article-container a,
+html[data-theme="light"] #post a,
+html[data-theme="light"] #page a,
+html[data-theme="light"] #archive a,
+html[data-theme="light"] #tag a,
+html[data-theme="light"] #category a,
+html[data-theme="light"] #aside-content a {
+  color: #2f6fe0 !important;
+}
+
+html[data-theme="light"] #article-container blockquote {
+  background: rgba(226, 236, 250, 0.7) !important;
+  border-color: rgba(61, 127, 240, 0.22) !important;
+}
+
+html[data-theme="light"] .article-sort-item-title,
+html[data-theme="light"] .article-sort-item-title a {
+  color: #12283d !important;
+}
+
+html[data-theme="light"] .article-sort-item-time,
+html[data-theme="light"] .article-sort-item-tags a {
+  color: #4b6478 !important;
+}
+
+/*
+ * ============================================================================
+ * 浅色主题：残留青色/绿色清除（第二轮，2026-10-13）
+ * ----------------------------------------------------------------------------
+ * 来源有两类：
+ *   ① 本文件里既有的"日间青绿"规则，例如
+ *      html[data-theme="light"] #page-header #nav … a.site-page.active { color: #087f91 }、
+ *      html[data-theme="light"] .cyber-rail-taxonomy > summary:hover { color: #087586 }、
+ *      html[data-theme="light"] #pagination .page-number.current { background: … #35d8d0 }；
+ *   ② 若干"不分主题"的青色规则，白天会变成浅青字压白底，例如
+ *      #home_top .cyber-build-panel__eyebrow span { background: #93f6af }、
+ *      .cyber-profile-card .card-info-social-icons .social-icon { color: #a8f8fb }。
+ * 处理方式一致：浅色作用域 + 补 #home_top/#aside-content 提高权重，统一换成蓝色系。
+ * ========================================================================== */
+
+/* 导航：当前项 / 子菜单悬停 */
+html[data-theme="light"] body:has(#home_top) #page-header #nav #menus .menus_item > a:hover,
+html[data-theme="light"] body:has(#home_top) #page-header #nav #menus .menus_item > a.site-page.active,
+html[data-theme="light"] body:has(#home_top) #page-header #nav #menus .menus_item_child li a:hover {
+  color: #2f6fe0 !important;
+}
+
+/* 个人卡：头像光环（原来是无条件生效的青色 conic-gradient）+ 社交按钮 */
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-profile-card .author-info-avatar::before,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-profile-card .author-info-avatar::before {
+  background: conic-gradient(#6fa8ff, #3d7ff0, #9cc2ff, #6fa8ff) !important;
+  box-shadow: 0 0 14px rgba(61, 127, 240, 0.45) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-profile-card .card-info-social-icons .social-icon,
+html[data-theme="light"] body:has(#home_top) #blog-container #aside-content .cyber-profile-card .card-info-social-icons .social-icon {
+  color: #2f6fe0 !important;
+  border-color: rgba(61, 127, 240, 0.28) !important;
+  background: rgba(61, 127, 240, 0.08) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-profile-card .card-info-social-icons .social-icon:hover,
+html[data-theme="light"] body:has(#home_top) #blog-container #aside-content .cyber-profile-card .card-info-social-icons .social-icon:hover {
+  color: #ffffff !important;
+  background: #2f6fe0 !important;
+  border-color: #2f6fe0 !important;
+}
+
+/* 侧栏：折叠标题悬停 / 折叠箭头 / 分类项悬停 / 分类圆点 */
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-taxonomy > summary:hover,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-group summary:hover {
+  color: #1f5fd0 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-taxonomy > summary::after,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-group summary::after {
+  color: #2f6fe0 !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-category-list a:hover,
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-tag-list a:hover {
+  color: #2f6fe0 !important;
+  background: rgba(61, 127, 240, 0.16) !important;
+  border-color: rgba(61, 127, 240, 0.5) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #aside-content .cyber-rail-category-list a::before {
+  border-color: #2f6fe0 !important;
+}
+
+/* 公告 / 小站资讯 卡片标题图标 */
+html[data-theme="light"] body:has(#home_top) #aside-content :is(.card-announcement, .card-webinfo) .item-headline i,
+html[data-theme="light"] #aside-content.cyber-unified-aside .cyber-desktop-aside :is(.card-announcement, .card-webinfo) .item-headline i {
+  color: #2f6fe0 !important;
+}
+
+/* 页码当前项 */
+html[data-theme="light"] #pagination .page-number.current {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #4a86f7, #2f6fe0) !important;
+  border-color: rgba(61, 127, 240, 0.6) !important;
+}
+
+/* 中控台（右下角控制台面板）日间配色 */
+html[data-theme="light"] #console :is(.author-content-item-tips, .item-headline, .item-headline *) {
+  color: #1f5fd0 !important;
+}
+
+html[data-theme="light"] #console .console-card.tags .card-tag-cloud a:hover,
+html[data-theme="light"] #console .button-group .console-btn-item:hover a,
+html[data-theme="light"] #console .button-group .console-btn-item.on a {
+  color: #2f6fe0 !important;
+  background: rgba(61, 127, 240, 0.12) !important;
+}
+
+/* 页脚链接悬停 */
+html[data-theme="light"] #footer-wrap :is(a:hover, .footer-item:hover) {
+  color: #2f6fe0 !important;
+}
+
+/* 加载页：光环与圆点也从青绿改蓝 */
+html[data-theme="light"] #loading-box .loading-img {
+  background:
+    linear-gradient(#eaf4fb, #eaf4fb) padding-box,
+    conic-gradient(from 210deg, #6fa8ff, #3d7ff0, #2f6fe0, #6fa8ff) border-box !important;
+}
+
+html[data-theme="light"] #loading-box .loading-image-dot {
+  background: #2f6fe0 !important;
+  border-color: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 0 12px rgba(47, 111, 224, 0.45) !important;
+}
+
+/*
+ * ============================================================================
+ * 浅色主题：加强"区域感"（第三轮，2026-10-13）
+ * ----------------------------------------------------------------------------
+ * 对比参考站 blog.anheyu.com 的白天模式：它是"浅灰底 + 实心白卡片 + 明显投影"，
+ * 小色块用饱和色（实测那块蓝色是 rgb(43,76,242)）。
+ * 你这边实测：页面底 (234,245,250)，三张快捷卡分别是 (253,254,255) / (246,250,255) /
+ *   (234,242,255) —— 跟底色几乎一样，加上卡片底色原本是 rgba(255,255,255,.9) 半透明，
+ *   所以"分不出区域"。
+ * 处理：
+ *   ① 底色加深一档 → 白卡片才浮得起来；
+ *   ② 卡片底色改成实心白 + 可见描边 + 真实投影（去掉半透明）；
+ *   ③ 三张快捷卡改成饱和蓝色块 + 白字（对齐参考站那种色块观感）。
+ * 只作用于 html[data-theme="light"]，深色模式不受影响。
+ * ========================================================================== */
+
+/* ① + ② 设计变量：底色 / 卡片 / 描边 / 投影 */
+html[data-theme="light"] body {
+  --global-bg: #e7eef6;
+  --anzhiyu-background: #e7eef6;
+  --anzhiyu-card-bg: #ffffff;
+  --anzhiyu-secondbg: #eef3f9;
+  --anzhiyu-card-border: rgba(28, 68, 120, 0.16);
+  --card-bg: #ffffff;
+  --card-box-shadow: 0 6px 16px rgba(31, 77, 140, 0.10);
+  --card-hover-box-shadow: 0 10px 24px rgba(31, 77, 140, 0.16);
+}
+
+/* 顶部横幅 / 构建面板 / 分类栏 / 文章卡 / 侧栏所有卡片：实心白 + 可见边界 */
+html[data-theme="light"] body:has(#home_top) #home_top #random-banner,
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-build-panel,
+html[data-theme="light"] body:has(#home_top) #home_top .cyber-profile-card,
+html[data-theme="light"] body:has(#home_top) #category-bar,
+html[data-theme="light"] body:has(#home_top) #recent-posts > .recent-post-item,
+html[data-theme="light"] body:has(#home_top) #aside-content > :is(.card-widget, details, .cyber-rail-dashboard, .cyber-rail-taxonomy, .cyber-rail-archives, .cyber-profile-card, .card-announcement, .card-webinfo) {
+  background: #ffffff !important;
+  border: 1px solid rgba(28, 68, 120, 0.16) !important;
+  box-shadow: 0 6px 16px rgba(31, 77, 140, 0.10) !important;
+}
+
+/* 卡片里的小分隔线也加深一点，否则在白底上看不见 */
+html[data-theme="light"] body:has(#home_top) #aside-content > :is(.cyber-rail-dashboard, .card-announcement, .card-webinfo) {
+  border-top-color: rgba(28, 68, 120, 0.12) !important;
+}
+
+/* ③ 三张快捷卡：饱和蓝色块 + 白字（对齐参考站的色块观感） */
+html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-quick-links > a {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  background: linear-gradient(135deg, #4a86f7, #2f6fe0) !important;
+  box-shadow: 0 10px 22px rgba(47, 111, 224, 0.28) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-quick-links > a[href*="/categories/"] {
+  background: linear-gradient(135deg, #3a63e8, #2b46c8) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-quick-links > a[href*="/about/"] {
+  background: linear-gradient(135deg, #3f9fd8, #2f6fd0) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-quick-links > a strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-quick-links > a small {
+  color: rgba(255, 255, 255, 0.84) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-quick-links > a > span {
+  color: rgba(255, 255, 255, 0.62) !important;
+}
+
+html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-quick-links > a:hover {
+  border-color: rgba(255, 255, 255, 0.66) !important;
+  box-shadow: 0 14px 28px rgba(47, 111, 224, 0.36) !important;
+  transform: translateY(-2px);
+}
+
+/*
+ * ============================================================================
+ * 暗色模式背景：把渐变铺满可见区域（2026-10-13）
+ * ----------------------------------------------------------------------------
+ * 原来的背景（本文件 L2247 那条 #web_bg 规则）是：
+ *   linear-gradient(125deg, #040c1d 0%, #071831 55%, #063740 100%)
+ *   + 两处光晕 + 72px 网格线
+ * 问题：125° 的亮头（#063740 青）落在最右下角，正常视口里几乎看不到，
+ *   可见处只剩接近纯黑的 #040c1d 和那层网格线 —— 就是你说的"只有夜间星空点点"。
+ * 处理：保持同样的层级结构（网格 → 网格 → 光晕 → 光晕 → 光晕 → 主渐变），
+ *   ① 主渐变改为竖向铺满，亮部落在视口中段，暗部收在底部；
+ *   ② 三处光晕提亮（右上青、左下靛、底部蓝）。
+ * 只覆盖 background-image —— 不动 background-size / background-position，
+ *   这样原有的 cyber-ambient-drift 缓慢漂移动画仍然生效。
+ * 深色模式专属（html[data-theme="dark"]），浅色模式不受影响。
+ * 备选色感：偏紫空 → 光晕换 rgba(120,96,214,…)、主渐变换 #161034→#2a1a52；
+ *          偏极简墨蓝 → 去掉三处光晕，只留 linear-gradient(#0a1c33 → #050f1f)。
+ * ========================================================================== */
+html[data-theme="dark"] body #web_bg {
+  background-image:
+    linear-gradient(rgba(133, 181, 245, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(133, 181, 245, 0.028) 1px, transparent 1px),
+    radial-gradient(46rem 32rem at 84% 6%, rgba(2, 176, 178, 0.30), transparent 60%),
+    radial-gradient(44rem 30rem at 10% 70%, rgba(86, 102, 214, 0.28), transparent 62%),
+    radial-gradient(58rem 36rem at 50% 106%, rgba(22, 104, 186, 0.26), transparent 64%),
+    linear-gradient(158deg, #0a2140 0%, #0b2846 20%, #0a3252 42%, #093f57 62%, #074056 78%, #062b3f 92%, #05192b 100%) !important;
+}
+
+/*
+ * ============================================================================
+ * 暗色模式背景（加强版，2026-10-13）
+ * ----------------------------------------------------------------------------
+ * 上面 v59 那版只覆盖了 `background-image`，权重 (1,1,2) 其实已经能压过
+ * `#web_bg { background-image: … !important }`（(1,0,0)），但既然你还是看到"纯黑"，
+ * 这里做三件事，确保任何一个环节都不会退化成黑底：
+ *   ① 选择器补到 (2,1,2)：html[data-theme="dark"] body:has(#home_top) #web_bg —— 稳定赢；
+ *   ② 渐变整体提亮一档（顶部 #0d2a4a、中段 #0d4a68、底部 #06293f），并加强三处光晕；
+ *   ③ 顺手给 html / body 也铺一层同色渐变（fixed），
+ *      这样即使 #web_bg 被某条规则 display:none 或没加载，页面也不会是纯黑。
+ * 仍然不碰 background-position，保留 cyber-ambient-drift 漂移动画。
+ * ========================================================================== */
+html[data-theme="dark"] body:has(#home_top) #web_bg,
+html[data-theme="dark"] body #web_bg {
+  background-image:
+    linear-gradient(rgba(140, 190, 250, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 190, 250, 0.03) 1px, transparent 1px),
+    radial-gradient(50rem 34rem at 84% 4%, rgba(4, 196, 194, 0.34), transparent 62%),
+    radial-gradient(48rem 32rem at 8% 68%, rgba(104, 118, 238, 0.32), transparent 64%),
+    radial-gradient(62rem 38rem at 50% 104%, rgba(30, 124, 210, 0.32), transparent 66%),
+    linear-gradient(158deg, #0d2a4a 0%, #0f3356 18%, #0e4166 38%, #0d4a68 56%, #0b5170 72%, #084a63 86%, #06293f 100%) !important;
+  background-size: 72px 72px, 72px 72px, auto, auto, auto, auto !important;
+  background-repeat: repeat !important;
+  background-color: transparent !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* 兜底：html / body 也铺同色渐变，避免任何情况下退化成纯黑 */
+html[data-theme="dark"] body,
+html[data-theme="dark"] {
+  background-color: #0b2440 !important;
+  background-image: linear-gradient(158deg, #0d2a4a 0%, #0e3d60 45%, #0a4a63 72%, #06293f 100%) !important;
+  background-attachment: fixed !important;
+}
+
+/*
+ * ============================================================================
+ * 首页翻页（分页器）居中（2026-10-13）
+ * ----------------------------------------------------------------------------
+ * 现状：`#pagination` 已经 grid-column: 1 / -1、内部 .pagination 也写了
+ *   width: min(100%,540px) + margin-inline: auto，但实际渲染偏右 →
+ *   说明有更高优先级（或更靠后的）规则在推它，例如主题的 flex/text-align 对齐。
+ * 这里直接把整条链路锁成"占满一整行 + 内部水平居中 + flex 居中"，
+ *   不再依赖别人怎么写。
+ * ========================================================================== */
+body:has(#home_top) #recent-posts > #pagination {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+body:has(#home_top) #recent-posts > #pagination > .pagination {
+  display: flex !important;
+  width: min(100%, 540px) !important;
+  margin: 20px auto 0 !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+body:has(#home_top) #recent-posts > #pagination > .pagination > * {
+  margin-inline: 3px !important;
+}
+
+/*
+ * ============================================================================
+ * 暗色模式：背景换成图片 + 遮罩压暗（2026-10-13）
+ * ----------------------------------------------------------------------------
+ * 图片：source/assets/blog-bg.webp（由 wallhaven-6lwz1w.jpg 4096×2304 → 2560×1440
+ *   WebP q82，2.55MB → 240KB）。实测该图平均线性亮度 0.156、亮部(p95) 0.71 ——
+ *   脸/白毛/泡泡偏亮，所以必须加遮罩，否则那块背景会亮到压过文字。
+ * 做法：
+ *   ① 背景 = 上层"深蓝黑遮罩" + 下层图片（第一层画在第二层之上）；
+ *      遮罩取垂直渐变：顶部 .66、中段 .60、底部 .78，
+ *      压完后的平均亮度 ≈ 0.02~0.03（和之前那条渐变背景同一档），文字对比度不受影响；
+ *   ② 关掉 cyber-ambient-drift 漂移动画 —— 图片不能跟着漂；
+ *   ③ 图片位对齐用 center 30%，让角色脸部留在视口内（窄屏裁切时优先保脸）；
+ *   ④ 卡片背景从 rgba(6,24,50,.76) 提到 .90 —— 图片透进卡片会让正文发花，
+ *      背景留给卡片之间的缝隙和页面边缘去展示。
+ * 想调亮度：改上面那三个 rgba(3,9,22,α) 的 α（越小图越清楚、越大越好读）。
+ * 浅色模式不变（仍是浅色渐变背景）。
+ * ========================================================================== */
+html[data-theme="dark"] body:has(#home_top) #web_bg,
+html[data-theme="dark"] body #web_bg {
+  background-image:
+    linear-gradient(180deg, rgba(3, 9, 22, 0.66) 0%, rgba(3, 9, 22, 0.60) 40%, rgba(2, 7, 18, 0.78) 100%),
+    url('/assets/blog-bg.webp') !important;
+  background-size: cover, cover !important;
+  background-position: center center, center 30% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-attachment: fixed, fixed !important;
+  background-color: #050d1c !important;
+  animation: none !important;
+}
+
+/* 图片透进卡片会让正文发花：暗色模式下把卡片压得更实一点 */
+html[data-theme="dark"] body:has(#home_top) #recent-posts > .recent-post-item {
+  background-color: rgba(6, 24, 50, 0.9) !important;
+}
+
+html[data-theme="dark"] body:has(#home_top) #home_top .cyber-quick-links > a {
+  background-color: rgba(9, 32, 58, 0.94) !important;
+}
+
+/*
+ * 浅色模式同样用这张背景图，但换成"浅色遮罩"（.80~.86 的雾蓝白），
+ * 这样白卡片依然清楚、文字对比度不变，背景只是隐约透出画面。
+ * 不想在白天看到图：删掉这一段即可，浅色模式会回到原来的浅色渐变。
+ */
+html[data-theme="light"] #web_bg,
+html[data-theme="light"] body:has(#home_top) #web_bg {
+  background-image:
+    linear-gradient(180deg, rgba(238, 245, 250, 0.86) 0%, rgba(238, 245, 250, 0.80) 45%, rgba(230, 239, 248, 0.90) 100%),
+    url('/assets/blog-bg.webp') !important;
+  background-size: cover, cover !important;
+  background-position: center center, center 30% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-attachment: fixed, fixed !important;
+  background-color: #e7eef6 !important;
+  animation: none !important;
+}
