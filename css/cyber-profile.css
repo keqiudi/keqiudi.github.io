@@ -1,10 +1,10 @@
 /* PC 端在浏览器缩放后仍保留赛博布局；仅窄于 769px 时切换移动端。 */
 @media screen and (min-width: 769px) {
+  /* 【2026-10-13 去掉光晕】原先这里是两处冷色光晕 + #07121c 底色。
+     光晕会在页面上糊出两团亮斑，和星星抢眼，也不再是纯粹的夜空感；
+     现在底色统一交给文件末尾的"纯星空背景"规则，这里只留一个同色兜底。 */
   body:has(#home_top) #web_bg {
-    background:
-      radial-gradient(circle at 77% 3%, rgba(24, 155, 177, 0.18), transparent 32rem),
-      radial-gradient(circle at 10% 78%, rgba(78, 90, 164, 0.12), transparent 28rem),
-      #07121c;
+    background: #07121c;
   }
 
   body:has(#home_top) #page-header {
@@ -1277,15 +1277,11 @@ html[data-theme="light"] #console .button-group .console-btn-item.on a {
     background: #eef5fa !important;
   }
 
+  /* 【2026-10-13 去掉光晕/网格】浅色模式同步简化，只留素净浅底，
+     与文件末尾的浅色"纯渐变"规则一致；不再有光晕和 72px 网格。 */
   html[data-theme="light"] #web_bg,
   html[data-theme="light"] body:has(#home_top) #web_bg {
-    background-image:
-      linear-gradient(rgba(57, 111, 145, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(57, 111, 145, 0.045) 1px, transparent 1px),
-      radial-gradient(circle at 17% 42%, rgba(91, 158, 203, 0.2), transparent 38rem),
-      radial-gradient(circle at 84% 31%, rgba(39, 180, 183, 0.16), transparent 40rem),
-      linear-gradient(125deg, #f6fafc 0%, #edf5fa 55%, #e2f1f3 100%) !important;
-    background-size: 72px 72px, 72px 72px, auto, auto, auto !important;
+    background: #eaf3f8 !important;
   }
 
   html[data-theme="light"] #page-header,
@@ -1863,17 +1859,12 @@ body:has(#home_top) #category-bar #catalog-list::-webkit-scrollbar,
 
 /* 首页桌面端：Asyn API 参考图的深海玻璃质感。页面保留极淡网格，个人卡片刻意不使用网格。 */
 @media screen and (min-width: 769px) {
+  /* 【2026-10-13 去掉光晕】这里原先是最主要的"光晕版"背景：
+     72px 网格 + 三处冷色光晕 + 125° 深色渐变，另外还挂着 cyber-ambient-drift 漂移动画。
+     现在只保留纯星空感 —— 光晕、网格、漂移全部去掉，
+     底色由文件末尾的"纯星空背景"规则统一定义，这里只留同色兜底。 */
   body:has(#home_top) #web_bg {
-    background-image:
-      linear-gradient(rgba(133, 181, 245, 0.042) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(133, 181, 245, 0.042) 1px, transparent 1px),
-      radial-gradient(circle at 18% 44%, rgba(49, 103, 205, 0.34), transparent 36rem),
-      radial-gradient(circle at 83% 28%, rgba(2, 164, 166, 0.23), transparent 42rem),
-      radial-gradient(circle at 72% 92%, rgba(10, 76, 154, 0.2), transparent 36rem),
-      linear-gradient(125deg, #040c1d 0%, #071831 51%, #063a43 100%);
-    background-size: 72px 72px, 72px 72px, auto, auto, auto, auto;
-    background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
-    animation: cyber-ambient-drift 20s ease-in-out infinite alternate;
+    background: #071831;
   }
 
   body:has(#home_top) #page-header {
@@ -2244,16 +2235,14 @@ body:has(#home_top) #category-bar #catalog-list::-webkit-scrollbar,
     color: #d6e4f4;
   }
 
+  /*
+   * 【2026-10-13 去掉光晕】这条原主题的 #web_bg 背景（网格 + 两处光晕 + 125° 渐变）
+   * 是"光晕版"星空底色的来源。现在只保留纯星空感，光晕和网格都不要，
+   * 暗色底色统一交给文件末尾那条"纯星空背景"规则；这里改成简单的同色兜底，
+   * 免得它在窄屏/其他断点下冒出来又带出一层光晕。
+   */
   #web_bg {
-    background-image:
-      linear-gradient(rgba(126, 174, 237, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(126, 174, 237, 0.035) 1px, transparent 1px),
-      radial-gradient(circle at 17% 42%, rgba(44, 92, 183, 0.3), transparent 38rem),
-      radial-gradient(circle at 84% 31%, rgba(3, 153, 158, 0.21), transparent 40rem),
-      linear-gradient(125deg, #040c1d 0%, #071831 55%, #063740 100%) !important;
-    background-size: 72px 72px, 72px 72px, auto, auto, auto !important;
-    background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
-    animation: cyber-ambient-drift 20s ease-in-out infinite alternate;
+    background-color: #071831;
   }
 
   /* 顶部导航：中间菜单按内容占宽，下拉层不受滚动容器裁剪。 */
@@ -3541,12 +3530,11 @@ body[data-type="link"] #flink-banners #skills-tags-group-all {
     color: #d6e4f4;
   }
 
+  /* 【2026-10-13 去掉光晕】移动端原本也有两处光晕，一并简化成纯底色，
+     与桌面端的星空底保持一致（星星由 #universe canvas 统一负责）。 */
   #web_bg,
   body:has(#home_top) #web_bg {
-    background:
-      radial-gradient(circle at 12% 18%, rgba(50, 105, 198, 0.28), transparent 24rem),
-      radial-gradient(circle at 86% 64%, rgba(4, 145, 151, 0.2), transparent 28rem),
-      linear-gradient(145deg, #030b1d 0%, #06172f 58%, #06313a 100%) !important;
+    background: linear-gradient(145deg, #07162c 0%, #08172f 58%, #06202f 100%) !important;
   }
 
   #page-header,
@@ -4006,12 +3994,10 @@ body[data-type="link"] #flink-banners #skills-tags-group-all {
     color: #294b63;
   }
 
+  /* 【2026-10-13 去掉光晕】浅色移动端同步简化成素净浅底。 */
   html[data-theme="light"] #web_bg,
   html[data-theme="light"] body:has(#home_top) #web_bg {
-    background:
-      radial-gradient(circle at 12% 18%, rgba(92, 163, 205, 0.2), transparent 24rem),
-      radial-gradient(circle at 86% 64%, rgba(44, 177, 179, 0.14), transparent 28rem),
-      linear-gradient(145deg, #f5fafc 0%, #eaf3f8 58%, #e2f2f3 100%) !important;
+    background: linear-gradient(145deg, #f3fbff 0%, #ecf4fa 58%, #e6f1f9 100%) !important;
   }
 
   html[data-theme="light"] #page-header,
@@ -5223,67 +5209,23 @@ html[data-theme="light"] body:has(#home_top) #blog-container #home_top .cyber-qu
 }
 
 /*
- * ============================================================================
- * 暗色模式背景：把渐变铺满可见区域（2026-10-13）
- * ----------------------------------------------------------------------------
- * 原来的背景（本文件 L2247 那条 #web_bg 规则）是：
- *   linear-gradient(125deg, #040c1d 0%, #071831 55%, #063740 100%)
- *   + 两处光晕 + 72px 网格线
- * 问题：125° 的亮头（#063740 青）落在最右下角，正常视口里几乎看不到，
- *   可见处只剩接近纯黑的 #040c1d 和那层网格线 —— 就是你说的"只有夜间星空点点"。
- * 处理：保持同样的层级结构（网格 → 网格 → 光晕 → 光晕 → 光晕 → 主渐变），
- *   ① 主渐变改为竖向铺满，亮部落在视口中段，暗部收在底部；
- *   ② 三处光晕提亮（右上青、左下靛、底部蓝）。
- * 只覆盖 background-image —— 不动 background-size / background-position，
- *   这样原有的 cyber-ambient-drift 缓慢漂移动画仍然生效。
- * 深色模式专属（html[data-theme="dark"]），浅色模式不受影响。
- * 备选色感：偏紫空 → 光晕换 rgba(120,96,214,…)、主渐变换 #161034→#2a1a52；
- *          偏极简墨蓝 → 去掉三处光晕，只留 linear-gradient(#0a1c33 → #050f1f)。
- * ========================================================================== */
-html[data-theme="dark"] body #web_bg {
-  background-image:
-    linear-gradient(rgba(133, 181, 245, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(133, 181, 245, 0.028) 1px, transparent 1px),
-    radial-gradient(46rem 32rem at 84% 6%, rgba(2, 176, 178, 0.30), transparent 60%),
-    radial-gradient(44rem 30rem at 10% 70%, rgba(86, 102, 214, 0.28), transparent 62%),
-    radial-gradient(58rem 36rem at 50% 106%, rgba(22, 104, 186, 0.26), transparent 64%),
-    linear-gradient(158deg, #0a2140 0%, #0b2846 20%, #0a3252 42%, #093f57 62%, #074056 78%, #062b3f 92%, #05192b 100%) !important;
-}
+ * 【2026-10-13 清理】这条 v59 暗色背景（网格 + 三处光晕 + 竖向渐变）已随"去掉光晕"
+ * 一并移除，理由同上：光晕会糊出亮斑、网格和粒子混成噪点。
+ * 现在暗色背景只保留最下面那条纯星空渐变，另加 html/body 的兜底层。
+ */
 
 /*
- * ============================================================================
- * 暗色模式背景（加强版，2026-10-13）
- * ----------------------------------------------------------------------------
- * 上面 v59 那版只覆盖了 `background-image`，权重 (1,1,2) 其实已经能压过
- * `#web_bg { background-image: … !important }`（(1,0,0)），但既然你还是看到"纯黑"，
- * 这里做三件事，确保任何一个环节都不会退化成黑底：
- *   ① 选择器补到 (2,1,2)：html[data-theme="dark"] body:has(#home_top) #web_bg —— 稳定赢；
- *   ② 渐变整体提亮一档（顶部 #0d2a4a、中段 #0d4a68、底部 #06293f），并加强三处光晕；
- *   ③ 顺手给 html / body 也铺一层同色渐变（fixed），
- *      这样即使 #web_bg 被某条规则 display:none 或没加载，页面也不会是纯黑。
- * 仍然不碰 background-position，保留 cyber-ambient-drift 漂移动画。
- * ========================================================================== */
-html[data-theme="dark"] body:has(#home_top) #web_bg,
-html[data-theme="dark"] body #web_bg {
-  background-image:
-    linear-gradient(rgba(140, 190, 250, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(140, 190, 250, 0.03) 1px, transparent 1px),
-    radial-gradient(50rem 34rem at 84% 4%, rgba(4, 196, 194, 0.34), transparent 62%),
-    radial-gradient(48rem 32rem at 8% 68%, rgba(104, 118, 238, 0.32), transparent 64%),
-    radial-gradient(62rem 38rem at 50% 104%, rgba(30, 124, 210, 0.32), transparent 66%),
-    linear-gradient(158deg, #0d2a4a 0%, #0f3356 18%, #0e4166 38%, #0d4a68 56%, #0b5170 72%, #084a63 86%, #06293f 100%) !important;
-  background-size: 72px 72px, 72px 72px, auto, auto, auto, auto !important;
-  background-repeat: repeat !important;
-  background-color: transparent !important;
-  opacity: 1 !important;
-  display: block !important;
-}
+ * 【2026-10-13 清理】这里原先有两版暗色背景（v59 一条 + "加强版"一条），
+ * 都带光晕和网格，用来在背景图上叠色。背景图去掉后它们已无意义，且互相覆盖，
+ * 只剩阅读负担 —— 一并移除。现在暗色背景只由下面"纯星空背景"那一条定义。
+ */
 
-/* 兜底：html / body 也铺同色渐变，避免任何情况下退化成纯黑 */
+/* 兜底：html / body 也铺一层同色渐变，避免任何情况下退化成纯黑（不再用背景图）。
+   色调与 #web_bg 保持一致，这样即使 #web_bg 没加载，画面也是同一片深空。 */
 html[data-theme="dark"] body,
 html[data-theme="dark"] {
-  background-color: #0b2440 !important;
-  background-image: linear-gradient(158deg, #0d2a4a 0%, #0e3d60 45%, #0a4a63 72%, #06293f 100%) !important;
+  background-color: #071831 !important;
+  background-image: linear-gradient(158deg, #0a1c3a 0%, #08172f 34%, #071831 58%, #06202f 82%, #05202e 100%) !important;
   background-attachment: fixed !important;
 }
 
@@ -5320,58 +5262,61 @@ body:has(#home_top) #recent-posts > #pagination > .pagination > * {
 
 /*
  * ============================================================================
- * 暗色模式：背景换成图片 + 遮罩压暗（2026-10-13）
+ * 暗色模式：纯星空背景（2026-10-13）
  * ----------------------------------------------------------------------------
- * 图片：source/assets/blog-bg.webp（由 wallhaven-6lwz1w.jpg 4096×2304 → 2560×1440
- *   WebP q82，2.55MB → 240KB）。实测该图平均线性亮度 0.156、亮部(p95) 0.71 ——
- *   脸/白毛/泡泡偏亮，所以必须加遮罩，否则那块背景会亮到压过文字。
- * 做法：
- *   ① 背景 = 上层"深蓝黑遮罩" + 下层图片（第一层画在第二层之上）；
- *      遮罩取垂直渐变：顶部 .66、中段 .60、底部 .78，
- *      压完后的平均亮度 ≈ 0.02~0.03（和之前那条渐变背景同一档），文字对比度不受影响；
- *   ② 关掉 cyber-ambient-drift 漂移动画 —— 图片不能跟着漂；
- *   ③ 图片位对齐用 center 30%，让角色脸部留在视口内（窄屏裁切时优先保脸）；
- *   ④ 卡片背景从 rgba(6,24,50,.76) 提到 .90 —— 图片透进卡片会让正文发花，
- *      背景留给卡片之间的缝隙和页面边缘去展示。
- * 想调亮度：改上面那三个 rgba(3,9,22,α) 的 α（越小图越清楚、越大越好读）。
- * 浅色模式不变（仍是浅色渐变背景）。
+ * 去掉 source/assets/blog-bg.webp 那张背景图，改回「深色渐变底 + 星空粒子 canvas」。
+ * 分工：
+ *   ① #web_bg = 纯深空渐变底色，不参与动态、不带任何光晕；
+ *   ② 星空和闪烁由主题的 #universe canvas（dark.js）负责，它 z-index:1、
+ *      position:fixed、pointer-events:none，盖在 #web_bg(z-index:-999) 之上；
+ *      两者一上一下正好配合 —— 这也是当初关掉 universe 才会「只见底图」的原因。
+ *
+ * 【2026-10-13 二次调整】按要求去掉光晕，只留"星空感"：
+ *   - 删掉两处 radial-gradient 冷色光晕（原来在 17%42% 蓝、84%31% 青）——
+ *     它们会在画面上糊出两大团亮斑，和星星抢注意力，也不再是"夜空"的感觉；
+ *   - 顺手删掉那两层 72px 的网格线：网格是"科技蓝图"的语汇，
+ *     留着一方面会跟星星混成一片噪点，另一方面网格是规则的、星星是随机的，
+ *     两种秩序叠在一起会显得脏。
+ *   于是这一层只剩一条纯净的深空渐变，全部"内容"都交给 canvas 上的粒子。
+ *   亮度梯度保留（顶部 #0a1c3a → 中段 #071831 → 右下 #05202e），比纯黑更透气。
+ *
+ * 显式关掉 cyber-ambient-drift 漂移动画：渐变漂移会和粒子静止感打架，
+ *   看着像背景在"晃"；底色保持静止，动的东西只留给星空。
+ * 想更快/更密的星星：改 _config.anzhiyu.yml 里 universe 相关项。
  * ========================================================================== */
 html[data-theme="dark"] body:has(#home_top) #web_bg,
 html[data-theme="dark"] body #web_bg {
   background-image:
-    linear-gradient(180deg, rgba(3, 9, 22, 0.66) 0%, rgba(3, 9, 22, 0.60) 40%, rgba(2, 7, 18, 0.78) 100%),
-    url('/assets/blog-bg.webp') !important;
-  background-size: cover, cover !important;
-  background-position: center center, center 30% !important;
-  background-repeat: no-repeat, no-repeat !important;
-  background-attachment: fixed, fixed !important;
-  background-color: #050d1c !important;
+    linear-gradient(158deg, #0a1c3a 0%, #08172f 34%, #071831 58%, #06202f 82%, #05202e 100%) !important;
+  background-size: auto !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+  background-color: #071831 !important;
+  opacity: 1 !important;
+  display: block !important;
   animation: none !important;
 }
 
-/* 图片透进卡片会让正文发花：暗色模式下把卡片压得更实一点 */
-html[data-theme="dark"] body:has(#home_top) #recent-posts > .recent-post-item {
-  background-color: rgba(6, 24, 50, 0.9) !important;
-}
-
-html[data-theme="dark"] body:has(#home_top) #home_top .cyber-quick-links > a {
-  background-color: rgba(9, 32, 58, 0.94) !important;
-}
+/*
+ * 【2026-10-13 移除】原先这里把首页卡片压到 .9/.94 不透明，是为了挡住背景图透进正文。
+ * 背景图已删除，星空是极细的点、透一点进卡片反而更好看，故一并去掉这两条覆盖，
+ * 卡片回到主题默认的玻璃透明度。
+ */
 
 /*
- * 浅色模式同样用这张背景图，但换成"浅色遮罩"（.80~.86 的雾蓝白），
- * 这样白卡片依然清楚、文字对比度不变，背景只是隐约透出画面。
- * 不想在白天看到图：删掉这一段即可，浅色模式会回到原来的浅色渐变。
+ * 浅色模式：同样去掉光晕，只留一条干净的浅色渐变。
+ * 粒子 canvas #universe 只在暗色模式显示（见主题 dark.css），
+ * 所以白天就是素净的浅色底，不会有星星。
  */
 html[data-theme="light"] #web_bg,
 html[data-theme="light"] body:has(#home_top) #web_bg {
   background-image:
-    linear-gradient(180deg, rgba(238, 245, 250, 0.86) 0%, rgba(238, 245, 250, 0.80) 45%, rgba(230, 239, 248, 0.90) 100%),
-    url('/assets/blog-bg.webp') !important;
-  background-size: cover, cover !important;
-  background-position: center center, center 30% !important;
-  background-repeat: no-repeat, no-repeat !important;
-  background-attachment: fixed, fixed !important;
+    linear-gradient(168deg, #f3fbff 0%, #e9f3fa 55%, #e6f1f9 100%) !important;
+  background-size: auto !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
   background-color: #e7eef6 !important;
   animation: none !important;
 }
