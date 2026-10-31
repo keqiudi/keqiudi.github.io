@@ -279,7 +279,8 @@ hr:before,
 .error404 #error-wrap .error-content,
 #recent-posts > .recent-post-item,
 #aside-content .card-widget,
-.layout > .recent-posts .pagination > *:not(.space):not(pangu) {
+.layout > .recent-posts .pagination > *:not(.space):not(pangu),
+.layout > #pagination .pagination > *:not(.space):not(pangu) {
   border-radius: 8px;
   background: var(--card-bg);
   -webkit-box-shadow: var(--card-box-shadow);
@@ -12585,7 +12586,8 @@ h1.page-title + .tag-cloud-list {
   #recent-posts > .recent-post-item,
   #aside-content .card-widget,
   .layout > .recent-posts .pagination > *:not(.space),
-  .layout > .recent-posts .pagination > *:not(.space):not(pangu) {
+  .layout > .recent-posts .pagination > *:not(.space):not(pangu),
+  .layout > #pagination .pagination > *:not(.space):not(pangu) {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
   }
@@ -13746,13 +13748,15 @@ h1.page-title + .tag-cloud-list {
     margin-right: 0;
   }
 }
-.layout > .recent-posts .pagination > *:not(pangu) {
+.layout > .recent-posts .pagination > *:not(pangu),
+.layout > #pagination .pagination > *:not(pangu) {
   display: inline-block;
   width: 2.5em;
   height: 2.5em;
   line-height: 2.5em;
 }
-.layout > .recent-posts .pagination > *:not(.space):not(pangu) {
+.layout > .recent-posts .pagination > *:not(.space):not(pangu),
+.layout > #pagination .pagination > *:not(.space):not(pangu) {
   -webkit-transition: 0s;
   -moz-transition: 0s;
   -o-transition: 0s;
